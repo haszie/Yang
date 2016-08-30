@@ -1,0 +1,61 @@
+PODS:
+  - APAddressBook (0.2.3):
+    - APAddressBook/Core (= 0.2.3)
+  - APAddressBook/Core (0.2.3)
+  - DateTools (1.7.0)
+  - DBCamera (2.4.1):
+    - GPUImage (~> 0.1)
+  - GPUImage (0.1.7)
+  - HexColors (2.2.1)
+  - JHPullToRefreshKit (1.0.1)
+  - JVFloatLabeledTextField (1.1.0)
+  - MBProgressHUD (0.9.2)
+  - MMDrawerController (0.6.0):
+    - MMDrawerController/Core (= 0.6.0)
+    - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
+    - MMDrawerController/MMDrawerVisualStates (= 0.6.0)
+    - MMDrawerController/Subclass (= 0.6.0)
+  - MMDrawerController/Core (0.6.0)
+  - MMDrawerController/MMDrawerBarButtonItem (0.6.0):
+    - MMDrawerController/Core
+  - MMDrawerController/MMDrawerVisualStates (0.6.0):
+    - MMDrawerController/Core
+  - MMDrawerController/Subclass (0.6.0):
+    - MMDrawerController/Core
+  - MMNumberKeyboard (0.1.2)
+  - RSKImageCropper (1.5.1)
+  - SDWebImage (3.7.4):
+    - SDWebImage/Core (= 3.7.4)
+  - SDWebImage/Core (3.7.4)
+  - TSMessages (0.9.12):
+    - HexColors (~> 2.2.0)
+
+DEPENDENCIES:
+  - APAddressBook
+  - DateTools
+  - DBCamera
+  - JHPullToRefreshKit
+  - JVFloatLabeledTextField
+  - MBProgressHUD
+  - MMDrawerController
+  - MMNumberKeyboard
+  - RSKImageCropper
+  - SDWebImage
+  - TSMessages
+
+SPEC CHECKSUMS:
+  APAddressBook: 2a91bf05999548bea210ec9d1a68073f4dc8bfce
+  DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
+  DBCamera: 7a4343a541e1264610f9f33176552b93170a843e
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  HexColors: abfd172e329dab59888614ccba6f216cec59289d
+  JHPullToRefreshKit: ec51e32764eacf468eddf3d05a9f1b3b6d9a7d76
+  JVFloatLabeledTextField: ea4a3d8387ddd43724c472bb2b8ab39b79af05d4
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
+  MMNumberKeyboard: 37d94d13d41e62152d91f35711413d031f2217c2
+  RSKImageCropper: edd65fedb3734332818deb139906d6b7f54b8a44
+  SDWebImage: 247edd7dd80dd6124197b0d6a17846fe9d1df968
+  TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
+
+COCOAPODS: 0.39.0
