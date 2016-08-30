@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D3C4A6767D60A0E05AF5610 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBCD8EABAC1313FAC5E6D9AF /* Pods.framework */; };
+		798FA54C88B26B85D95E94B5 /* libPods-YangTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2F1FE0EE45FA6096757B8B /* libPods-YangTests.a */; };
 		B6158F1D1C652AC1003A39D0 /* FlexboxKit in Resources */ = {isa = PBXBuildFile; fileRef = B6158F1C1C652AC1003A39D0 /* FlexboxKit */; };
 		B625DC7D1C6FA66500FA5349 /* YangRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = B625DC7C1C6FA66500FA5349 /* YangRefresh.m */; };
 		B625DC801C6FB4CE00FA5349 /* ProfileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B625DC7F1C6FB4CE00FA5349 /* ProfileHeader.m */; };
@@ -73,6 +73,8 @@
 		B6FA268F1C6EDE4800698584 /* FeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA268E1C6EDE4800698584 /* FeedVC.m */; };
 		B6FA26921C6EE1EF00698584 /* ProPicIV.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA26911C6EE1EF00698584 /* ProPicIV.m */; };
 		B6FE89091C768F3E00115565 /* PhoneFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FE89081C768F3E00115565 /* PhoneFriendsCell.m */; };
+		C322D5AAD0AB9D01F2D384BD /* libPods-Yang.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85195D4CE574C8B23CBDE61C /* libPods-Yang.a */; };
+		E53514A0D72ADB9344152D74 /* libPods-YangUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1C6BBCD0E820B45F7B81AC9 /* libPods-YangUITests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,7 +108,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		457C5E32D3E26666B4F47984 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3298ED87488748CFF9EE1874 /* Pods-Yang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yang.release.xcconfig"; path = "Pods/Target Support Files/Pods-Yang/Pods-Yang.release.xcconfig"; sourceTree = "<group>"; };
+		4A2F1FE0EE45FA6096757B8B /* libPods-YangTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YangTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DD07ED9BB7E8B4D484FBE9A /* Pods-YangUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YangUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YangUITests/Pods-YangUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6DC5282BF9A3F9CFC88FEEE8 /* Pods-YangUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YangUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YangUITests/Pods-YangUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		75C2957B24B34EF0673B74E9 /* Pods-YangTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YangTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YangTests/Pods-YangTests.release.xcconfig"; sourceTree = "<group>"; };
+		85195D4CE574C8B23CBDE61C /* libPods-Yang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Yang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		88BFA6D2A996FAFD7F80C359 /* Pods-Yang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yang/Pods-Yang.debug.xcconfig"; sourceTree = "<group>"; };
 		B6158F1C1C652AC1003A39D0 /* FlexboxKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FlexboxKit; path = /Users/biggiesmallz/Desktop/iOS/Yang/Yang/FlexboxKit; sourceTree = "<absolute>"; };
 		B625DC7B1C6FA66500FA5349 /* YangRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YangRefresh.h; sourceTree = "<group>"; };
 		B625DC7C1C6FA66500FA5349 /* YangRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YangRefresh.m; sourceTree = "<group>"; };
@@ -209,7 +217,8 @@
 		B6FA26911C6EE1EF00698584 /* ProPicIV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProPicIV.m; sourceTree = "<group>"; };
 		B6FE89071C768F3E00115565 /* PhoneFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneFriendsCell.h; sourceTree = "<group>"; };
 		B6FE89081C768F3E00115565 /* PhoneFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneFriendsCell.m; sourceTree = "<group>"; };
-		BF2606BD4FAD29C80A12B148 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		BA3511388B64458058EBE453 /* Pods-YangTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YangTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YangTests/Pods-YangTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D1C6BBCD0E820B45F7B81AC9 /* libPods-YangUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-YangUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCD8EABAC1313FAC5E6D9AF /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -233,7 +242,7 @@
 				B658EEF01C43F75C00C6D333 /* CFNetwork.framework in Frameworks */,
 				B658EF091C43F8C900C6D333 /* Parse.framework in Frameworks */,
 				B658EEEE1C43F75300C6D333 /* AudioToolbox.framework in Frameworks */,
-				1D3C4A6767D60A0E05AF5610 /* Pods.framework in Frameworks */,
+				C322D5AAD0AB9D01F2D384BD /* libPods-Yang.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +250,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				798FA54C88B26B85D95E94B5 /* libPods-YangTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,17 +258,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E53514A0D72ADB9344152D74 /* libPods-YangUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		638FD675AE27C3BCA14E6CD5 /* Pods */ = {
+		5733954CB86BD26C7C14A3AE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BF2606BD4FAD29C80A12B148 /* Pods.debug.xcconfig */,
-				457C5E32D3E26666B4F47984 /* Pods.release.xcconfig */,
+				88BFA6D2A996FAFD7F80C359 /* Pods-Yang.debug.xcconfig */,
+				3298ED87488748CFF9EE1874 /* Pods-Yang.release.xcconfig */,
+				BA3511388B64458058EBE453 /* Pods-YangTests.debug.xcconfig */,
+				75C2957B24B34EF0673B74E9 /* Pods-YangTests.release.xcconfig */,
+				6DC5282BF9A3F9CFC88FEEE8 /* Pods-YangUITests.debug.xcconfig */,
+				5DD07ED9BB7E8B4D484FBE9A /* Pods-YangUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -271,7 +286,7 @@
 				B658EED21C43F5C200C6D333 /* YangUITests */,
 				B658EEAC1C43F5C200C6D333 /* Products */,
 				B658EF011C43F7EF00C6D333 /* Frameworks */,
-				638FD675AE27C3BCA14E6CD5 /* Pods */,
+				5733954CB86BD26C7C14A3AE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -358,6 +373,9 @@
 				B658EEEF1C43F75C00C6D333 /* CFNetwork.framework */,
 				B658EEED1C43F75300C6D333 /* AudioToolbox.framework */,
 				DBCD8EABAC1313FAC5E6D9AF /* Pods.framework */,
+				85195D4CE574C8B23CBDE61C /* libPods-Yang.a */,
+				4A2F1FE0EE45FA6096757B8B /* libPods-YangTests.a */,
+				D1C6BBCD0E820B45F7B81AC9 /* libPods-YangUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -491,13 +509,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B658EED81C43F5C200C6D333 /* Build configuration list for PBXNativeTarget "Yang" */;
 			buildPhases = (
-				1BCCC32344173B264BBE0D5A /* Check Pods Manifest.lock */,
+				77F25A13383A910FC0F852B3 /* [CP] Check Pods Manifest.lock */,
 				B658EEA71C43F5C200C6D333 /* Sources */,
 				B658EEA81C43F5C200C6D333 /* Frameworks */,
 				B658EEA91C43F5C200C6D333 /* Resources */,
-				FEE5E4B85B78C3F89DC5CF9A /* Embed Pods Frameworks */,
-				475A0CFE31389D562EEB2BD3 /* Copy Pods Resources */,
 				B6E82F421C7C05DC00F6B848 /* Embed Frameworks */,
+				930DBD40398D8A9FADE9CFE0 /* [CP] Embed Pods Frameworks */,
+				B52FC4DD1BF66247F38C529B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -512,9 +530,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B658EEDB1C43F5C200C6D333 /* Build configuration list for PBXNativeTarget "YangTests" */;
 			buildPhases = (
+				3C29860751DFA7FA7078CCA2 /* [CP] Check Pods Manifest.lock */,
 				B658EEC01C43F5C200C6D333 /* Sources */,
 				B658EEC11C43F5C200C6D333 /* Frameworks */,
 				B658EEC21C43F5C200C6D333 /* Resources */,
+				27C8C4412C56A82D85705468 /* [CP] Embed Pods Frameworks */,
+				387792D89086467F55E87413 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -530,9 +551,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B658EEDE1C43F5C200C6D333 /* Build configuration list for PBXNativeTarget "YangUITests" */;
 			buildPhases = (
+				F3F9E10882FD654DC1DD7A9E /* [CP] Check Pods Manifest.lock */,
 				B658EECB1C43F5C200C6D333 /* Sources */,
 				B658EECC1C43F5C200C6D333 /* Frameworks */,
 				B658EECD1C43F5C200C6D333 /* Resources */,
+				9FF08DDEFAC8023779F2D50A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -637,14 +660,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1BCCC32344173B264BBE0D5A /* Check Pods Manifest.lock */ = {
+		27C8C4412C56A82D85705468 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YangTests/Pods-YangTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		387792D89086467F55E87413 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YangTests/Pods-YangTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3C29860751DFA7FA7078CCA2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -652,34 +705,79 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		475A0CFE31389D562EEB2BD3 /* Copy Pods Resources */ = {
+		77F25A13383A910FC0F852B3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FEE5E4B85B78C3F89DC5CF9A /* Embed Pods Frameworks */ = {
+		930DBD40398D8A9FADE9CFE0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Yang/Pods-Yang-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9FF08DDEFAC8023779F2D50A /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YangUITests/Pods-YangUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B52FC4DD1BF66247F38C529B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Yang/Pods-Yang-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3F9E10882FD654DC1DD7A9E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -850,7 +948,7 @@
 		};
 		B658EED91C43F5C200C6D333 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF2606BD4FAD29C80A12B148 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 88BFA6D2A996FAFD7F80C359 /* Pods-Yang.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -871,7 +969,7 @@
 		};
 		B658EEDA1C43F5C200C6D333 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 457C5E32D3E26666B4F47984 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 3298ED87488748CFF9EE1874 /* Pods-Yang.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -892,6 +990,7 @@
 		};
 		B658EEDC1C43F5C200C6D333 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA3511388B64458058EBE453 /* Pods-YangTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = YangTests/Info.plist;
@@ -904,6 +1003,7 @@
 		};
 		B658EEDD1C43F5C200C6D333 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75C2957B24B34EF0673B74E9 /* Pods-YangTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = YangTests/Info.plist;
@@ -916,6 +1016,7 @@
 		};
 		B658EEDF1C43F5C200C6D333 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6DC5282BF9A3F9CFC88FEEE8 /* Pods-YangUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = YangUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -928,6 +1029,7 @@
 		};
 		B658EEE01C43F5C200C6D333 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5DD07ED9BB7E8B4D484FBE9A /* Pods-YangUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = YangUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

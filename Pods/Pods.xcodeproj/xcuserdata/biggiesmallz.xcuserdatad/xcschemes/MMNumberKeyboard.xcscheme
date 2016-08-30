@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E7DB5E26B10FC8B3436FF349'
+               BlueprintIdentifier = '84D260F81845A16EC9E9E0C8CD55DD63'
                BlueprintName = 'MMNumberKeyboard'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'MMNumberKeyboard.framework'>
+               BuildableName = 'libMMNumberKeyboard.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

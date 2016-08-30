@@ -47,7 +47,6 @@ static const CGSize kFilterCellSize = { 75, 90 };
 
 @implementation DBCameraSegueViewController
 @synthesize forceQuadCrop = _forceQuadCrop;
-@synthesize showCropButton = _showCropButton;
 @synthesize useCameraSegue = _useCameraSegue;
 @synthesize tintColor = _tintColor;
 @synthesize selectedTintColor = _selectedTintColor;
@@ -143,7 +142,7 @@ static const CGSize kFilterCellSize = { 75, 90 };
         [self reset:YES];
     }
     
-    if ( _cropMode && _showCropButton)
+    if ( _cropMode )
         [_cropButton setSelected:YES];
 }
 
@@ -256,7 +255,7 @@ static const CGSize kFilterCellSize = { 75, 90 };
         [_navigationBar setUserInteractionEnabled:YES];
         [_navigationBar addSubview:self.useButton];
         [_navigationBar addSubview:self.retakeButton];
-        if ( !_forceQuadCrop && _showCropButton)
+        if ( !_forceQuadCrop )
             [_navigationBar addSubview:self.cropButton];
     }
     

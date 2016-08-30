@@ -142,7 +142,6 @@
 
         [container.cameraViewController setUseCameraSegue:YES];
         [container.cameraViewController setCameraSegueConfigureBlock:^( DBCameraSegueViewController *segue ) {
-            segue.showCropButton = NO;
             segue.cropMode = NO;
         }];
     }];

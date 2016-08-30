@@ -1,14 +1,32 @@
-pod 'SDWebImage'
-pod 'MMDrawerController'
-pod 'JVFloatLabeledTextField'
-pod 'MMNumberKeyboard'
-pod 'MBProgressHUD'
-pod 'DateTools'
-pod 'DBCamera'
-pod 'JHPullToRefreshKit'
-pod 'RSKImageCropper'
-pod 'APAddressBook'
-pod 'TSMessages'
+# Uncomment this line to define a global platform for your project
+# platform :ios, '9.0'
 
-use_frameworks!
+target 'Yang' do
+  # Uncomment this line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
 
+  # Pods for Yang
+
+        pod 'SDWebImage'
+        pod 'MMDrawerController'
+        pod 'JVFloatLabeledTextField'
+        pod 'MMNumberKeyboard'
+        pod 'MBProgressHUD'
+        pod 'DateTools'
+        pod 'DBCamera'
+        pod 'JHPullToRefreshKit'
+        pod 'RSKImageCropper'
+        pod 'APAddressBook'
+        pod 'TSMessages'
+
+  target 'YangTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'YangUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

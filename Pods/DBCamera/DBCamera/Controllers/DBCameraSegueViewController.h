@@ -32,11 +32,6 @@
 @property (nonatomic, assign) BOOL cropMode;
 
 /**
- *  BOOL value to show crop button or not
- */
-@property (nonatomic, assign) BOOL showCropButton;
-
-/**
  *  Filter collectionView
  */
 @property (nonatomic, strong) DBCameraFiltersView *filtersView;
