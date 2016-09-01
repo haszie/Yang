@@ -353,7 +353,7 @@ static MMDrawerController *drawer;
     CGSize neededSize = [lbl sizeThatFits:CGSizeMake(maxLabelWidth, CGFLOAT_MAX)];
 
     height += MAX(30 + neededSize.height, 50);
-    height += 50;
+    height += 62;
     
     return height;
 }
