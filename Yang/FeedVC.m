@@ -31,16 +31,18 @@
 
 #pragma mark - UIViewController
 
+-(BOOL)prefersStatusBarHidden {
+    return !self.mediaScreen.hidden;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
-    self.tableView.separatorColor = [UIColor clearColor];
+    self.tableView.separatorInset = UIEdgeInsetsMake(0, 8, 0, 8);
     [self.tableView registerNib:[UINib nibWithNibName:@"PostCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     
     self.navigationController.hidesBarsOnSwipe = NO;
-    
-    [self setNeedsStatusBarAppearanceUpdate];
     
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     self.navigationController.navigationBar.translucent = NO;
@@ -53,8 +55,28 @@
         }];
     }
     
+    // media screen on hold
+    self.mediaScreen = [[UIImageView alloc] initWithFrame:self.view.frame];
+    self.mediaScreen.hidden = YES;
+    self.mediaScreen.contentMode = UIViewContentModeScaleAspectFill;
+    self.mediaScreen.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tapTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mediaScreenTapped)];
+    tapTap.numberOfTapsRequired = 1;
+    [self.mediaScreen addGestureRecognizer:tapTap];
+    
+    [[[[UIApplication sharedApplication] delegate] window] addSubview:self.mediaScreen];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userChangedPostAttr:) name:YPostVCUserUpvotePostNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userChangedPostAttr:) name:YUtilUserUpvotePostCallbackFinishedNotification object:nil];
+    
+    [self setNeedsStatusBarAppearanceUpdate];
+
+}
+
+-(void) mediaScreenTapped {
+    self.mediaScreen.hidden = YES;
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 -(void)didReceiveMemoryWarning {
@@ -185,9 +207,18 @@
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
     
     if (![indexPath isEqual:[self _indexPathForPaginationCell]]) {
+        
+        if (self.objects[indexPath.row][@"photo"]) {
+            PFFile * photo = self.objects[indexPath.row][@"photo"];
+            [self.mediaScreen sd_setImageWithURL:[NSURL URLWithString:photo.url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                self.mediaScreen.hidden = NO;
+                [self setNeedsStatusBarAppearanceUpdate];
+            }];
+        } else {
+        
         PostVC *vc = [[PostVC alloc] initWithPFObject:self.objects[indexPath.row] withHeight:[YUtil calcHeight:[self objectAtIndexPath:indexPath] withFrame:self.view.frame] userDidTapCommentButton:NO];
         [self.navigationController pushViewController:vc animated:YES];
-
+        }
     }
 }
 

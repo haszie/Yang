@@ -38,7 +38,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 15, 0, 15);
+    self.tableView.separatorInset = UIEdgeInsetsMake(0, 8, 0, 8);
     self.tableView.separatorColor = [UIColor clearColor];
     
     [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:@"CommentCell"];
@@ -368,7 +368,7 @@
 
 - (void)userChangedPostAttr:(NSNotification *)note {
     PostCell *heada = (PostCell *) self.tableView.tableHeaderView;
-    heada.upvotes.text = [[[YCash sharedCache] upvoteCountForPost:heada.post] stringValue];
+    //heada.upvotes.text = [[[YCash sharedCache] upvoteCountForPost:heada.post] stringValue];
 }
 
 - (void)keyboardWasShown:(NSNotification*)aNotification

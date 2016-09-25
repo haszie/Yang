@@ -22,6 +22,7 @@
 @property (strong, nonatomic) YangRefresh *quickRefresh;
 @property (nonatomic) BOOL quickEnabled;
 @property BOOL scrollToTop;
+@property (nonatomic) UIImageView *mediaScreen;
 
 -(void)tableViewWasPulledToRefresh;
 
