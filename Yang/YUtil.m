@@ -335,25 +335,30 @@ static MMDrawerController *drawer;
 
 +(CGFloat) calcHeight:(PFObject *) post withFrame:(CGRect) frame {
     CGFloat height = 0;
-    if (post[@"photo"]) {
-        if ([post[@"isPortrait"] boolValue] == YES) {
-            height += frame.size.width * 4.0 / 3.0;
-        } else {
-            height += frame.size.width * 3.0 / 4.0;
-        }
-        height += 10;
-    }
+    
+    // headline
+    height += 12 + 32 + 8;
     
     UILabel *lbl = [[UILabel alloc] init];
     lbl.text = [post objectForKey:@"text"];
     lbl.numberOfLines = 6;
     [lbl setFont:[UIFont fontWithName:@"OpenSans" size:15.0f]];
     
-    CGFloat maxLabelWidth = frame.size.width - 98; //((55 + 8 + 8) * 2 + 55);
+    CGFloat maxLabelWidth = frame.size.width - 16;
+    
+    if (post[@"photo"]) {
+        maxLabelWidth -= (8 + 32);
+    }
+
     CGSize neededSize = [lbl sizeThatFits:CGSizeMake(maxLabelWidth, CGFLOAT_MAX)];
 
-    height += MAX(30 + neededSize.height, 50);
-    height += 50;
+    // words
+    height += neededSize.height;
+    
+    // buttons
+    height += 12 + 22 + 12;
+    
+    //NSLog([NSString stringWithFormat:@"%@: %f\n", lbl.text, height]);
     
     return height;
 }

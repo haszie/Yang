@@ -37,12 +37,10 @@
     int amt = [[object objectForKey:@"amt"] intValue];
     
     NSDate * date = object.createdAt;
-    cell.dateLabel.text = date.shortTimeAgoSinceNow;
+    cell.dateLabel.text = [NSString stringWithFormat:@"%@ AGO", [date.shortTimeAgoSinceNow uppercaseString]];
 
     cell.words.text = [object objectForKey:@"text"];
-    cell.karma.text = [NSString stringWithFormat:@"¤ %@", [[NSNumberFormatter localizedStringFromNumber:[NSNumber numberWithInt:amt]
-                                                       numberStyle:NSNumberFormatterDecimalStyle] stringByAppendingString:@""]];
-    cell.karma.text = @"+ 12";
+    cell.karma.text = [NSString stringWithFormat:@"%d KARMA", amt];
 
     [cell setNeedsLayout];
     [cell layoutIfNeeded];
@@ -50,19 +48,26 @@
 //    CGFloat maxLabelWidth = cell.words.frame.size.width;
 //    CGSize neededSize = [cell.words sizeThatFits:CGSizeMake(maxLabelWidth, CGFLOAT_MAX)];
     
-    cell.landscape_photo.hidden = YES;
-    cell.portrait_photo.hidden = YES;
+//    cell.landscape_photo.hidden = YES;
+//    cell.portrait_photo.hidden = YES;
     
     if (object[@"photo"]) {
+        [cell.mediaPreviewWidth setConstant:32.0f];
+        [cell.mediaFromUserSpace setConstant:8.0f];
+
         PFFile *photo = [object objectForKey:@"photo"];
-        
-        if ([object[@"isPortrait"] boolValue] == YES) {
-            cell.portrait_photo.hidden = NO;
-            [cell.portrait_photo sd_setImageWithURL:[NSURL URLWithString:photo.url]];
-        } else {
-            cell.landscape_photo.hidden = NO;
-            [cell.landscape_photo sd_setImageWithURL:[NSURL URLWithString:photo.url]];
-        }
+        [cell.mediaPreview sd_setImageWithURL:[NSURL URLWithString:photo.url]];
+
+//        if ([object[@"isPortrait"] boolValue] == YES) {
+//            cell.portrait_photo.hidden = NO;
+//            [cell.portrait_photo sd_setImageWithURL:[NSURL URLWithString:photo.url]];
+//        } else {
+//            cell.landscape_photo.hidden = NO;
+//            [cell.landscape_photo sd_setImageWithURL:[NSURL URLWithString:photo.url]];
+//        }
+    } else {
+        [cell.mediaPreviewWidth setConstant:0.0f];
+        [cell.mediaFromUserSpace setConstant:0.0f];
     }
 
     cell.sender.delegate = theDelegate;
@@ -78,28 +83,32 @@
         [cell.receiver setNeedsLayout];
     }];
     
-    cell.backgroundColor = [UIColor clearColor];
+    //cell.backgroundColor = [UIColor clearColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.delegate = theDelegate;
     cell.post = object;
     cell.tag = indexPath.row;
 
+    cell.mediaPreview.layer.cornerRadius = 3.0f;
+    cell.mediaPreview.contentMode = UIViewContentModeScaleAspectFill;
+    [cell.mediaPreview.layer  setMasksToBounds:YES];
+    
     NSDictionary *attributesForPost = [[YCash sharedCache] attributesForPost:object];
     
     if (attributesForPost) {
         [cell setUpvoteStatus:[[YCash sharedCache] currentUserGaveUpvoteForPost:object]];
-        [cell.upvotes setText:[[[YCash sharedCache] upvoteCountForPost:object] stringValue]];
-        [cell.comment_btn setTitle:[NSString stringWithFormat:@"%d Comments", [[[YCash sharedCache] commentCountForPost:object] intValue]] forState:UIControlStateNormal];
+        //[cell.upvotes setText:[[[YCash sharedCache] upvoteCountForPost:object] stringValue]];
+        [cell.comment_btn setTitle:[self formatCommentsLabel:[[[YCash sharedCache] commentCountForPost:object] intValue]] forState:UIControlStateNormal];
         
-        if (cell.karma.alpha < 1.0f || cell.comment_btn.alpha < 1.0f) {
+        if (/*cell.upvotes.alpha < 1.0f ||*/ cell.comment_btn.alpha < 1.0f) {
             [UIView animateWithDuration:0.200f animations:^{
-                cell.karma.alpha = 1.0f;
+                //cell.upvotes.alpha = 1.0f;
                 cell.comment_btn.alpha = 1.0f;
             }];
         }
     } else {
-        cell.upvotes.alpha = 0.0f;
+        //cell.upvotes.alpha = 0.0f;
         cell.comment_btn.alpha = 0.0f;
         
         @synchronized(theDelegate) {
@@ -141,12 +150,12 @@
                         }
                         
                         [cell setUpvoteStatus:[[YCash sharedCache] currentUserGaveUpvoteForPost:object]];
-                        [cell.upvotes setText:[[[YCash sharedCache] upvoteCountForPost:object] stringValue]];
-                        [cell.comment_btn setTitle:[NSString stringWithFormat:@"%d Comments", [[[YCash sharedCache] commentCountForPost:object] intValue]] forState:UIControlStateNormal];
+                        //[cell.upvotes setText:[[[YCash sharedCache] upvoteCountForPost:object] stringValue]];
+                        [cell.comment_btn setTitle:[self formatCommentsLabel:[[[YCash sharedCache] commentCountForPost:object] intValue]] forState:UIControlStateNormal];
                         
-                        if (cell.upvotes.alpha < 1.0f || cell.comment_btn.alpha < 1.0f) {
+                        if (/*cell.upvotes.alpha < 1.0f ||*/ cell.comment_btn.alpha < 1.0f) {
                             [UIView animateWithDuration:0.200f animations:^{
-                                cell.upvotes.alpha = 1.0f;
+                                //cell.upvotes.alpha = 1.0f;
                                 cell.comment_btn.alpha = 1.0f;
                             }];
                         }
@@ -158,6 +167,17 @@
 
 }
 
+-(NSString *) formatCommentsLabel:(int) numComments {
+    if (numComments == 0) {
+        return @"NO COMMENTS";
+    } else if (numComments == 1) {
+        return @"1 COMMENT";
+    } else {
+        return [NSString stringWithFormat:@"%d COMMENTS", numComments];
+    }
+}
+
+
 -(void) setUp {
     
 //    _bg.layer.shadowColor = [UIColor lightGrayColor].CGColor;
@@ -166,11 +186,11 @@
 //    _bg.layer.shadowRadius = 0.25;
 //    _bg.clipsToBounds = NO;
 
-    _landscape_photo.contentMode = UIViewContentModeScaleAspectFill;
-    _portrait_photo.contentMode = UIViewContentModeScaleAspectFill;
-
-    [_up_btn setBackgroundImage:[UIImage imageNamed:@"up-arrow-blue"] forState:UIControlStateSelected];
-    [_up_btn setBackgroundImage:[UIImage imageNamed:@"up-arrow-gray"] forState:UIControlStateNormal];
+//    _landscape_photo.contentMode = UIViewContentModeScaleAspectFill;
+//    _portrait_photo.contentMode = UIViewContentModeScaleAspectFill;
+//
+//    [_up_btn setBackgroundImage:[UIImage imageNamed:@"up-arrow-blue"] forState:UIControlStateSelected];
+//    [_up_btn setBackgroundImage:[UIImage imageNamed:@"up-arrow-gray"] forState:UIControlStateNormal];
 
 //    _comment_btn.layer.borderWidth = 0.5;
 //    _comment_btn.layer.borderColor = [UIColor lightGrayColor].CGColor;
@@ -181,19 +201,19 @@
 
 -(void) setPost:(PFObject *)aPost {
     _post = aPost;
-    [_up_btn addTarget:self action:@selector(didTapUpvoteButton:) forControlEvents:UIControlEventTouchUpInside];
+    //[_up_btn addTarget:self action:@selector(didTapUpvoteButton:) forControlEvents:UIControlEventTouchUpInside];
     [_comment_btn addTarget:self action:@selector(didTapCommentButton:) forControlEvents:UIControlEventTouchUpInside];
-    [_ghost_btn addTarget:self action:@selector(ghost_hit) forControlEvents:UIControlEventTouchUpInside];
+    //[_ghost_btn addTarget:self action:@selector(ghost_hit) forControlEvents:UIControlEventTouchUpInside];
 }
 
 -(void) ghost_hit {
-    [_ghost_btn setUserInteractionEnabled:NO];
-    [self didTapUpvoteButton:self.up_btn];
-    [_ghost_btn setUserInteractionEnabled:YES];
+    //[_ghost_btn setUserInteractionEnabled:NO];
+    //[self didTapUpvoteButton:self.up_btn];
+    //[_ghost_btn setUserInteractionEnabled:YES];
 }
 
 - (void)setUpvoteStatus:(BOOL)upvote {
-    [self.up_btn setSelected:upvote];
+    //[self.up_btn setSelected:upvote];
 }
 
 -(void)didTapUpvoteButton:(UIButton *)button {
