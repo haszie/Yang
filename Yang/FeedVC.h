@@ -16,13 +16,16 @@
 
 #import "PostCell.h"
 #import "YangRefresh.h"
+#import "MediaScreenOverlayVC.h"
 
 @interface FeedVC : PFQueryTableViewController <PostCellDelegate, ProPicDelegate>
 
 @property (strong, nonatomic) YangRefresh *quickRefresh;
 @property (nonatomic) BOOL quickEnabled;
 @property BOOL scrollToTop;
-@property (nonatomic) UIImageView *mediaScreen;
+
+@property (strong, nonatomic) MediaScreenOverlayVC *mediaScreen;
+@property (strong, nonatomic) UIWindow *topWindow;
 
 -(void)tableViewWasPulledToRefresh;
 

@@ -337,7 +337,7 @@ static MMDrawerController *drawer;
     CGFloat height = 0;
     
     // headline
-    height += 12 + 32 + 8;
+    height += 12 + 32 + 12;
     
     UILabel *lbl = [[UILabel alloc] init];
     lbl.text = [post objectForKey:@"text"];
@@ -345,18 +345,23 @@ static MMDrawerController *drawer;
     [lbl setFont:[UIFont fontWithName:@"OpenSans" size:15.0f]];
     
     CGFloat maxLabelWidth = frame.size.width - 16;
-    
-    if (post[@"photo"]) {
-        maxLabelWidth -= (8 + 32);
-    }
 
     CGSize neededSize = [lbl sizeThatFits:CGSizeMake(maxLabelWidth, CGFLOAT_MAX)];
 
     // words
     height += neededSize.height;
     
-    // buttons
-    height += 12 + 22 + 12;
+    // pad
+    height += 6;
+ 
+    if (post[@"photo"]) {
+        height += 44;
+    } else {
+        height += 22;
+    }
+    
+    //pad
+    height += 12;
     
     //NSLog([NSString stringWithFormat:@"%@: %f\n", lbl.text, height]);
     

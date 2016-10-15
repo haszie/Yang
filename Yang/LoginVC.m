@@ -168,21 +168,25 @@
     blurb.delegate = self;
     self.blurb = blurb;
     
-    UITextField *email = [[UITextField alloc] initWithFrame:
-                          CGRectMake(0, blurb.frame.origin.y + blurb.frame.size.height + 16.0f, self.view.frame.size.width, 60.0f)];
-    [email setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:240.0/255.0f blue:240.0/255.0f alpha:1.0f]];
-    [email setFont:[UIFont fontWithName:@"OpenSans" size:24.0f]];
-    [email setPlaceholder:@"Email (optional)"];
-    [email setTextColor:[UIColor blackColor]];
-    [email setReturnKeyType:UIReturnKeyDone];
-    UIView *spacer_last = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 32.0f, 60.0f)];
-    [email setLeftViewMode:UITextFieldViewModeAlways];
-    [email setLeftView:spacer_last];
-    email.delegate = self;
-    self.email = email;
+//    UITextField *email = [[UITextField alloc] initWithFrame:
+//                          CGRectMake(0, blurb.frame.origin.y + blurb.frame.size.height + 16.0f, self.view.frame.size.width, 60.0f)];
+//    [email setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:240.0/255.0f blue:240.0/255.0f alpha:1.0f]];
+//    [email setFont:[UIFont fontWithName:@"OpenSans" size:24.0f]];
+//    [email setPlaceholder:@"Email (optional)"];
+//    [email setTextColor:[UIColor blackColor]];
+//    [email setReturnKeyType:UIReturnKeyDone];
+//    UIView *spacer_last = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 32.0f, 60.0f)];
+//    [email setLeftViewMode:UITextFieldViewModeAlways];
+//    [email setLeftView:spacer_last];
+//    email.delegate = self;
+//    self.email = email;
     
-    UIButton *finish = [[UIButton alloc] initWithFrame:
-                                CGRectMake(32.0f, email.frame.origin.y + email.frame.size.height + 24.0f, self.view.frame.size.width - 64.0f, 50.0f)];
+//    UIButton *finish = [[UIButton alloc] initWithFrame:
+//                                CGRectMake(32.0f, email.frame.origin.y + email.frame.size.height + 24.0f, self.view.frame.size.width - 64.0f, 50.0f)];
+
+    UIButton *finish = [[UIButton alloc] initWithFrame:CGRectMake(0, blurb.frame.origin.y + blurb.frame.size.height + 16.0f,
+                                                                  self.view.frame.size.width, 60.0f)];
+    
     [finish addTarget:self action:@selector(didHitFinish) forControlEvents:UIControlEventTouchUpInside];
     [finish.titleLabel setFont:[UIFont fontWithName:@"OpenSans" size:24.0f]];
     [finish setBackgroundColor:[UIColor colorWithRed:32.0/255.0f green:164.0/255.0f blue:0.0/255.0f alpha:1.0f]];
@@ -213,7 +217,7 @@
     [formScroller addSubview:firstName];
     [formScroller addSubview:lastName];
     [formScroller addSubview:blurb];
-    [formScroller addSubview:email];
+    //[formScroller addSubview:email];
     [formScroller addSubview:finish];
     
     [scroller addSubview:formScroller];
@@ -283,6 +287,8 @@
                     
                     //HomeFeedVC *home = [[HomeFeedVC alloc] initWithStyle:UITableViewStylePlain];
                     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MenuVC home]];
+                    nav.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+                    nav.navigationBar.translucent = NO;
                     
                     MenuVC *menu = [[MenuVC alloc] init];
                     MainVC *drawerController = [[MainVC alloc] initWithCenterViewController:nav leftDrawerViewController:menu];
@@ -401,8 +407,8 @@
         user[kUserProfilePicture] = photoFile;
     }
     
-    NSString *trimmedEmail = [self.email.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if (trimmedEmail.length != 0) user[@"email"] = self.email.text;
+//    NSString *trimmedEmail = [self.email.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//    if (trimmedEmail.length != 0) user[@"email"] = self.email.text;
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
@@ -413,7 +419,9 @@
             
             //HomeFeedVC *home = [[HomeFeedVC alloc] initWithStyle:UITableViewStylePlain];
             UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MenuVC home]];
-            
+            nav.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+            nav.navigationBar.translucent = NO;
+
             MenuVC *menu = [[MenuVC alloc] init];
             MainVC *drawerController = [[MainVC alloc] initWithCenterViewController:nav leftDrawerViewController:menu];
 
@@ -509,8 +517,8 @@
     user[@"blurb"] = trimmedBlurb;
     user[@"signedUp"] = @YES;
     
-    NSString *trimmedEmail = [self.email.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if (trimmedEmail != 0) user[@"email"] = self.email.text;
+//    NSString *trimmedEmail = [self.email.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//    if (trimmedEmail != 0) user[@"email"] = self.email.text;
 
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];

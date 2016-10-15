@@ -29,16 +29,21 @@
     return self;
 }
 
-#pragma mark - UIViewController
+#pragma mark - StatusBar
 
--(BOOL)prefersStatusBarHidden {
-    return !self.mediaScreen.hidden;
+-(UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    return UIStatusBarAnimationFade;
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
+#pragma mark - UIViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 8, 0, 8);
     [self.tableView registerNib:[UINib nibWithNibName:@"PostCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     
@@ -55,28 +60,25 @@
         }];
     }
     
-    // media screen on hold
-    self.mediaScreen = [[UIImageView alloc] initWithFrame:self.view.frame];
-    self.mediaScreen.hidden = YES;
-    self.mediaScreen.contentMode = UIViewContentModeScaleAspectFill;
-    self.mediaScreen.userInteractionEnabled = YES;
+    // media screen
     
-    UITapGestureRecognizer *tapTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mediaScreenTapped)];
-    tapTap.numberOfTapsRequired = 1;
-    [self.mediaScreen addGestureRecognizer:tapTap];
+    self.mediaScreen = [[MediaScreenOverlayVC alloc] init];
     
-    [[[[UIApplication sharedApplication] delegate] window] addSubview:self.mediaScreen];
+    CGRect frame = self.view.bounds;
+    frame.origin.y = CGRectGetHeight(self.view.bounds) + 20;
+    frame.size.height += 20;
+    
+    self.topWindow = [[UIWindow alloc] initWithFrame:frame];
+    self.topWindow.windowLevel = UIWindowLevelStatusBar;
+    
+    [self.topWindow setRootViewController:self.mediaScreen];
+    [self.topWindow setHidden:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userChangedPostAttr:) name:YPostVCUserUpvotePostNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userChangedPostAttr:) name:YUtilUserUpvotePostCallbackFinishedNotification object:nil];
     
     [self setNeedsStatusBarAppearanceUpdate];
 
-}
-
--(void) mediaScreenTapped {
-    self.mediaScreen.hidden = YES;
-    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 -(void)didReceiveMemoryWarning {
@@ -205,19 +207,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [super tableView:tableView didSelectRowAtIndexPath:indexPath];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    PFObject * post = [self objectAtIndexPath:indexPath];
     
     if (![indexPath isEqual:[self _indexPathForPaginationCell]]) {
+        if (post[@"photo"]) {
+            PFFile * photo = post[@"photo"];
         
-        if (self.objects[indexPath.row][@"photo"]) {
-            PFFile * photo = self.objects[indexPath.row][@"photo"];
-            [self.mediaScreen sd_setImageWithURL:[NSURL URLWithString:photo.url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                self.mediaScreen.hidden = NO;
-                [self setNeedsStatusBarAppearanceUpdate];
-            }];
+            self.mediaScreen.mediaFile = photo;
+            self.mediaScreen.post = post;
+            
+            [self.mediaScreen show];
         } else {
-        
-        PostVC *vc = [[PostVC alloc] initWithPFObject:self.objects[indexPath.row] withHeight:[YUtil calcHeight:[self objectAtIndexPath:indexPath] withFrame:self.view.frame] userDidTapCommentButton:NO];
-        [self.navigationController pushViewController:vc animated:YES];
+            // do nothing...
+            
+            /*
+             PostVC *vc = [[PostVC alloc] initWithPFObject:post withHeight:[YUtil calcHeight:post withFrame:self.view.frame] userDidTapCommentButton:NO];
+            [self.navigationController pushViewController:vc animated:YES];
+             */
         }
     }
 }
@@ -232,8 +240,6 @@
         BOOL upvoted = !button.selected;
         [postCell setUpvoteStatus:upvoted];
         
-        //NSString *originalButtonTitle = [self normalize:button.titleLabel.text];
-        
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
         
@@ -242,32 +248,14 @@
         upvotes = [NSNumber numberWithInt:[upvotes intValue] + 1];
         [[YCash sharedCache] incrementUpvoterCountForPost:post];
         
-        
-        //    if (upvoted) {
-        //        upvotes = [NSNumber numberWithInt:[upvotes intValue] + 1];
-        //        [[YCash sharedCache] incrementUpvoterCountForPost:post];
-        //    } else {
-        //        if ([upvotes intValue] > 0) {
-        //            upvotes = [NSNumber numberWithInt:[upvotes intValue] - 1];
-        //        }
-        //        [[YCash sharedCache] decrementUpvoterCountForPost:post];
-        //    }
-        
         [[YCash sharedCache] setCurrentUserGaveUpvoteForPost:post upvoted:upvoted];
         
         [YUtil upvotePostInBackground:post block:^(BOOL succeeded, NSError *error) {
             [button setUserInteractionEnabled:YES];
         }];
+    } else {
+        // nav to see who else liked it
         
-        //    if (upvoted) {
-        //        [YUtil upvotePostInBackground:post block:^(BOOL succeeded, NSError *error) {
-        //            [button setUserInteractionEnabled:YES];
-        //        }];
-        //    } else {
-        //        [YUtil unUpvotePostInBackground:post block:^(BOOL succeeded, NSError *error) {
-        //            [button setUserInteractionEnabled:YES];
-        //        }];
-        //    }
     }
 }
 
@@ -300,12 +288,5 @@
     return [NSIndexPath indexPathForRow:[self.objects count] inSection:0];
 }
 
--(UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
-    return UIStatusBarAnimationSlide;
-}
-
--(UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
-}
 
 @end

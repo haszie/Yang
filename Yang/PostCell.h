@@ -22,19 +22,15 @@
 @property (weak, nonatomic) IBOutlet ProPicIV *receiver;
 @property (weak, nonatomic) IBOutlet UIView *bg;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *flex_height;
+@property (weak, nonatomic) IBOutlet UILabel *toUserLbl;
 
-@property (retain, nonatomic) IBOutlet UILabel *karma;
-@property (retain, nonatomic) IBOutlet UILabel *sentence;
+@property (retain, nonatomic) IBOutlet UILabel *upvotes;
+@property (retain, nonatomic) IBOutlet UILabel *fromUserLbl;
 @property (retain, nonatomic) IBOutlet UILabel *words;
-//@property (weak, nonatomic) IBOutlet UILabel *upvotes;
-//@property (weak, nonatomic) IBOutlet UIButton *up_btn;
-//@property (weak, nonatomic) IBOutlet UIButton *ghost_btn;
+@property (weak, nonatomic) IBOutlet UIButton *ghost_btn;
+@property (weak, nonatomic) IBOutlet UIButton *up_btn;
 
 @property (weak, nonatomic) IBOutlet UIImageView *mediaPreview;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mediaPreviewWidth;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mediaFromUserSpace;
-@property (weak, nonatomic) IBOutlet UIButton *comment_btn;
 
 @property (nonatomic, weak) id <PostCellDelegate> delegate;
 @property (nonatomic, strong) PFObject *post;
