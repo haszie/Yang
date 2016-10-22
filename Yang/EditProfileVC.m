@@ -68,27 +68,30 @@
     blurb.delegate = self;
     self.blurb = blurb;
     
-    UITextField *email = [[UITextField alloc] initWithFrame:
-                          CGRectMake(0, blurb.frame.origin.y + blurb.frame.size.height + 16.0f, self.view.frame.size.width, 50.0f)];
-    [email setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:240.0/255.0f blue:240.0/255.0f alpha:1.0f]];
-    [email setFont:[UIFont fontWithName:@"OpenSans" size:20.0f]];
-    [email setPlaceholder:@"Email (optional)"];
-    [email setTextColor:[UIColor blackColor]];
-    [email setReturnKeyType:UIReturnKeyDone];
-    UIView *spacer_last = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 32.0f, 60.0f)];
-    [email setLeftViewMode:UITextFieldViewModeAlways];
-    [email setLeftView:spacer_last];
-    email.delegate = self;
-    self.email = email;
+//    UITextField *email = [[UITextField alloc] initWithFrame:
+//                          CGRectMake(0, blurb.frame.origin.y + blurb.frame.size.height + 16.0f, self.view.frame.size.width, 50.0f)];
+//    [email setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:240.0/255.0f blue:240.0/255.0f alpha:1.0f]];
+//    [email setFont:[UIFont fontWithName:@"OpenSans" size:20.0f]];
+//    [email setPlaceholder:@"Email (optional)"];
+//    [email setTextColor:[UIColor blackColor]];
+//    [email setReturnKeyType:UIReturnKeyDone];
+//    UIView *spacer_last = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 32.0f, 60.0f)];
+//    [email setLeftViewMode:UITextFieldViewModeAlways];
+//    [email setLeftView:spacer_last];
+//    email.delegate = self;
+//    self.email = email;
 
     UIButton *camera = [[UIButton alloc] initWithFrame:
-                        CGRectMake(32.0f, email.frame.origin.y + email.frame.size.height + 24.0f, self.view.frame.size.width - 64.0f, 50.0f)];
+                        CGRectMake(32.0f, blurb.frame.origin.y + blurb.frame.size.height + 24.0f, self.view.frame.size.width - 64.0f, 50.0f)];
     [camera addTarget:self action:@selector(didHitCam) forControlEvents:UIControlEventTouchUpInside];
     [camera.titleLabel setFont:[UIFont fontWithName:@"OpenSans" size:20.0f]];
-    [camera setBackgroundColor:[UIColor blackColor]];
-    [camera setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [camera setTitle:@"New Profile Picture" forState:UIControlStateNormal];
     [camera setAdjustsImageWhenHighlighted:NO];
+    [camera setBackgroundImage:[YUtil imageWithColor:[UIColor colorWithRed:240.0/255.0f green:240.0/255.0f blue:240.0/255.0f alpha:1.0f]] forState:UIControlStateNormal];
+    [camera setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    camera.layer.masksToBounds = YES;
+    camera.layer.cornerRadius = 3.0f;
+
     self.camera = camera;
     
     UIButton *finish = [[UIButton alloc] initWithFrame:
@@ -99,6 +102,8 @@
     [finish setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [finish setTitle:@"Save" forState:UIControlStateNormal];
     [finish setAdjustsImageWhenHighlighted:NO];
+    finish.layer.masksToBounds = YES;
+    finish.layer.cornerRadius = 3.0f;
     self.finish = finish;
     
     UIScrollView *scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
@@ -112,7 +117,7 @@
     [scroller addSubview:firstName];
     [scroller addSubview:lastName];
     [scroller addSubview:blurb];
-    [scroller addSubview:email];
+//    [scroller addSubview:email];
     [scroller addSubview:camera];
     [scroller addSubview:finish];
     
@@ -121,7 +126,7 @@
     _firstName.text = [PFUser currentUser][@"first"];
     _lastName.text = [PFUser currentUser][@"last"];
     _blurb.text = [PFUser currentUser][@"blurb"];
-    _email.text = [PFUser currentUser][@"email"];
+//    _email.text = [PFUser currentUser][@"email"];
    
     [_firstName becomeFirstResponder];
 }
@@ -167,8 +172,8 @@
             return;
         }
 
-        NSString *trimmedEmail = [self.email.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if (trimmedEmail != 0) usa[@"email"] = self.email.text;
+//        NSString *trimmedEmail = [self.email.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//        if (trimmedEmail != 0) usa[@"email"] = self.email.text;
 
         usa[@"first"] = trimmedFirst;
         usa[@"last"] = trimmedLast;
@@ -292,9 +297,12 @@
         [self.scroller setContentOffset:CGPointMake(0, self.firstName.frame.origin.y - 8.0f) animated:YES];
     } else if (textField == self.blurb) {
         [self.scroller setContentOffset:CGPointMake(0, self.lastName.frame.origin.y - 8.0f) animated:YES];
-    } else if (textField == self.email) {
-        [self.scroller setContentOffset:CGPointMake(0, self.blurb.frame.origin.y - 8.0f) animated:YES];
     }
+
+//    } else if (textField == self.email) {
+//        [self.scroller setContentOffset:CGPointMake(0, self.blurb.frame.origin.y - 8.0f) animated:YES];
+//    }
+
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -302,9 +310,11 @@
         [self.lastName becomeFirstResponder];
     } else if (textField == self.lastName) {
         [self.blurb becomeFirstResponder];
-    } else if (textField == self.blurb) {
-        [self.email becomeFirstResponder];
     }
+    
+//    else if (textField == self.blurb) {
+//        [self.email becomeFirstResponder];
+//    }
     return YES;
 }
 

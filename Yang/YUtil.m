@@ -361,7 +361,7 @@ static MMDrawerController *drawer;
     }
     
     //pad
-    height += 12;
+    height += 16;
     
     //NSLog([NSString stringWithFormat:@"%@: %f\n", lbl.text, height]);
     

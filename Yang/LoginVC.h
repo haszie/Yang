@@ -10,6 +10,7 @@
 #import "MBProgressHUD.h"
 #import "MainVC.h"
 #import "RSKImageCropper.h"
+#import "VWWPermissionKit.h"
 
 @interface LoginVC : UIViewController <UIScrollViewDelegate, UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,
                                         UITextFieldDelegate, RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource>
@@ -26,5 +27,8 @@
 @property (weak, nonatomic) UIButton *keepGoing;
 @property (weak, nonatomic) UIScrollView *scrollView;
 @property (weak, nonatomic) UIScrollView *formScroller;
+@property (weak, nonatomic) UIScrollView *permissionsScroller;
+
+@property (weak, nonatomic) PFUser *theNewUser;
 
 @end

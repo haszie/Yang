@@ -106,8 +106,8 @@
                             <frame key="frameInset" minX="187" minY="110" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="36" id="5MX-GG-x1b"/>
-                                <constraint firstAttribute="width" constant="44" id="Dc2-xc-Apc"/>
-                                <constraint firstAttribute="height" constant="44" id="vga-7L-6rb"/>
+                                <constraint firstAttribute="width" constant="40" id="Dc2-xc-Apc"/>
+                                <constraint firstAttribute="height" constant="40" id="vga-7L-6rb"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">

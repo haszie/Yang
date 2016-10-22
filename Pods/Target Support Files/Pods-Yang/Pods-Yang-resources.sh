@@ -119,6 +119,10 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "TSMessages/Pod/Assets/NotificationButtonBackground.png"
   install_resource "TSMessages/Pod/Assets/NotificationButtonBackground@2x.png"
   install_resource "TSMessages/Pod/Assets/TSMessagesDefaultDesign.json"
+  install_resource "VENTokenField/VENTokenField/VENToken.xib"
+  install_resource "VWWPermissionKit/VWWPermissionKit/VWWPermissionKit/VWWPermissionManager/VWWPermissionsViewController.xib"
+  install_resource "VWWPermissionKit/VWWPermissionKit/VWWPermissionKit/VWWPermissionManager/VWWPermissionTableViewCell.xib"
+  install_resource "VWWPermissionKit/VWWPermissionKit/VWWPermissionKit/VWWPermissionManager/VWWPermissionTitleTableViewCell.xib"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "DBCamera/DBCamera/Resources/DBCameraImages.xcassets"
@@ -160,6 +164,10 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "TSMessages/Pod/Assets/NotificationButtonBackground.png"
   install_resource "TSMessages/Pod/Assets/NotificationButtonBackground@2x.png"
   install_resource "TSMessages/Pod/Assets/TSMessagesDefaultDesign.json"
+  install_resource "VENTokenField/VENTokenField/VENToken.xib"
+  install_resource "VWWPermissionKit/VWWPermissionKit/VWWPermissionKit/VWWPermissionManager/VWWPermissionsViewController.xib"
+  install_resource "VWWPermissionKit/VWWPermissionKit/VWWPermissionKit/VWWPermissionManager/VWWPermissionTableViewCell.xib"
+  install_resource "VWWPermissionKit/VWWPermissionKit/VWWPermissionKit/VWWPermissionManager/VWWPermissionTitleTableViewCell.xib"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

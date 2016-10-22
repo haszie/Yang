@@ -52,5 +52,22 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+    
+    <!-- 📷 Camera -->
+    <key>NSCameraUsageDescription</key>
+    <string>For taking pictures and recording video</string>
+    
+    <!-- 🎤 Microphone -->
+    <key>NSMicrophoneUsageDescription</key>
+    <string>Videos need sound</string>
+    
+    <!-- Contacts -->
+    <key>NSContactsUsageDescription</key>
+    <string>For finding friends</string>
+
+    <!-- Photos -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Upload a profile picture from your camera roll</string>
+
 </dict>
 </plist>

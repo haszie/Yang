@@ -18,6 +18,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    self.navigationController.navigationBar.translucent = NO;
+
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
 
     UIScrollView *scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 120.0f, self.view.frame.size.width, self.view.frame.size.height - 120.0f)];
@@ -69,8 +73,10 @@
     [continueButton setUserInteractionEnabled:NO];
     [continueButton setSelected:NO];
     [continueButton setAdjustsImageWhenHighlighted:NO];
+    continueButton.layer.masksToBounds = YES;
+    continueButton.layer.cornerRadius = 3.0f;
     self.continueButton = continueButton;
-    
+
     UILabel *instructions = [[UILabel alloc] initWithFrame:
                              CGRectMake(32.0f + self.view.frame.size.width, 16.0f, self.view.frame.size.width - 64.0f, 88.0f)];
     [instructions setFont:[UIFont fontWithName:@"OpenSans" size:18.0f]];
@@ -109,6 +115,8 @@
     [keepGoing setUserInteractionEnabled:NO];
     [keepGoing setSelected:NO];
     [keepGoing setAdjustsImageWhenHighlighted:NO];
+    keepGoing.layer.masksToBounds = YES;
+    keepGoing.layer.cornerRadius = 3.0f;
     self.keepGoing = keepGoing;
     
     UIButton *resend = [[UIButton alloc] initWithFrame:
@@ -119,7 +127,9 @@
     [resend setBackgroundColor:[UIColor colorWithRed:170.0/255.0f green:51.0/255.0f blue:17.0/255.0f alpha:1.0f]];
     [resend setTitle:@"Resend" forState:UIControlStateNormal];
     [resend setAdjustsImageWhenHighlighted:NO];
-    
+    resend.layer.masksToBounds = YES;
+    resend.layer.cornerRadius = 3.0f;
+
     UILabel *signUpHelp = [[UILabel alloc] initWithFrame:
                              CGRectMake(32.0f, 16.0f, self.view.frame.size.width - 64.0f, 88.0f)];
     [signUpHelp setFont:[UIFont fontWithName:@"OpenSans" size:18.0f]];
@@ -162,6 +172,7 @@
     [blurb setPlaceholder:@"Blurb about yourself"];
     [blurb setTextColor:[UIColor blackColor]];
     [blurb setReturnKeyType:UIReturnKeyNext];
+    
     UIView *spacer_lol = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 32.0f, 60.0f)];
     [blurb setLeftViewMode:UITextFieldViewModeAlways];
     [blurb setLeftView:spacer_lol];
@@ -197,13 +208,24 @@
     
     UIScrollView * formScroller = [[UIScrollView alloc] initWithFrame:
                                    CGRectMake(self.scrollView.frame.size.width * 2.0f + 1.0f, 1.0f, self.scrollView.frame.size.width - 2.0f, self.scrollView.frame.size.height)];
-    [formScroller setContentSize:CGSizeMake(formScroller.frame.size.width, formScroller.frame.size.height + 232.0f)];
+    
+    [formScroller setContentSize:CGSizeMake(formScroller.frame.size.width, formScroller.frame.size.height + 132.0f)];
     [formScroller setScrollEnabled:YES];
     [formScroller setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
     formScroller.bounces = YES;
     formScroller.delegate = self;
     self.formScroller = formScroller;
     
+    UIScrollView * permissionsScroller = [[UIScrollView alloc] initWithFrame:
+                                   CGRectMake(self.scrollView.frame.size.width * 3.0f + 1.0f, 1.0f, self.scrollView.frame.size.width - 2.0f, self.scrollView.frame.size.height)];
+
+    [permissionsScroller setContentSize:CGSizeMake(formScroller.frame.size.width, formScroller.frame.size.height + 132.0f)];
+    [permissionsScroller setScrollEnabled:YES];
+    [permissionsScroller setKeyboardDismissMode:UIScrollViewKeyboardDismissModeOnDrag];
+    permissionsScroller.bounces = YES;
+    permissionsScroller.delegate = self;
+    self.permissionsScroller = formScroller;
+
     [scroller addSubview:welcome];
     [scroller addSubview:phoneNumber];
     [scroller addSubview:continueButton];
@@ -221,15 +243,19 @@
     [formScroller addSubview:finish];
     
     [scroller addSubview:formScroller];
+    [scroller addSubview:permissionsScroller];
 
     [self.view addSubview:logoBG];
     [self.view addSubview:yangTitle];
     [self.view addSubview:scroller];
     
+
+    
     [self.phoneNumber becomeFirstResponder];
 }
 
 -(void) didHitContinue {
+    
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
@@ -296,6 +322,8 @@
                     [self presentViewController:drawerController animated:YES completion:nil];
                 });
             } else {
+                self.theNewUser = [PFUser currentUser];
+                
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     [[UIApplication sharedApplication] endIgnoringInteractionEvents];
@@ -365,7 +393,7 @@
     UIAlertAction *actionNo = [UIAlertAction actionWithTitle:@"Not right now"
                                                        style:UIAlertActionStyleDefault
                                                      handler:^(UIAlertAction * alert){
-                                                         [self actionNo];
+                                                         [self signUp];
                                                      }];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel"
                                                        style:UIAlertActionStyleCancel
@@ -390,49 +418,14 @@
     
     [controller dismissViewControllerAnimated:YES completion:nil];
     
-    NSString *trimmedFirst = [self.firstName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    NSString *trimmedLast = [self.lastName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    NSString *trimmedBlurb = [self.blurb.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    PFUser *user = [PFUser currentUser];
-    user[@"first"] = trimmedFirst;
-    user[@"last"] = trimmedLast;
-    user[@"blurb"] = trimmedBlurb;
-    user[@"signedUp"] = @YES;
-    
     NSData * photoData = UIImageJPEGRepresentation(croppedImage, 0.6f);
     
     if (photoData.length < 10485760)  {
         PFFile * photoFile = [PFFile fileWithData:photoData];
-        user[kUserProfilePicture] = photoFile;
+        self.theNewUser[kUserProfilePicture] = photoFile;
     }
     
-//    NSString *trimmedEmail = [self.email.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//    if (trimmedEmail.length != 0) user[@"email"] = self.email.text;
-    
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if (succeeded) {
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-            
-            //HomeFeedVC *home = [[HomeFeedVC alloc] initWithStyle:UITableViewStylePlain];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MenuVC home]];
-            nav.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-            nav.navigationBar.translucent = NO;
-
-            MenuVC *menu = [[MenuVC alloc] init];
-            MainVC *drawerController = [[MainVC alloc] initWithCenterViewController:nav leftDrawerViewController:menu];
-
-            [self presentViewController:drawerController animated:YES completion:nil];
-        } else {
-            hud.mode = MBProgressHUDModeText;
-            hud.labelText = error.localizedDescription;
-            [hud hide:YES afterDelay:1.5f];
-            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-        }
-    }];
+    [self signUp];
 }
 
 - (CGRect)imageCropViewControllerCustomMaskRect:(RSKImageCropViewController *)controller
@@ -506,34 +499,25 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
--(void) actionNo {
+-(void) signUp {
     NSString *trimmedFirst = [self.firstName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *trimmedLast = [self.lastName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     NSString *trimmedBlurb = [self.blurb.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-
-    PFUser *user = [PFUser currentUser];
-    user[@"first"] = trimmedFirst;
-    user[@"last"] = trimmedLast;
-    user[@"blurb"] = trimmedBlurb;
-    user[@"signedUp"] = @YES;
     
-//    NSString *trimmedEmail = [self.email.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-//    if (trimmedEmail != 0) user[@"email"] = self.email.text;
-
+    self.theNewUser[@"first"] = trimmedFirst;
+    self.theNewUser[@"last"] = trimmedLast;
+    self.theNewUser[@"blurb"] = trimmedBlurb;
+    self.theNewUser[@"signedUp"] = @YES;
+    
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+    [self.theNewUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
+            
             [MBProgressHUD hideHUDForView:self.view animated:YES];
             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
             
-            //HomeFeedVC *home = [[HomeFeedVC alloc] initWithStyle:UITableViewStylePlain];
-            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MenuVC home]];
-            
-            MenuVC *menu = [[MenuVC alloc] init];
-            MainVC *drawerController = [[MainVC alloc] initWithCenterViewController:nav leftDrawerViewController:menu];
-            
-            [self presentViewController:drawerController animated:YES completion:nil];
+            [self doPermissions];
         } else {
             hud.mode = MBProgressHUDModeText;
             hud.labelText = error.localizedDescription;
@@ -541,7 +525,40 @@
             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
         }
     }];
+
 }
+
+
+-(void) doPermissions {
+    VWWCameraPermission *camera = [VWWCameraPermission permissionWithLabelText:@"Yang needs access to the camera so you can send friends picture or video."];
+    
+    VWWMicrophonePermission *microphone = [VWWMicrophonePermission permissionWithLabelText:@"The videos need to have sound!"];
+    
+    VWWPhotosPermission *photos = [VWWPhotosPermission permissionWithLabelText:@"If you would like to upload a profile picture from your camera roll, Yang needs permission."];
+    
+    VWWContactsPermission *contacts = [VWWContactsPermission permissionWithLabelText:@"Yang needs to have access to your contacts to find friends."];
+    
+    VWWNotificationsPermission *notifications = [VWWNotificationsPermission permissionWithLabelText:@"Yang will notify you when someone sends you karma."];
+    
+    NSArray *permissions = @[camera, microphone, photos, contacts, notifications, ];
+    
+    [VWWPermissionsManager optionPermissions:permissions
+                                       title:@"We need a couple things from you before we get started. You can change these settings at any time."
+                          fromViewController:self
+                                resultsBlock:^(NSArray *permissions) {
+                                    [permissions enumerateObjectsUsingBlock:^(VWWPermission *permission, NSUInteger idx, BOOL *stop) {
+                                        NSLog(@"%@ - %@", permission.type, [permission stringForStatus]);
+                                    }];
+
+                                    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MenuVC home]];
+                                    
+                                    MenuVC *menu = [[MenuVC alloc] init];
+                                    MainVC *drawerController = [[MainVC alloc] initWithCenterViewController:nav leftDrawerViewController:menu];
+                                    
+                                    [self presentViewController:drawerController animated:YES completion:nil];
+                                }];
+}
+
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
     if (textField == self.firstName) {

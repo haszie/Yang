@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "RSKImageCropper.h"
 #import "MBProgressHUD.h"
+#import "YUtil.h"
 
 @interface EditProfileVC : UIViewController <UIScrollViewDelegate, UIAlertViewDelegate, UINavigationControllerDelegate,
                                                 UIImagePickerControllerDelegate, UITextFieldDelegate, RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource>
@@ -17,7 +18,7 @@
 @property (weak, nonatomic) UITextField *firstName;
 @property (weak, nonatomic) UITextField *lastName;
 @property (weak, nonatomic) UITextField *blurb;
-@property (weak, nonatomic) UITextField *email;
+//@property (weak, nonatomic) UITextField *email;
 @property (weak, nonatomic) UIButton *finish;
 @property (weak, nonatomic) UIButton *camera;
 @property (strong, nonatomic) UIImage *profileImage;

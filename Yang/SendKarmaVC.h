@@ -33,8 +33,11 @@
 #import "FriendCell.h"
 #import "CameraNAV.h"
 
+#import "VENTokenField.h"
+
 @interface SendKarmaVC : UIViewController <UITextViewDelegate, UITextFieldDelegate, MMNumberKeyboardDelegate,
-                                            UITableViewDataSource, UITableViewDelegate, DBCameraViewControllerDelegate>
+                                            UITableViewDataSource, UITableViewDelegate, DBCameraViewControllerDelegate,
+                                            VENTokenFieldDelegate, VENTokenFieldDataSource>
 
 -(id) initWithUsername:(PFUser *) user;
 
@@ -50,10 +53,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *send_btn;
 
 @property (nullable, strong, nonatomic) UITableView * friends;
-@property (nullable, strong, nonatomic) NSString * searchTerm;
 
 @property (nullable, weak, nonatomic) NSString *usernameToSend;
 @property (nullable, weak, nonatomic) PFUser *sendToUser;
+
 
 @property (nullable, nonatomic, copy, readonly) NSArray<__kindof PFObject *> *objects;
 

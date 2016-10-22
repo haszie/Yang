@@ -31,6 +31,11 @@
      @{NSForegroundColorAttributeName:[UIColor whiteColor],
        NSFontAttributeName:[UIFont fontWithName:@"OpenSans" size:14.0f]}];
     
+    [[UINavigationBar appearance] setTranslucent:NO];
+    [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
+    
+    [[UIButton appearance] setTintColor:[UIColor lightGrayColor]];
+    
     [[UIBarButtonItem appearanceWhenContainedIn:[UINavigationBar class], nil]
      setTitleTextAttributes:
      @{NSForegroundColorAttributeName:[UIColor whiteColor],

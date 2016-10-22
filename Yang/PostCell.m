@@ -74,7 +74,7 @@
     cell.post = object;
     cell.tag = indexPath.row;
 
-    cell.mediaPreview.layer.cornerRadius = 22.0f;
+    cell.mediaPreview.layer.cornerRadius = 20.0f;
     cell.mediaPreview.contentMode = UIViewContentModeScaleAspectFill;
     [cell.mediaPreview.layer  setMasksToBounds:YES];
     

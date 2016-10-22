@@ -10,6 +10,8 @@
 
 @interface SendKarmaVC () {
     NSMutableArray<PFObject *> *_mutableObjects;
+    NSMutableArray<PFObject *> *_filteredObjects;
+
     BOOL success;
     UIImage *photo;
 }
@@ -30,8 +32,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        
+    
+    [self setNeedsStatusBarAppearanceUpdate];
+    
     _mutableObjects = [NSMutableArray array];
+    _filteredObjects = [NSMutableArray array];
     
     self.navigationController.navigationBar.translucent = NO;
     
@@ -106,6 +111,7 @@
     [_desc setReturnKeyType:UIReturnKeyDefault];
     
     [_recipient addTarget:self action:@selector(doneHit) forControlEvents:UIControlEventEditingDidEndOnExit];
+    [_recipient addTarget:self action:@selector(textFieldChanged) forControlEvents:UIControlEventEditingChanged];
     
     _hud = [[MBProgressHUD alloc] initWithView:self.view];
     [self.view addSubview:_hud];
@@ -131,7 +137,9 @@
     [super viewDidAppear:animated];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
+
 
 -(void) camera_btn_hit {
     
@@ -208,6 +216,32 @@
     });
 }
 
+-(void) textFieldChanged {
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(id  _Nullable evaluatedObject, NSDictionary<NSString *,id> * _Nullable bindings) {
+        if (evaluatedObject == nil ) {
+            return NO;
+        }
+        
+        if ([_recipient.text length] == 0) {
+            return YES;
+        }
+        
+        PFUser * obj = (PFUser *) evaluatedObject[@"toUser"];
+        
+        if (obj[@"first"] && obj[@"last"]) {
+            NSString * fullName = [NSString stringWithFormat:@"%@ %@", obj[@"first"], obj[@"last"]];
+            NSRange range = [fullName rangeOfString:_recipient.text options:NSCaseInsensitiveSearch];
+            return range.location != NSNotFound;
+        } else {
+            return NO;
+        }
+    }];
+    
+    [_filteredObjects removeAllObjects];
+    _filteredObjects = [[self.objects filteredArrayUsingPredicate:predicate] mutableCopy];
+    [_friends reloadData];
+}
+
 -(void) doneHit {
     [_amount becomeFirstResponder];
 }
@@ -221,7 +255,10 @@
     // recipient
     if (textField.tag == 0) {
         [self.view addSubview:self.friends];
-        [self loadObjects];
+        
+        if ([_recipient.text length] == 0) {
+            [self loadObjects];
+        }
     }
 }
 
@@ -231,6 +268,9 @@
     if (textField.tag == 0) {
         [self.friends removeFromSuperview];
     }
+    
+    // check what is in recipient text
+    
 }
 
 -(UITableView *) friends {
@@ -250,13 +290,15 @@
         return NO;
     }
     
-    if ([string isEqualToString:@""]) {
-        _searchTerm = [_searchTerm substringToIndex:_searchTerm.length - 1];
-    } else {
-        _searchTerm = [NSString stringWithFormat:@"%@%@", textField.text, string];
-    }
+//    if ([string isEqualToString:@""]) {
+//        _searchTerm = [_searchTerm substringToIndex:_searchTerm.length - 1];
+//    } else {
+//        _searchTerm = [NSString stringWithFormat:@"%@%@", textField.text, string];
+//    }
     
-    [self loadObjects];
+//    [self loadObjects];
+
+    // filter using NSPredicate
     
     return YES;
 }
@@ -286,6 +328,20 @@
 }
 
 -(void) sendKarma {
+    
+    if (!self.usernameToSend) {
+        success = false;
+        dispatch_async(dispatch_get_main_queue(), ^(void){
+            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+            
+            _hud.mode = MBProgressHUDModeText;
+            _hud.labelText = @"Recipient not set";
+
+            [_hud show:YES];
+            [_hud hide:YES afterDelay:2.0f];
+        });
+        return;
+    }
     
     PFUser *sender = [PFUser currentUser];
     [sender fetch];
@@ -421,20 +477,20 @@
     followingActivitiesQuery.cachePolicy = kPFCachePolicyNetworkOnly;
 
     [followingActivitiesQuery setCachePolicy:kPFCachePolicyNetworkOnly];
-    [followingActivitiesQuery orderByAscending:@"toUser"];
+//    [followingActivitiesQuery orderByAscending:@"toUser"];
     [followingActivitiesQuery includeKey:@"toUser"];
     
-    PFQuery *firstQuery = [PFQuery queryWithClassName:@"_User"];
-    PFQuery *lastQuery = [PFQuery queryWithClassName:@"_User"];
-    
-    if (_searchTerm) {
-        [firstQuery whereKey:@"first" matchesRegex:[NSString stringWithFormat:@"(?i)%@", _searchTerm]];
-        [lastQuery whereKey:@"last" matchesRegex:[NSString stringWithFormat:@"(?i)%@", _searchTerm]];
-    }
-    
-    PFQuery *firstLast = [PFQuery orQueryWithSubqueries:@[firstQuery, lastQuery]];
-    
-    [followingActivitiesQuery whereKey:@"toUser" matchesQuery:firstLast];
+//    PFQuery *firstQuery = [PFQuery queryWithClassName:@"_User"];
+//    PFQuery *lastQuery = [PFQuery queryWithClassName:@"_User"];
+//    
+//    if (_searchTerm) {
+//        [firstQuery whereKey:@"first" matchesRegex:[NSString stringWithFormat:@"(?i)%@", _searchTerm]];
+//        [lastQuery whereKey:@"last" matchesRegex:[NSString stringWithFormat:@"(?i)%@", _searchTerm]];
+//    }
+//    
+//    PFQuery *firstLast = [PFQuery orQueryWithSubqueries:@[firstQuery, lastQuery]];
+//    
+//    [followingActivitiesQuery whereKey:@"toUser" matchesQuery:firstLast];
     
     return followingActivitiesQuery;
 }
@@ -456,9 +512,11 @@
             
             if (clear) {
                 [_mutableObjects removeAllObjects];
+                [_filteredObjects removeAllObjects];
             }
             
             [_mutableObjects addObjectsFromArray:foundObjects];
+            [_filteredObjects addObjectsFromArray:foundObjects];
             [_friends reloadData];
         }
         
@@ -502,8 +560,13 @@
     return _mutableObjects;
 }
 
+- (NSArray<__kindof PFObject *> *) filteredObjs {
+    return _filteredObjects;
+}
+
+
 - (PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath {
-    return self.objects[indexPath.row];
+    return self.filteredObjs[indexPath.row];
 }
 
 #pragma mark - UITableViewDataSource
@@ -517,8 +580,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     PFUser *user = [self.objects objectAtIndex:indexPath.row][@"toUser"];
     PFFile * propic = user[@"propic"];
-
-    _searchTerm = user[@"username"];
     
     [_recipient setText:[NSString stringWithFormat:@"%@ %@", user[@"first"], user[@"last"]]];
     self.usernameToSend = user.username;
@@ -529,7 +590,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.objects count];
+    return [self.filteredObjs count];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

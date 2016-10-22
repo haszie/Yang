@@ -62,15 +62,15 @@
 -(void)objectsDidLoad:(NSError *)error {
     [super objectsDidLoad:error];
     
-    if (self.objects.count == 0) {
-        UILabel * bg = [[UILabel alloc] initWithFrame:CGRectMake(64.0f, self.view.frame.size.height / 2.0f - 96.0f, self.view.frame.size.width - 128.0f, 120.0f)];
-        [bg setFont:[UIFont fontWithName:@"OpenSans-Light" size:18.0f]];
-        bg.text = @"← Add friends and start Yangin' out";
-        bg.numberOfLines = 0;
-        [bg sizeToFit];
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [self.view addSubview:bg];
-    }
+//    if (self.objects.count == 0) {
+//        UILabel * bg = [[UILabel alloc] initWithFrame:CGRectMake(64.0f, self.view.frame.size.height / 2.0f - 96.0f, self.view.frame.size.width - 128.0f, 120.0f)];
+//        [bg setFont:[UIFont fontWithName:@"OpenSans-Light" size:18.0f]];
+//        bg.text = @"← Add friends and start Yangin' out";
+//        bg.numberOfLines = 0;
+//        [bg sizeToFit];
+//        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//        [self.view addSubview:bg];
+//    }
 }
 
 -(void) menuButtonPress {
