@@ -20,7 +20,7 @@ target 'Yang' do
         pod 'TSMessages'
 	pod 'VWWPermissionKit', '~> 1.3.0'
 	pod 'Onboard'
-	pod 'VENTokenField', '~> 2.0'
+	pod 'LLSimpleCamera', '~> 4.1'
 
   target 'YangTests' do
     inherit! :search_paths

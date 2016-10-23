@@ -142,44 +142,48 @@
 
 
 -(void) camera_btn_hit {
-    
-    DBCameraContainerViewController *cameraContainer = [[DBCameraContainerViewController alloc] initWithDelegate:self cameraSettingsBlock:^(DBCameraView *cameraView, DBCameraContainerViewController *container) {
 
-        [cameraView.photoLibraryButton setHidden:YES];
-        [cameraView.gridButton setHidden:YES];
-
-        [container.cameraViewController setUseCameraSegue:YES];
-        [container.cameraViewController setCameraSegueConfigureBlock:^( DBCameraSegueViewController *segue ) {
-            segue.cropMode = NO;
-        }];
-    }];
-    
-    [cameraContainer setTintColor:[UIColor whiteColor]];
-    [cameraContainer setSelectedTintColor:[UIColor yellowColor]];
-    
-    [cameraContainer setFullScreenMode];
-   
-    CameraNAV *nav = [[CameraNAV alloc] initWithRootViewController:cameraContainer];
-    [nav setNavigationBarHidden:YES];
-    
-    [self presentViewController:nav animated:YES completion:nil];
+    // present camera 
+    CameraVC *cam = [[CameraVC alloc] init];
+    [self presentViewController:cam animated:YES completion:nil];
+//
+//    DBCameraContainerViewController *cameraContainer = [[DBCameraContainerViewController alloc] initWithDelegate:self cameraSettingsBlock:^(DBCameraView *cameraView, DBCameraContainerViewController *container) {
+//
+//        [cameraView.photoLibraryButton setHidden:YES];
+//        [cameraView.gridButton setHidden:YES];
+//
+//        [container.cameraViewController setUseCameraSegue:YES];
+//        [container.cameraViewController setCameraSegueConfigureBlock:^( DBCameraSegueViewController *segue ) {
+//            segue.cropMode = NO;
+//        }];
+//    }];
+//    
+//    [cameraContainer setTintColor:[UIColor whiteColor]];
+//    [cameraContainer setSelectedTintColor:[UIColor yellowColor]];
+//    
+//    [cameraContainer setFullScreenMode];
+//   
+//    CameraNAV *nav = [[CameraNAV alloc] initWithRootViewController:cameraContainer];
+//    [nav setNavigationBarHidden:YES];
+//    
+//      [self presentViewController:nav animated:YES completion:nil];
 }
 
-#pragma mark - DBCameraViewControllerDelegate
-
-- (void) dismissCamera:(id)cameraViewController{
-    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
-    [cameraViewController restoreFullScreenMode];
-    [_desc becomeFirstResponder];
-}
-
-- (void) camera:(id)cameraViewController didFinishWithImage:(UIImage *)image withMetadata:(NSDictionary *)metadata
-{
-    [cameraViewController restoreFullScreenMode];
-    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
-    photo = image;
-    [_desc becomeFirstResponder];
-}
+//#pragma mark - DBCameraViewControllerDelegate
+//
+//- (void) dismissCamera:(id)cameraViewController{
+//    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+//    [cameraViewController restoreFullScreenMode];
+//    [_desc becomeFirstResponder];
+//}
+//
+//- (void) camera:(id)cameraViewController didFinishWithImage:(UIImage *)image withMetadata:(NSDictionary *)metadata
+//{
+//    [cameraViewController restoreFullScreenMode];
+//    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
+//    photo = image;
+//    [_desc becomeFirstResponder];
+//}
 
 -(void) send_btn_hit {
     _hud.mode = MBProgressHUDModeIndeterminate;

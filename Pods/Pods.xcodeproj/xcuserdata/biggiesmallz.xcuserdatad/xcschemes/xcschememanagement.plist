@@ -19,11 +19,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>FrameAccessor.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>GPUImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -40,6 +35,11 @@
 			<false/>
 		</dict>
 		<key>JVFloatLabeledTextField.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>LLSimpleCamera.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -94,11 +94,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>VENTokenField.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>VWWPermissionKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -107,22 +102,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>01BB64E02F912E39BD0954ABA8B19B5A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>0776E1192CA437ECFB201E116BFDD7A8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>0A7C904D05B7B051778A2DAD0C9AF8EF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>0F7B1940DE10624DFABB6A65D0BE9B4A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,17 +117,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>30F3144919471DEB717FE31FB0B5EA6B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>31FF44B5E2FF8CF00090950A8B67AFF6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>3376C8A1DBBB7358281B34FEB56030B8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>41B1049D8C8E948CF8DD599A2130B42F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4FA1354E93C8891299C5142B0A7D9A60</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -162,7 +147,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6A20A78CD03E0F031FA1CB9D9A553C82</key>
+		<key>5DCEBF28FF6F1EF9913A980017D11521</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6688FC4CEA8EAA9A4ADA55F6E99D9507</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>72B84EEF741212E64AF885C52F2A70F3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7355165C3686E430B4912C22950ED024</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -173,16 +173,6 @@
 			<true/>
 		</dict>
 		<key>84D260F81845A16EC9E9E0C8CD55DD63</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>889D492F7EF218CD6D859CD7CD64ED16</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BCEE7F8C02F67EC3F27B63AAE90330C2</key>
 		<dict>
 			<key>primary</key>
 			<true/>

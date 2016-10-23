@@ -67,7 +67,12 @@
 		B6C59CBC1C49AFBA009D735D /* SendKarmaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C59CBA1C49AFBA009D735D /* SendKarmaVC.m */; };
 		B6C59CBD1C49AFBA009D735D /* SendKarmaVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6C59CBB1C49AFBA009D735D /* SendKarmaVC.xib */; };
 		B6C59CC01C49B356009D735D /* SharedStateThing.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C59CBF1C49B356009D735D /* SharedStateThing.m */; };
-		B6DEA2A31C63D90500A5A6F1 /* CameraNAV.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DEA2A21C63D90500A5A6F1 /* CameraNAV.m */; };
+		B6DC045F1DBC08BB00DE2235 /* CameraVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DC045E1DBC08BB00DE2235 /* CameraVC.m */; };
+		B6DC04651DBCFE5200DE2235 /* ImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DC04641DBCFE5200DE2235 /* ImageVC.m */; };
+		B6DC04681DBCFE6800DE2235 /* VideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DC04671DBCFE6800DE2235 /* VideoVC.m */; };
+		B6DC04721DBCFF2B00DE2235 /* ViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DC046D1DBCFF2B00DE2235 /* ViewUtils.m */; };
+		B6DC04731DBCFF2B00DE2235 /* UIImage+Crop.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DC046F1DBCFF2B00DE2235 /* UIImage+Crop.m */; };
+		B6DC04741DBCFF2B00DE2235 /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DC04711DBCFF2B00DE2235 /* UIImage+Resize.m */; };
 		B6E82F4A1C7C4CB500F6B848 /* EditProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E82F491C7C4CB500F6B848 /* EditProfileVC.m */; };
 		B6E82F4D1C7C557200F6B848 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E82F4C1C7C557200F6B848 /* SettingsVC.m */; };
 		B6F3D8931C4C19FE003A4B17 /* FriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F3D8911C4C19FE003A4B17 /* FriendCell.m */; };
@@ -209,8 +214,18 @@
 		B6C59CBB1C49AFBA009D735D /* SendKarmaVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendKarmaVC.xib; sourceTree = "<group>"; };
 		B6C59CBE1C49B356009D735D /* SharedStateThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedStateThing.h; sourceTree = "<group>"; };
 		B6C59CBF1C49B356009D735D /* SharedStateThing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedStateThing.m; sourceTree = "<group>"; };
-		B6DEA2A11C63D90500A5A6F1 /* CameraNAV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraNAV.h; sourceTree = "<group>"; };
-		B6DEA2A21C63D90500A5A6F1 /* CameraNAV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraNAV.m; sourceTree = "<group>"; };
+		B6DC045D1DBC08BB00DE2235 /* CameraVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraVC.h; sourceTree = "<group>"; };
+		B6DC045E1DBC08BB00DE2235 /* CameraVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraVC.m; sourceTree = "<group>"; };
+		B6DC04631DBCFE5200DE2235 /* ImageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageVC.h; sourceTree = "<group>"; };
+		B6DC04641DBCFE5200DE2235 /* ImageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageVC.m; sourceTree = "<group>"; };
+		B6DC04661DBCFE6800DE2235 /* VideoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoVC.h; sourceTree = "<group>"; };
+		B6DC04671DBCFE6800DE2235 /* VideoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoVC.m; sourceTree = "<group>"; };
+		B6DC046C1DBCFF2B00DE2235 /* ViewUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewUtils.h; sourceTree = "<group>"; };
+		B6DC046D1DBCFF2B00DE2235 /* ViewUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewUtils.m; sourceTree = "<group>"; };
+		B6DC046E1DBCFF2B00DE2235 /* UIImage+Crop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Crop.h"; sourceTree = "<group>"; };
+		B6DC046F1DBCFF2B00DE2235 /* UIImage+Crop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Crop.m"; sourceTree = "<group>"; };
+		B6DC04701DBCFF2B00DE2235 /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		B6DC04711DBCFF2B00DE2235 /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		B6E82F481C7C4CB500F6B848 /* EditProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileVC.h; sourceTree = "<group>"; };
 		B6E82F491C7C4CB500F6B848 /* EditProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileVC.m; sourceTree = "<group>"; };
 		B6E82F4B1C7C557200F6B848 /* SettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
@@ -314,9 +329,9 @@
 			children = (
 				B658EEB11C43F5C200C6D333 /* AppDelegate.h */,
 				B658EEB21C43F5C200C6D333 /* AppDelegate.m */,
-				B6FE890A1C768F5200115565 /* Models */,
-				B6FE890B1C768F6A00115565 /* Views */,
-				B6FE890C1C768F7700115565 /* Controllers */,
+				B6FE890A1C768F5200115565 /* Model */,
+				B6FE890B1C768F6A00115565 /* View */,
+				B6FE890C1C768F7700115565 /* Controller */,
 				B6C59CC11C49B385009D735D /* Utils */,
 				B658EEBC1C43F5C200C6D333 /* LaunchScreen.storyboard */,
 				B658EEBF1C43F5C200C6D333 /* Info.plist */,
@@ -392,6 +407,7 @@
 		B6C59CC11C49B385009D735D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B6DC04751DBCFF3400DE2235 /* LLUtils */,
 				B68581221C6B7A98003F9799 /* YConstants.h */,
 				B68581231C6B7A98003F9799 /* YConstants.m */,
 				B685811F1C6B7893003F9799 /* YCash.h */,
@@ -404,19 +420,75 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
-		B6FE890A1C768F5200115565 /* Models */ = {
+		B6DC04601DBCFDA600DE2235 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				B6FA268D1C6EDE4800698584 /* FeedVC.h */,
+				B6FA268E1C6EDE4800698584 /* FeedVC.m */,
+				B658EF0E1C43FC6600C6D333 /* HomeFeedVC.h */,
+				B658EF0F1C43FC6600C6D333 /* HomeFeedVC.m */,
+				B6987E811C6AAD0C00355776 /* PostVC.h */,
+				B6987E821C6AAD0C00355776 /* PostVC.m */,
+				B652A6DC1D99F1AA00DC8FBB /* MediaScreenOverlayVC.h */,
+				B652A6DD1D99F1AA00DC8FBB /* MediaScreenOverlayVC.m */,
+			);
+			name = Feed;
+			sourceTree = "<group>";
+		};
+		B6DC04611DBCFDD100DE2235 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				B6C59CB01C49890B009D735D /* MenuVC.h */,
+				B6C59CB11C49890B009D735D /* MenuVC.m */,
+				B6E82F4B1C7C557200F6B848 /* SettingsVC.h */,
+				B6E82F4C1C7C557200F6B848 /* SettingsVC.m */,
+				B63C6AA71D0775550025C262 /* ActivityFeedVC.h */,
+				B63C6AA81D0775550025C262 /* ActivityFeedVC.m */,
+				B63C6AA41D073A150025C262 /* FwendsVC.h */,
+				B63C6AA51D073A150025C262 /* FwendsVC.m */,
+				B669C4441C74DEA100D25661 /* FriendsVC.h */,
+				B669C4451C74DEA100D25661 /* FriendsVC.m */,
+			);
+			name = Menu;
+			sourceTree = "<group>";
+		};
+		B6DC04621DBCFDF200DE2235 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				B6FA268A1C6EDBD100698584 /* UserProfileVC.h */,
+				B6FA268B1C6EDBD100698584 /* UserProfileVC.m */,
+				B6E82F481C7C4CB500F6B848 /* EditProfileVC.h */,
+				B6E82F491C7C4CB500F6B848 /* EditProfileVC.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		B6DC04751DBCFF3400DE2235 /* LLUtils */ = {
+			isa = PBXGroup;
+			children = (
+				B6DC046C1DBCFF2B00DE2235 /* ViewUtils.h */,
+				B6DC046D1DBCFF2B00DE2235 /* ViewUtils.m */,
+				B6DC046E1DBCFF2B00DE2235 /* UIImage+Crop.h */,
+				B6DC046F1DBCFF2B00DE2235 /* UIImage+Crop.m */,
+				B6DC04701DBCFF2B00DE2235 /* UIImage+Resize.h */,
+				B6DC04711DBCFF2B00DE2235 /* UIImage+Resize.m */,
+			);
+			name = LLUtils;
+			sourceTree = "<group>";
+		};
+		B6FE890A1C768F5200115565 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				B669C4471C767C5E00D25661 /* ProfileInfo.h */,
 				B669C4481C767C5E00D25661 /* ProfileInfo.m */,
 			);
-			name = Models;
+			name = Model;
 			sourceTree = "<group>";
 		};
-		B6FE890B1C768F6A00115565 /* Views */ = {
+		B6FE890B1C768F6A00115565 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B6FE890D1C76901500115565 /* Cells */,
+				B6FE890D1C76901500115565 /* Cell */,
 				B625DC7E1C6FB4CE00FA5349 /* ProfileHeader.h */,
 				B625DC7F1C6FB4CE00FA5349 /* ProfileHeader.m */,
 				B68581301C6E64DE003F9799 /* NewCommentView.h */,
@@ -430,20 +502,22 @@
 				B672193D1DB29CA00054FCAA /* UpButton.h */,
 				B672193E1DB29CA00054FCAA /* UpButton.m */,
 			);
-			name = Views;
+			name = View;
 			sourceTree = "<group>";
 		};
-		B6FE890C1C768F7700115565 /* Controllers */ = {
+		B6FE890C1C768F7700115565 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B6FE890E1C76903700115565 /* Supers */,
-				B6FE890F1C76905B00115565 /* OffMenu */,
-				B6FE89101C76907A00115565 /* Smallers */,
+				B6DC04621DBCFDF200DE2235 /* Profile */,
+				B6DC04611DBCFDD100DE2235 /* Menu */,
+				B6DC04601DBCFDA600DE2235 /* Feed */,
+				B6FE890E1C76903700115565 /* Login */,
+				B6FE89101C76907A00115565 /* Send Karma */,
 			);
-			name = Controllers;
+			name = Controller;
 			sourceTree = "<group>";
 		};
-		B6FE890D1C76901500115565 /* Cells */ = {
+		B6FE890D1C76901500115565 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				B685812D1C6E4D41003F9799 /* CommentCell.h */,
@@ -462,59 +536,34 @@
 				B6C59CB41C498FBD009D735D /* MenuCell.m */,
 				B6C59CB51C498FBD009D735D /* MenuCell.xib */,
 			);
-			name = Cells;
+			name = Cell;
 			sourceTree = "<group>";
 		};
-		B6FE890E1C76903700115565 /* Supers */ = {
+		B6FE890E1C76903700115565 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				B6FA268D1C6EDE4800698584 /* FeedVC.h */,
-				B6FA268E1C6EDE4800698584 /* FeedVC.m */,
 				B6BFBFB71C72613D0052D699 /* LoginVC.h */,
 				B6BFBFB81C72613D0052D699 /* LoginVC.m */,
 				B6BFBFB41C725F4F0052D699 /* MainVC.h */,
 				B6BFBFB51C725F4F0052D699 /* MainVC.m */,
-				B6C59CB01C49890B009D735D /* MenuVC.h */,
-				B6C59CB11C49890B009D735D /* MenuVC.m */,
-				B652A6DC1D99F1AA00DC8FBB /* MediaScreenOverlayVC.h */,
-				B652A6DD1D99F1AA00DC8FBB /* MediaScreenOverlayVC.m */,
 			);
-			name = Supers;
+			name = Login;
 			sourceTree = "<group>";
 		};
-		B6FE890F1C76905B00115565 /* OffMenu */ = {
+		B6FE89101C76907A00115565 /* Send Karma */ = {
 			isa = PBXGroup;
 			children = (
-				B658EF0E1C43FC6600C6D333 /* HomeFeedVC.h */,
-				B658EF0F1C43FC6600C6D333 /* HomeFeedVC.m */,
-				B6FA268A1C6EDBD100698584 /* UserProfileVC.h */,
-				B6FA268B1C6EDBD100698584 /* UserProfileVC.m */,
-				B6E82F4B1C7C557200F6B848 /* SettingsVC.h */,
-				B6E82F4C1C7C557200F6B848 /* SettingsVC.m */,
-				B63C6AA71D0775550025C262 /* ActivityFeedVC.h */,
-				B63C6AA81D0775550025C262 /* ActivityFeedVC.m */,
-				B63C6AA41D073A150025C262 /* FwendsVC.h */,
-				B63C6AA51D073A150025C262 /* FwendsVC.m */,
-				B669C4441C74DEA100D25661 /* FriendsVC.h */,
-				B669C4451C74DEA100D25661 /* FriendsVC.m */,
-			);
-			name = OffMenu;
-			sourceTree = "<group>";
-		};
-		B6FE89101C76907A00115565 /* Smallers */ = {
-			isa = PBXGroup;
-			children = (
-				B6E82F481C7C4CB500F6B848 /* EditProfileVC.h */,
-				B6E82F491C7C4CB500F6B848 /* EditProfileVC.m */,
 				B6C59CB91C49AFBA009D735D /* SendKarmaVC.h */,
 				B6C59CBA1C49AFBA009D735D /* SendKarmaVC.m */,
 				B6C59CBB1C49AFBA009D735D /* SendKarmaVC.xib */,
-				B6DEA2A11C63D90500A5A6F1 /* CameraNAV.h */,
-				B6DEA2A21C63D90500A5A6F1 /* CameraNAV.m */,
-				B6987E811C6AAD0C00355776 /* PostVC.h */,
-				B6987E821C6AAD0C00355776 /* PostVC.m */,
+				B6DC045D1DBC08BB00DE2235 /* CameraVC.h */,
+				B6DC045E1DBC08BB00DE2235 /* CameraVC.m */,
+				B6DC04631DBCFE5200DE2235 /* ImageVC.h */,
+				B6DC04641DBCFE5200DE2235 /* ImageVC.m */,
+				B6DC04661DBCFE6800DE2235 /* VideoVC.h */,
+				B6DC04671DBCFE6800DE2235 /* VideoVC.m */,
 			);
-			name = Smallers;
+			name = "Send Karma";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -810,9 +859,10 @@
 				B658EEB31C43F5C200C6D333 /* AppDelegate.m in Sources */,
 				B6FA26921C6EE1EF00698584 /* ProPicIV.m in Sources */,
 				B658EEB01C43F5C200C6D333 /* main.m in Sources */,
-				B6DEA2A31C63D90500A5A6F1 /* CameraNAV.m in Sources */,
 				B6C59CBC1C49AFBA009D735D /* SendKarmaVC.m in Sources */,
 				B669C4461C74DEA100D25661 /* FriendsVC.m in Sources */,
+				B6DC04651DBCFE5200DE2235 /* ImageVC.m in Sources */,
+				B6DC04731DBCFF2B00DE2235 /* UIImage+Crop.m in Sources */,
 				B6E82F4A1C7C4CB500F6B848 /* EditProfileVC.m in Sources */,
 				B6C59CB61C498FBD009D735D /* MenuCell.m in Sources */,
 				B6987E841C6AAD0C00355776 /* PostVC.m in Sources */,
@@ -822,6 +872,9 @@
 				B625DC7D1C6FA66500FA5349 /* YangRefresh.m in Sources */,
 				B6BFBFB91C72613D0052D699 /* LoginVC.m in Sources */,
 				B63C6AA61D073A150025C262 /* FwendsVC.m in Sources */,
+				B6DC04681DBCFE6800DE2235 /* VideoVC.m in Sources */,
+				B6DC04721DBCFF2B00DE2235 /* ViewUtils.m in Sources */,
+				B6DC04741DBCFF2B00DE2235 /* UIImage+Resize.m in Sources */,
 				B63C6AA91D0775550025C262 /* ActivityFeedVC.m in Sources */,
 				B6FE89091C768F3E00115565 /* PhoneFriendsCell.m in Sources */,
 				B658EF101C43FC6600C6D333 /* HomeFeedVC.m in Sources */,
@@ -834,6 +887,7 @@
 				B6C59CC01C49B356009D735D /* SharedStateThing.m in Sources */,
 				B6ACE5EC1D970DAF000B20C8 /* KarmaPostCell.m in Sources */,
 				B6BFBFB61C725F4F0052D699 /* MainVC.m in Sources */,
+				B6DC045F1DBC08BB00DE2235 /* CameraVC.m in Sources */,
 				B625DC801C6FB4CE00FA5349 /* ProfileHeader.m in Sources */,
 				B68581241C6B7A98003F9799 /* YConstants.m in Sources */,
 			);

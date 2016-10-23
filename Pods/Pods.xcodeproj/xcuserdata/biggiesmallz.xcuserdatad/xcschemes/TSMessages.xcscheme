@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '0776E1192CA437ECFB201E116BFDD7A8'
+               BlueprintIdentifier = '6688FC4CEA8EAA9A4ADA55F6E99D9507'
                BlueprintName = 'TSMessages'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libTSMessages.a'>

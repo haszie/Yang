@@ -19,10 +19,10 @@
 
 #import <MMNumberKeyboard/MMNumberKeyboard.h>
 
-#import "DBCameraViewController.h"
-#import "DBCameraContainerViewController.h"
-#import "DBCameraSegueViewController.h"
-#import "DBCameraView.h"
+//#import "DBCameraViewController.h"
+//#import "DBCameraContainerViewController.h"
+//#import "DBCameraSegueViewController.h"
+//#import "DBCameraView.h"
 
 #import "MBProgressHUD.h"
 
@@ -31,13 +31,12 @@
 
 #import "FeedVC.h"
 #import "FriendCell.h"
-#import "CameraNAV.h"
+//#import "CameraNAV.h"
 
-#import "VENTokenField.h"
+#import "CameraVC.h"
 
 @interface SendKarmaVC : UIViewController <UITextViewDelegate, UITextFieldDelegate, MMNumberKeyboardDelegate,
-                                            UITableViewDataSource, UITableViewDelegate, DBCameraViewControllerDelegate,
-                                            VENTokenFieldDelegate, VENTokenFieldDataSource>
+                                            UITableViewDataSource, UITableViewDelegate>
 
 -(id) initWithUsername:(PFUser *) user;
 
