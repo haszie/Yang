@@ -37,22 +37,19 @@
     [self.view addSubview:self.imageView];
     
     NSString *info = [NSString stringWithFormat:@"Size: %@  -  Orientation: %ld", NSStringFromCGSize(self.image.size), (long)self.image.imageOrientation];
+
+    NSLog(@"%@", info);
     
-    self.infoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
-    self.infoLabel.backgroundColor = [[UIColor darkGrayColor] colorWithAlphaComponent:0.7];
-    self.infoLabel.textColor = [UIColor whiteColor];
-    self.infoLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:13];
-    self.infoLabel.textAlignment = NSTextAlignmentCenter;
-    self.infoLabel.text = info;
-    [self.view addSubview:self.infoLabel];
-    
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(viewTapped:)];
-    [self.view addGestureRecognizer:tapGesture];
+    [self.view addSubview:self.cancelButton];
+    [self.cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.cancelButton.frame = CGRectMake(0, 0, 44, 44);
+
+    [self.view addSubview:self.acceptButton];
+    [self.acceptButton addTarget:self action:@selector(acceptButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.acceptButton.frame = CGRectMake(self.view.frame.size.width - 44, 0, 44, 44);
+
 }
 
-- (void)viewTapped:(UIGestureRecognizer *)gesture {
-    [self dismissViewControllerAnimated:NO completion:nil];
-}
 
 - (BOOL)prefersStatusBarHidden {
     return YES;
@@ -62,18 +59,62 @@
     [super viewWillLayoutSubviews];
     
     self.imageView.frame = self.view.contentBounds;
-    
-    [self.infoLabel sizeToFit];
-    self.infoLabel.width = self.view.contentBounds.size.width;
-    self.infoLabel.top = 0;
-    self.infoLabel.left = 0;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+}
+
+- (UIButton *)cancelButton {
+    if(!_cancelButton) {
+        UIImage *cancelImage = [UIImage imageNamed:@"cancel.png"];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.tintColor = [UIColor redColor];
+        [button setImage:cancelImage forState:UIControlStateNormal];
+        button.imageView.clipsToBounds = NO;
+        button.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+        button.layer.shadowColor = [UIColor blackColor].CGColor;
+        button.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        button.layer.shadowOpacity = 0.4f;
+        button.layer.shadowRadius = 1.0f;
+        button.clipsToBounds = NO;
+        
+        _cancelButton = button;
+    }
+    
+    return _cancelButton;
+}
+
+- (void)cancelButtonPressed:(UIButton *)button {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
+- (UIButton *)acceptButton {
+    if(!_acceptButton) {
+        UIImage *acceptImage = [UIImage imageNamed:@"check.png"];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.tintColor = [UIColor greenColor];
+        [button setImage:acceptImage forState:UIControlStateNormal];
+        button.imageView.clipsToBounds = NO;
+        button.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+        button.layer.shadowColor = [UIColor blackColor].CGColor;
+        button.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        button.layer.shadowOpacity = 0.4f;
+        button.layer.shadowRadius = 1.0f;
+        button.clipsToBounds = NO;
+        
+        _acceptButton = button;
+    }
+    
+    return _acceptButton;
+}
+
+- (void)acceptButtonPressed:(UIButton *)button {
+    if (_delegate && [_delegate respondsToSelector:@selector(didFinishWithImage:)]) {
+        [_delegate didFinishWithImage:self.image];
+    }
+}
 
 @end

@@ -13,7 +13,6 @@
     NSMutableArray<PFObject *> *_filteredObjects;
 
     BOOL success;
-    UIImage *photo;
 }
 
 @end
@@ -131,6 +130,12 @@
         _sentence_lbl.text = [NSString stringWithFormat:@"%@ →", [PFUser currentUser][@"first"]];
         [_recipient becomeFirstResponder];
     }
+    
+    
+    UIView *grr = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 264, self.view.frame.size.width, 264)];
+    grr.backgroundColor = [YUtil theColor];
+    [self.view addSubview:grr];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -138,52 +143,21 @@
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     [self setNeedsStatusBarAppearanceUpdate];
+    
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (![self.recipient isFirstResponder]) {
+        [self.desc becomeFirstResponder];
+    }
+}
 
 -(void) camera_btn_hit {
-
-    // present camera 
     CameraVC *cam = [[CameraVC alloc] init];
+    cam.delegate = self;
     [self presentViewController:cam animated:YES completion:nil];
-//
-//    DBCameraContainerViewController *cameraContainer = [[DBCameraContainerViewController alloc] initWithDelegate:self cameraSettingsBlock:^(DBCameraView *cameraView, DBCameraContainerViewController *container) {
-//
-//        [cameraView.photoLibraryButton setHidden:YES];
-//        [cameraView.gridButton setHidden:YES];
-//
-//        [container.cameraViewController setUseCameraSegue:YES];
-//        [container.cameraViewController setCameraSegueConfigureBlock:^( DBCameraSegueViewController *segue ) {
-//            segue.cropMode = NO;
-//        }];
-//    }];
-//    
-//    [cameraContainer setTintColor:[UIColor whiteColor]];
-//    [cameraContainer setSelectedTintColor:[UIColor yellowColor]];
-//    
-//    [cameraContainer setFullScreenMode];
-//   
-//    CameraNAV *nav = [[CameraNAV alloc] initWithRootViewController:cameraContainer];
-//    [nav setNavigationBarHidden:YES];
-//    
-//      [self presentViewController:nav animated:YES completion:nil];
 }
-
-//#pragma mark - DBCameraViewControllerDelegate
-//
-//- (void) dismissCamera:(id)cameraViewController{
-//    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
-//    [cameraViewController restoreFullScreenMode];
-//    [_desc becomeFirstResponder];
-//}
-//
-//- (void) camera:(id)cameraViewController didFinishWithImage:(UIImage *)image withMetadata:(NSDictionary *)metadata
-//{
-//    [cameraViewController restoreFullScreenMode];
-//    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
-//    photo = image;
-//    [_desc becomeFirstResponder];
-//}
 
 -(void) send_btn_hit {
     _hud.mode = MBProgressHUDModeIndeterminate;
@@ -218,6 +192,20 @@
             }
         });
     });
+}
+
+#pragma mark MediaPicker methods
+
+-(void)didFinishWithImage:(UIImage *)image {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    self.photo = image;
+    self.videoPath = nil;
+}
+
+-(void)didFinishWithVideo:(NSURL *)videoPath {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    self.videoPath = videoPath;
+    self.photo = nil;
 }
 
 -(void) textFieldChanged {
@@ -293,16 +281,6 @@
         [_amount becomeFirstResponder];
         return NO;
     }
-    
-//    if ([string isEqualToString:@""]) {
-//        _searchTerm = [_searchTerm substringToIndex:_searchTerm.length - 1];
-//    } else {
-//        _searchTerm = [NSString stringWithFormat:@"%@%@", textField.text, string];
-//    }
-    
-//    [self loadObjects];
-
-    // filter using NSPredicate
     
     return YES;
 }
@@ -432,8 +410,8 @@
     post[@"taker"] = recipient;
     post[@"amt"] = [NSNumber numberWithInt:[_amount.text intValue]];
     
-    if (photo) {
-        NSData * photoData = UIImageJPEGRepresentation(photo, 0.6f);
+    if (self.photo) {
+        NSData * photoData = UIImageJPEGRepresentation(self.photo, 0.6f);
         
         if (photoData.length > 10485760)  {
             success = false;
@@ -442,11 +420,15 @@
         
         PFFile * photoFile = [PFFile fileWithData:photoData];
         post[@"photo"] = photoFile;
+        post[@"isPhoto"] = @YES;
+    } else if (self.videoPath) {
+        NSData * videoData = [[NSFileManager defaultManager] contentsAtPath:[self.videoPath path]];
         
-        if (photo.size.width / photo.size.height == 0.75) {
-            post[@"isPortrait"] = @YES;
-        } else {
-            post[@"isPortrait"] = @NO;
+        PFFile * videoFile;
+        if (videoData != nil) {
+            videoFile = [PFFile fileWithName:@"flick.mov" data:videoData];
+            post[@"video"] = videoFile;
+            post[@"isPhoto"] = @NO;
         }
     }
     
@@ -481,20 +463,7 @@
     followingActivitiesQuery.cachePolicy = kPFCachePolicyNetworkOnly;
 
     [followingActivitiesQuery setCachePolicy:kPFCachePolicyNetworkOnly];
-//    [followingActivitiesQuery orderByAscending:@"toUser"];
     [followingActivitiesQuery includeKey:@"toUser"];
-    
-//    PFQuery *firstQuery = [PFQuery queryWithClassName:@"_User"];
-//    PFQuery *lastQuery = [PFQuery queryWithClassName:@"_User"];
-//    
-//    if (_searchTerm) {
-//        [firstQuery whereKey:@"first" matchesRegex:[NSString stringWithFormat:@"(?i)%@", _searchTerm]];
-//        [lastQuery whereKey:@"last" matchesRegex:[NSString stringWithFormat:@"(?i)%@", _searchTerm]];
-//    }
-//    
-//    PFQuery *firstLast = [PFQuery orQueryWithSubqueries:@[firstQuery, lastQuery]];
-//    
-//    [followingActivitiesQuery whereKey:@"toUser" matchesQuery:firstLast];
     
     return followingActivitiesQuery;
 }

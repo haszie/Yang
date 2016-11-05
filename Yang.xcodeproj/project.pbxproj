@@ -29,7 +29,6 @@
 		B658EEFC1C43F78E00C6D333 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B658EEFB1C43F78E00C6D333 /* SystemConfiguration.framework */; };
 		B658EEFE1C43F79600C6D333 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B658EEFD1C43F79600C6D333 /* libz.tbd */; };
 		B658EF001C43F7A000C6D333 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B658EEFF1C43F7A000C6D333 /* libsqlite3.tbd */; };
-		B658EF081C43F8C900C6D333 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B658EF021C43F8C900C6D333 /* Bolts.framework */; };
 		B658EF091C43F8C900C6D333 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B658EF031C43F8C900C6D333 /* Parse.framework */; };
 		B658EF0C1C43F8C900C6D333 /* ParseTwitterUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B658EF061C43F8C900C6D333 /* ParseTwitterUtils.framework */; };
 		B658EF0D1C43F8C900C6D333 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B658EF071C43F8C900C6D333 /* ParseUI.framework */; };
@@ -67,6 +66,8 @@
 		B6C59CBC1C49AFBA009D735D /* SendKarmaVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C59CBA1C49AFBA009D735D /* SendKarmaVC.m */; };
 		B6C59CBD1C49AFBA009D735D /* SendKarmaVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6C59CBB1C49AFBA009D735D /* SendKarmaVC.xib */; };
 		B6C59CC01C49B356009D735D /* SharedStateThing.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C59CBF1C49B356009D735D /* SharedStateThing.m */; };
+		B6DB253E1DCE80D500C40E91 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B658EF021C43F8C900C6D333 /* Bolts.framework */; };
+		B6DB25411DCE845C00C40E91 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DB25401DCE845C00C40E91 /* SDAVAssetExportSession.m */; };
 		B6DC045F1DBC08BB00DE2235 /* CameraVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DC045E1DBC08BB00DE2235 /* CameraVC.m */; };
 		B6DC04651DBCFE5200DE2235 /* ImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DC04641DBCFE5200DE2235 /* ImageVC.m */; };
 		B6DC04681DBCFE6800DE2235 /* VideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DC04671DBCFE6800DE2235 /* VideoVC.m */; };
@@ -214,6 +215,9 @@
 		B6C59CBB1C49AFBA009D735D /* SendKarmaVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SendKarmaVC.xib; sourceTree = "<group>"; };
 		B6C59CBE1C49B356009D735D /* SharedStateThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedStateThing.h; sourceTree = "<group>"; };
 		B6C59CBF1C49B356009D735D /* SharedStateThing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedStateThing.m; sourceTree = "<group>"; };
+		B6DB253B1DCE727E00C40E91 /* MediaPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaPicker.h; sourceTree = "<group>"; };
+		B6DB253F1DCE845C00C40E91 /* SDAVAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAVAssetExportSession.h; sourceTree = "<group>"; };
+		B6DB25401DCE845C00C40E91 /* SDAVAssetExportSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAVAssetExportSession.m; sourceTree = "<group>"; };
 		B6DC045D1DBC08BB00DE2235 /* CameraVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraVC.h; sourceTree = "<group>"; };
 		B6DC045E1DBC08BB00DE2235 /* CameraVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraVC.m; sourceTree = "<group>"; };
 		B6DC04631DBCFE5200DE2235 /* ImageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageVC.h; sourceTree = "<group>"; };
@@ -259,10 +263,10 @@
 				B658EF0C1C43F8C900C6D333 /* ParseTwitterUtils.framework in Frameworks */,
 				B658EF0D1C43F8C900C6D333 /* ParseUI.framework in Frameworks */,
 				B658EEF81C43F78000C6D333 /* Security.framework in Frameworks */,
+				B6DB253E1DCE80D500C40E91 /* Bolts.framework in Frameworks */,
 				B658EEF61C43F77A00C6D333 /* QuartzCore.framework in Frameworks */,
 				B658EEF41C43F77400C6D333 /* CoreLocation.framework in Frameworks */,
 				B658EEF21C43F76C00C6D333 /* CoreGraphics.framework in Frameworks */,
-				B658EF081C43F8C900C6D333 /* Bolts.framework in Frameworks */,
 				B658EEF01C43F75C00C6D333 /* CFNetwork.framework in Frameworks */,
 				B658EF091C43F8C900C6D333 /* Parse.framework in Frameworks */,
 				B658EEEE1C43F75300C6D333 /* AudioToolbox.framework in Frameworks */,
@@ -414,6 +418,8 @@
 				B68581201C6B7893003F9799 /* YCash.m */,
 				B68581251C6B7FBA003F9799 /* YUtil.h */,
 				B68581261C6B7FBA003F9799 /* YUtil.m */,
+				B6DB253F1DCE845C00C40E91 /* SDAVAssetExportSession.h */,
+				B6DB25401DCE845C00C40E91 /* SDAVAssetExportSession.m */,
 				B6C59CBE1C49B356009D735D /* SharedStateThing.h */,
 				B6C59CBF1C49B356009D735D /* SharedStateThing.m */,
 			);
@@ -562,6 +568,7 @@
 				B6DC04641DBCFE5200DE2235 /* ImageVC.m */,
 				B6DC04661DBCFE6800DE2235 /* VideoVC.h */,
 				B6DC04671DBCFE6800DE2235 /* VideoVC.m */,
+				B6DB253B1DCE727E00C40E91 /* MediaPicker.h */,
 			);
 			name = "Send Karma";
 			sourceTree = "<group>";
@@ -866,6 +873,7 @@
 				B6E82F4A1C7C4CB500F6B848 /* EditProfileVC.m in Sources */,
 				B6C59CB61C498FBD009D735D /* MenuCell.m in Sources */,
 				B6987E841C6AAD0C00355776 /* PostVC.m in Sources */,
+				B6DB25411DCE845C00C40E91 /* SDAVAssetExportSession.m in Sources */,
 				B67021041C5BD9D40033E9A4 /* CustomCamera.m in Sources */,
 				B68581271C6B7FBA003F9799 /* YUtil.m in Sources */,
 				B672193F1DB29CA00054FCAA /* UpButton.m in Sources */,

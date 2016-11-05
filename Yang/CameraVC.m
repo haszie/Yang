@@ -25,7 +25,7 @@
     // ----- initialize camera -------- //
     
     // create camera vc
-    self.camera = [[LLSimpleCamera alloc] initWithQuality:AVCaptureSessionPresetHigh
+    self.camera = [[LLSimpleCamera alloc] initWithQuality:AVCaptureSessionPreset1280x720
                                                  position:LLCameraPositionRear
                                              videoEnabled:YES];
     
@@ -39,9 +39,7 @@
     // take the required actions on a device change
     __weak typeof(self) weakSelf = self;
     [self.camera setOnDeviceChange:^(LLSimpleCamera *camera, AVCaptureDevice * device) {
-        
-        NSLog(@"Device changed.");
-        
+                
         // device changed, check if flash is available
         if([camera isFlashAvailable]) {
             weakSelf.flashButton.hidden = NO;
@@ -97,6 +95,8 @@
     self.snapButton.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
     self.snapButton.layer.rasterizationScale = [UIScreen mainScreen].scale;
     self.snapButton.layer.shouldRasterize = YES;
+    UILongPressGestureRecognizer * pressLong =  [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(snapButtonLongPress:)];
+    [self.snapButton addGestureRecognizer:pressLong];
     [self.snapButton addTarget:self action:@selector(snapButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.snapButton];
     
@@ -120,11 +120,24 @@
         [self.view addSubview:self.switchButton];
     }
     
-    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"Picture",@"Video"]];
-    self.segmentedControl.frame = CGRectMake(12.0f, screenRect.size.height - 67.0f, 120.0f, 32.0f);
-    self.segmentedControl.selectedSegmentIndex = 0;
-    self.segmentedControl.tintColor = [UIColor whiteColor];
-    [self.view addSubview:self.segmentedControl];
+    // cancel button
+    [self.view addSubview:self.cancelButton];
+    [self.cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.cancelButton.frame = CGRectMake(0, 0, 44, 44);
+    
+    // video record time
+    self.recordPV = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+    self.recordPV.frame = CGRectMake(0, 0, self.view.width, 3);
+    self.recordPV.tintColor = [UIColor colorWithRed:178.0f/255.0f green:34.0f/255.0f blue:34.0f/255.0f alpha:1.0f];
+//    self.recordPV.alpha = 0.8f;
+//    self.recordPV.layer.shadowRadius  = 2.5f;
+//    self.recordPV.layer.shadowColor   = [UIColor colorWithRed:176.f/255.f green:199.f/255.f blue:226.f/255.f alpha:1.f].CGColor;
+//    self.recordPV.layer.shadowOffset  = CGSizeMake(0.0f, 0.0f);
+//    self.recordPV.layer.shadowOpacity = 0.9f;
+//    self.recordPV.layer.masksToBounds = NO;
+    
+//    [self.recordTimer setProgress:0.5f animated:YES];
+    [self.view addSubview:self.recordPV];
     
     
 }
@@ -147,6 +160,22 @@
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+#pragma mark MediaPicker methods
+
+-(void)didFinishWithVideo:(NSURL *)videoPath {
+    if (_delegate && [_delegate respondsToSelector:@selector(didFinishWithImage:)]) {
+        [_delegate didFinishWithVideo:videoPath];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)didFinishWithImage:(UIImage *)image {
+    if (_delegate && [_delegate respondsToSelector:@selector(didFinishWithImage:)]) {
+        [_delegate didFinishWithImage:image];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)flashButtonPressed:(UIButton *)button
 {
     if(self.camera.flash == LLCameraFlashOff) {
@@ -165,25 +194,48 @@
     }
 }
 
-- (void)snapButtonPressed:(UIButton *)button
+- (void) startTimer {
+    self.time = 0.0f;
+    self.recordTimer = [NSTimer scheduledTimerWithTimeInterval: 0.05f
+                                                        target: self
+                                                      selector: @selector(updateTimer)
+                                                      userInfo: nil
+                                                       repeats: YES];
+}
+
+- (void) stopTimer {
+    if ([self.recordTimer isValid]) {
+        [self.recordTimer invalidate];
+    }
+    self.recordTimer = nil;
+}
+
+
+-(void) updateTimer
 {
-    __weak typeof(self) weakSelf = self;
+    if(self.time >= 8.0f)
+    {
+        [self stopTimer];
+        self.recordPV.progress = 0;
+        [self endRecording];
+    }
+    else
+    {
+        self.time += 0.05;
+        self.recordPV.progress = self.time / 8.0f;
+    }
+}
+
+
+-(void) snapButtonLongPress: (UILongPressGestureRecognizer *) gesture {
+    NSInteger state = gesture.state;
     
-    if(self.segmentedControl.selectedSegmentIndex == 0) {
-        // capture
-        [self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
-            if(!error) {
-                ImageVC *ivc = [[ImageVC alloc] initWithImage:image];
-                [weakSelf presentViewController:ivc animated:NO completion:nil];
-            }
-            else {
-                NSLog(@"An error has occured: %@", error);
-            }
-        } exactSeenImage:YES];
-        
-    } else {
-        if(!self.camera.isRecording) {
-            self.segmentedControl.hidden = YES;
+    switch (state) {
+        case UIGestureRecognizerStateChanged: break;
+        case UIGestureRecognizerStateBegan:
+        {
+            
+            self.cancelButton.hidden = YES;
             self.flashButton.hidden = YES;
             self.switchButton.hidden = YES;
             
@@ -192,23 +244,56 @@
             
             // start recording
             NSURL *outputURL = [[[self applicationDocumentsDirectory]
-                                 URLByAppendingPathComponent:@"test1"] URLByAppendingPathExtension:@"mov"];
+                                 URLByAppendingPathComponent:@"flick"] URLByAppendingPathExtension:@"mov"];
+            
+            
             [self.camera startRecordingWithOutputUrl:outputURL];
+            [self startTimer];
             
-        } else {
-            self.segmentedControl.hidden = NO;
-            self.flashButton.hidden = NO;
-            self.switchButton.hidden = NO;
+            break;
+        }
+        case UIGestureRecognizerStateEnded:
+        {
+            [self stopTimer];
+            self.recordPV.progress = 0;
+            [self endRecording];
             
-            self.snapButton.layer.borderColor = [UIColor whiteColor].CGColor;
-            self.snapButton.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
-            
-            [self.camera stopRecording:^(LLSimpleCamera *camera, NSURL *outputFileUrl, NSError *error) {
-                VideoVC *vvc = [[VideoVC alloc] initWithVideoUrl:outputFileUrl];
-                [weakSelf presentViewController:vvc animated:NO completion:nil];
-            }];
+            break;
         }
     }
+}
+
+-(void) endRecording {
+    self.cancelButton.hidden = NO;
+    self.flashButton.hidden = NO;
+    self.switchButton.hidden = NO;
+    
+    self.snapButton.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.snapButton.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [self.camera stopRecording:^(LLSimpleCamera *camera, NSURL *outputFileUrl, NSError *error) {
+        VideoVC *vvc = [[VideoVC alloc] initWithVideoUrl:outputFileUrl];
+        vvc.delegate = self;
+        [weakSelf presentViewController:vvc animated:NO completion:nil];
+    }];
+}
+
+- (void)snapButtonPressed:(UIButton *)button
+{
+    __weak typeof(self) weakSelf = self;
+    
+    [self.camera capture:^(LLSimpleCamera *camera, UIImage *image, NSDictionary *metadata, NSError *error) {
+        if(!error) {
+            ImageVC *ivc = [[ImageVC alloc] initWithImage:image];
+            ivc.delegate = self;
+            [weakSelf presentViewController:ivc animated:NO completion:nil];
+        }
+        else {
+            NSLog(@"An error has occured: %@", error);
+        }
+    } exactSeenImage:YES];
 }
 
 /* other lifecycle methods */
@@ -217,19 +302,45 @@
 {
     [super viewWillLayoutSubviews];
     
-    self.camera.view.frame = self.view.bounds;
-
-    self.snapButton.center = self.view.center;
+    self.camera.view.frame = self.view.contentBounds;
+    
+    self.snapButton.center = self.view.contentCenter;
     self.snapButton.bottom = self.view.height - 15.0f;
-
-    self.flashButton.center = self.view.center;
+    
+    self.flashButton.center = self.view.contentCenter;
     self.flashButton.top = 5.0f;
-
+    
     self.switchButton.top = 5.0f;
     self.switchButton.right = self.view.width - 5.0f;
+
+    self.cancelButton.top = 5.0f;
+    self.cancelButton.left = 5.0f;
+    [self.cancelButton setTintColor:[UIColor whiteColor]];
     
-    self.segmentedControl.left = 12.0f;
-    self.segmentedControl.bottom = self.view.height - 35.0f;
+}
+
+- (UIButton *)cancelButton {
+    if(!_cancelButton) {
+        UIImage *cancelImage = [UIImage imageNamed:@"cancel.png"];
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        button.tintColor = [UIColor whiteColor];
+        [button setImage:cancelImage forState:UIControlStateNormal];
+        button.imageView.clipsToBounds = NO;
+        button.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
+        button.layer.shadowColor = [UIColor blackColor].CGColor;
+        button.layer.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        button.layer.shadowOpacity = 0.4f;
+        button.layer.shadowRadius = 1.0f;
+        button.clipsToBounds = NO;
+        
+        _cancelButton = button;
+    }
+    
+    return _cancelButton;
+}
+
+- (void)cancelButtonPressed:(UIButton *)button {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (BOOL)prefersStatusBarHidden

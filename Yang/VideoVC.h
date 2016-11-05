@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#import "SDAVAssetExportSession.h"
+#import "MediaPicker.h"
+
 @import AVFoundation;
 
 @interface VideoVC : UIViewController
@@ -18,5 +21,8 @@
 @property (strong, nonatomic) AVPlayer *avPlayer;
 @property (strong, nonatomic) AVPlayerLayer *avPlayerLayer;
 @property (strong, nonatomic) UIButton *cancelButton;
+@property (strong, nonatomic) UIButton *acceptButton;
+
+@property (nonatomic, weak) id <MediaPickerDelegate> delegate;
 
 @end

@@ -19,11 +19,6 @@
 
 #import <MMNumberKeyboard/MMNumberKeyboard.h>
 
-//#import "DBCameraViewController.h"
-//#import "DBCameraContainerViewController.h"
-//#import "DBCameraSegueViewController.h"
-//#import "DBCameraView.h"
-
 #import "MBProgressHUD.h"
 
 #import "JVFloatLabeledTextField.h"
@@ -31,12 +26,13 @@
 
 #import "FeedVC.h"
 #import "FriendCell.h"
-//#import "CameraNAV.h"
 
 #import "CameraVC.h"
 
+#import "MediaPicker.h"
+
 @interface SendKarmaVC : UIViewController <UITextViewDelegate, UITextFieldDelegate, MMNumberKeyboardDelegate,
-                                            UITableViewDataSource, UITableViewDelegate>
+                                            UITableViewDataSource, UITableViewDelegate, MediaPickerDelegate>
 
 -(id) initWithUsername:(PFUser *) user;
 
@@ -55,6 +51,9 @@
 
 @property (nullable, weak, nonatomic) NSString *usernameToSend;
 @property (nullable, weak, nonatomic) PFUser *sendToUser;
+
+@property(strong, nonatomic) UIImage *photo;
+@property(strong, nonatomic) NSURL *videoPath;
 
 
 @property (nullable, nonatomic, copy, readonly) NSArray<__kindof PFObject *> *objects;
