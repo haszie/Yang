@@ -175,9 +175,9 @@
 
 - (IBAction)didTap:(UITapGestureRecognizer *)tapGesture
 {
-//    BOOL shouldOpen = self.window.frame.origin.y > 0;
-//    [self setHidden:!shouldOpen duration:self.animationDuration options:self.animationStyle];
-    [[EZCache globalCache] clearCache];
+    BOOL shouldOpen = self.window.frame.origin.y > 0;
+    [self setHidden:!shouldOpen duration:self.animationDuration options:self.animationStyle];
+//    [[EZCache globalCache] clearCache];
 
 }
 

@@ -44,7 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 8, 0, 8);
+    self.tableView.separatorInset = UIEdgeInsetsMake(0, 16, 0, 16);
     [self.tableView registerNib:[UINib nibWithNibName:@"PostCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     
     self.navigationController.hidesBarsOnSwipe = NO;

@@ -58,7 +58,6 @@
 		B685812F1C6E4D41003F9799 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B685812E1C6E4D41003F9799 /* CommentCell.m */; };
 		B68581321C6E64DE003F9799 /* NewCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = B68581311C6E64DE003F9799 /* NewCommentView.m */; };
 		B6987E841C6AAD0C00355776 /* PostVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6987E821C6AAD0C00355776 /* PostVC.m */; };
-		B6ACE5EC1D970DAF000B20C8 /* KarmaPostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B6ACE5EB1D970DAF000B20C8 /* KarmaPostCell.m */; };
 		B6BFBFB61C725F4F0052D699 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6BFBFB51C725F4F0052D699 /* MainVC.m */; };
 		B6BFBFB91C72613D0052D699 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6BFBFB81C72613D0052D699 /* LoginVC.m */; };
 		B6C59CB21C49890B009D735D /* MenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C59CB11C49890B009D735D /* MenuVC.m */; };
@@ -201,8 +200,6 @@
 		B68581311C6E64DE003F9799 /* NewCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewCommentView.m; sourceTree = "<group>"; };
 		B6987E811C6AAD0C00355776 /* PostVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostVC.h; sourceTree = "<group>"; };
 		B6987E821C6AAD0C00355776 /* PostVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostVC.m; sourceTree = "<group>"; };
-		B6ACE5EA1D970DAF000B20C8 /* KarmaPostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KarmaPostCell.h; sourceTree = "<group>"; };
-		B6ACE5EB1D970DAF000B20C8 /* KarmaPostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KarmaPostCell.m; sourceTree = "<group>"; };
 		B6BFBFB41C725F4F0052D699 /* MainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainVC.h; sourceTree = "<group>"; };
 		B6BFBFB51C725F4F0052D699 /* MainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainVC.m; sourceTree = "<group>"; };
 		B6BFBFB71C72613D0052D699 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
@@ -536,8 +533,6 @@
 				B658EF111C4400C800C6D333 /* PostCell.h */,
 				B658EF121C4400C800C6D333 /* PostCell.m */,
 				B658EF141C44018400C6D333 /* PostCell.xib */,
-				B6ACE5EA1D970DAF000B20C8 /* KarmaPostCell.h */,
-				B6ACE5EB1D970DAF000B20C8 /* KarmaPostCell.m */,
 				B6F3D8901C4C19FE003A4B17 /* FriendCell.h */,
 				B6F3D8911C4C19FE003A4B17 /* FriendCell.m */,
 				B6F3D8921C4C19FE003A4B17 /* FriendCell.xib */,
@@ -899,7 +894,6 @@
 				B68581211C6B7893003F9799 /* YCash.m in Sources */,
 				B685812F1C6E4D41003F9799 /* CommentCell.m in Sources */,
 				B6C59CC01C49B356009D735D /* SharedStateThing.m in Sources */,
-				B6ACE5EC1D970DAF000B20C8 /* KarmaPostCell.m in Sources */,
 				B6BFBFB61C725F4F0052D699 /* MainVC.m in Sources */,
 				B6DC045F1DBC08BB00DE2235 /* CameraVC.m in Sources */,
 				B625DC801C6FB4CE00FA5349 /* ProfileHeader.m in Sources */,

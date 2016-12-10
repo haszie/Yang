@@ -22,6 +22,12 @@
 
 -(void) configureCell:(PostCell *) cell forObject:(PFObject *) object withIndexPath:(NSIndexPath *) indexPath withDelegate:(id<PostCellDelegate, ProPicDelegate>) theDelegate {
     
+    if (indexPath.row % 2 == 0) {
+        [cell.bg setBackgroundColor:[UIColor whiteColor]];
+    } else {
+        [cell.bg setBackgroundColor:[UIColor colorWithRed:249.0f/255.0f green:249.0f/255.0f blue:249.0f/255.0f alpha:1.0f]];
+    }
+    
     PFUser *theSender = [object objectForKey:kPostSenderKey];
     PFUser *theReceiver = [object objectForKey:kPostReceiverKey];
     
@@ -50,13 +56,17 @@
         cell.mediaPreview.hidden = NO;
         PFFile *photo = [object objectForKey:@"photo"];
         [cell.mediaPreview sd_setImageWithURL:[NSURL URLWithString:photo.url]];
-
-    } else {
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    } else if (object[@"thumbnail"]){
         cell.mediaPreview.hidden = NO;
         PFFile *thumbnail = [object objectForKey:@"thumbnail"];
         [cell.mediaPreview sd_setImageWithURL:[NSURL URLWithString:thumbnail.url]];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    } else {
+        cell.mediaPreview.hidden = YES;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-
+    
     cell.sender.delegate = theDelegate;
     cell.receiver.delegate = theDelegate;
     
@@ -69,8 +79,6 @@
         [cell.receiver setTheUser:theReceiver];
         [cell.receiver setNeedsLayout];
     }];
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     cell.delegate = theDelegate;
     cell.post = object;

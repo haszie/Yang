@@ -49,11 +49,11 @@
     // cancel button
     [self.view addSubview:self.cancelButton];
     [self.cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.cancelButton.frame = CGRectMake(0, 0, 44, 44);
+    self.cancelButton.frame = CGRectMake(5, self.view.frame.size.height - 44 - 5, 44, 44);
     
     [self.view addSubview:self.acceptButton];
     [self.acceptButton addTarget:self action:@selector(acceptButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.acceptButton.frame = CGRectMake(self.view.frame.size.width - 44, 0, 44, 44);
+    self.acceptButton.frame = CGRectMake(self.view.frame.size.width - 44, self.view.frame.size.height - 44 - 5, 44, 44);
 
 }
 
@@ -74,10 +74,10 @@
 
 - (UIButton *)cancelButton {
     if(!_cancelButton) {
-        UIImage *cancelImage = [UIImage imageNamed:@"cancel.png"];
+        UIImage *cancelImage = [UIImage imageNamed:@"cancel"];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.tintColor = [UIColor redColor];
         [button setImage:cancelImage forState:UIControlStateNormal];
+        button.tintColor = [UIColor whiteColor];
         button.imageView.clipsToBounds = NO;
         button.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
         button.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -96,12 +96,13 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
 - (UIButton *)acceptButton {
     if(!_acceptButton) {
-        UIImage *acceptImage = [UIImage imageNamed:@"check.png"];
+        UIImage *acceptImage = [UIImage imageNamed:@"check"];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.tintColor = [UIColor greenColor];
         [button setImage:acceptImage forState:UIControlStateNormal];
+        button.tintColor = [UIColor whiteColor];
         button.imageView.clipsToBounds = NO;
         button.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10);
         button.layer.shadowColor = [UIColor blackColor].CGColor;

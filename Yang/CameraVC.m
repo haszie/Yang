@@ -321,7 +321,7 @@
 
 - (UIButton *)cancelButton {
     if(!_cancelButton) {
-        UIImage *cancelImage = [UIImage imageNamed:@"cancel.png"];
+        UIImage *cancelImage = [UIImage imageNamed:@"cancel"];
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.tintColor = [UIColor whiteColor];
         [button setImage:cancelImage forState:UIControlStateNormal];
