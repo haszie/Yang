@@ -213,12 +213,15 @@
     
     if (![indexPath isEqual:[self _indexPathForPaginationCell]]) {
         if (post[@"photo"]) {
-            PFFile * photo = post[@"photo"];
-        
-            self.mediaScreen.mediaFile = photo;
+
             self.mediaScreen.post = post;
-            
             [self.mediaScreen show];
+            
+        } else if (post[@"video"]) {
+            
+            self.mediaScreen.post = post;
+            [self.mediaScreen show];
+            
         } else {
             // do nothing...
             

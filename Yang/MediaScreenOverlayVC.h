@@ -11,19 +11,26 @@
 #import <Bolts/Bolts.h>
 #import <ParseUI/ParseUI.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "EZCache.h"
 
 #import "ProPicIV.h"
 
+@import AVFoundation;
+
 @interface MediaScreenOverlayVC : UIViewController
 
-@property (weak, nonatomic) PFFile *mediaFile;
 @property (strong, nonatomic) UIImageView *imageView;
+
+@property (strong, nonatomic) AVPlayer *avPlayer;
+@property (strong, nonatomic) AVPlayerLayer *avPlayerLayer;
 
 @property (strong, nonatomic) ProPicIV * fromUser;
 @property (strong, nonatomic) ProPicIV * toUser;
 
 @property (strong, nonatomic) UILabel * fromUserLbl;
 @property (strong, nonatomic) UILabel * toUserLbl;
+
+@property (strong, nonatomic) UIView* heada;
 
 @property (weak, nonatomic) PFObject * post;
 

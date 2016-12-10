@@ -426,7 +426,7 @@
         
         PFFile * videoFile;
         if (videoData != nil) {
-            videoFile = [PFFile fileWithName:@"flick.mov" data:videoData];
+            videoFile = [PFFile fileWithName:@"flick.mp4" data:videoData];
             post[@"video"] = videoFile;
             post[@"isPhoto"] = @NO;
         }

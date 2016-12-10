@@ -11,6 +11,7 @@
 		B6158F1D1C652AC1003A39D0 /* FlexboxKit in Resources */ = {isa = PBXBuildFile; fileRef = B6158F1C1C652AC1003A39D0 /* FlexboxKit */; };
 		B625DC7D1C6FA66500FA5349 /* YangRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = B625DC7C1C6FA66500FA5349 /* YangRefresh.m */; };
 		B625DC801C6FB4CE00FA5349 /* ProfileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B625DC7F1C6FB4CE00FA5349 /* ProfileHeader.m */; };
+		B629B7891DFC7F9300091C37 /* EZCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B629B7881DFC7F9300091C37 /* EZCache.m */; };
 		B63C6AA61D073A150025C262 /* FwendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B63C6AA51D073A150025C262 /* FwendsVC.m */; };
 		B63C6AA91D0775550025C262 /* ActivityFeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B63C6AA81D0775550025C262 /* ActivityFeedVC.m */; };
 		B652A6DE1D99F1AA00DC8FBB /* MediaScreenOverlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B652A6DD1D99F1AA00DC8FBB /* MediaScreenOverlayVC.m */; };
@@ -129,6 +130,8 @@
 		B625DC7C1C6FA66500FA5349 /* YangRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YangRefresh.m; sourceTree = "<group>"; };
 		B625DC7E1C6FB4CE00FA5349 /* ProfileHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileHeader.h; sourceTree = "<group>"; };
 		B625DC7F1C6FB4CE00FA5349 /* ProfileHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileHeader.m; sourceTree = "<group>"; };
+		B629B7871DFC7F9300091C37 /* EZCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZCache.h; sourceTree = "<group>"; };
+		B629B7881DFC7F9300091C37 /* EZCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EZCache.m; sourceTree = "<group>"; };
 		B63C6AA41D073A150025C262 /* FwendsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FwendsVC.h; sourceTree = "<group>"; };
 		B63C6AA51D073A150025C262 /* FwendsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FwendsVC.m; sourceTree = "<group>"; };
 		B63C6AA71D0775550025C262 /* ActivityFeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityFeedVC.h; sourceTree = "<group>"; };
@@ -422,6 +425,8 @@
 				B6DB25401DCE845C00C40E91 /* SDAVAssetExportSession.m */,
 				B6C59CBE1C49B356009D735D /* SharedStateThing.h */,
 				B6C59CBF1C49B356009D735D /* SharedStateThing.m */,
+				B629B7871DFC7F9300091C37 /* EZCache.h */,
+				B629B7881DFC7F9300091C37 /* EZCache.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -873,6 +878,7 @@
 				B6E82F4A1C7C4CB500F6B848 /* EditProfileVC.m in Sources */,
 				B6C59CB61C498FBD009D735D /* MenuCell.m in Sources */,
 				B6987E841C6AAD0C00355776 /* PostVC.m in Sources */,
+				B629B7891DFC7F9300091C37 /* EZCache.m in Sources */,
 				B6DB25411DCE845C00C40E91 /* SDAVAssetExportSession.m in Sources */,
 				B67021041C5BD9D40033E9A4 /* CustomCamera.m in Sources */,
 				B68581271C6B7FBA003F9799 /* YUtil.m in Sources */,

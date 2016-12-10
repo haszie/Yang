@@ -34,18 +34,21 @@
 {
     [super viewDidLoad];
     
-    UIView * header_bg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 46)];
-    header_bg.backgroundColor = [UIColor whiteColor];
-    header_bg.alpha = 0.777f;
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    
+    self.heada = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 46)];
+    self.heada.backgroundColor = [UIColor clearColor];
     
     self.fromUser = [[ProPicIV alloc] initWithFrame:CGRectMake(8, 8, 30, 30)];
     self.toUser = [[ProPicIV alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 38, 8, 30, 30)];
     
     self.fromUserLbl = [[UILabel alloc] initWithFrame:CGRectMake(46, 8, 200, 30)];
     [self.fromUserLbl setFont:[UIFont fontWithName:@"OpenSans" size:15.0f]];
-    
+    [self.fromUserLbl setTextColor:[UIColor whiteColor]];
+
     self.toUserLbl = [[UILabel alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 246, 8, 200, 30)];
     [self.toUserLbl setFont:[UIFont fontWithName:@"OpenSans" size:15.0f]];
+    [self.toUserLbl setTextColor:[UIColor whiteColor]];
     self.toUserLbl.textAlignment = NSTextAlignmentRight;
     
     
@@ -62,26 +65,55 @@
     self.imageView.clipsToBounds = YES;
     
     [self.view addSubview:self.imageView];
-    [self.view addSubview:header_bg];
-    [self.view addSubview:self.fromUserLbl];
-    [self.view addSubview:self.fromUser];
-    [self.view addSubview:self.toUser];
-    [self.view addSubview:self.fromUserLbl];
-    [self.view addSubview:self.toUserLbl];
- 
+    [self.view addSubview:self.heada];
+    
+    [self.heada addSubview:self.fromUserLbl];
+    [self.heada addSubview:self.fromUser];
+    [self.heada addSubview:self.toUser];
+    [self.heada addSubview:self.fromUserLbl];
+    [self.heada addSubview:self.toUserLbl];
+    
+}
+
+- (void)playerItemDidReachEnd:(NSNotification *)notification {
+    AVPlayerItem *p = [notification object];
+    [p seekToTime:kCMTimeZero];
 }
 
 - (void)show
 {
-    
-    if (self.mediaFile.url) {
-        [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.mediaFile.url]];
-    }
-    
     if (self.post) {
         
         int amt = [[self.post objectForKey:@"amt"] intValue];
-
+        
+        PFFile * imgFile = self.post[@"photo"];
+        PFFile * vidFile = self.post[@"video"];
+        
+        if (imgFile) {
+            self.imageView.hidden = NO;
+            [self.imageView sd_setImageWithURL:[NSURL URLWithString:imgFile.url]];
+        } else if (vidFile) {
+            if ([[EZCache globalCache] hasCacheForKey:vidFile.url]) {
+                NSString* path = [[EZCache globalCache] pathForKey:vidFile.url];
+                [self play:[NSURL fileURLWithPath:path]];
+            } else {
+                // show loading screen
+                // make it liek snapchat, duh!
+                id weakSelf = self;
+                dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+                    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:vidFile.url]];
+                    [[EZCache globalCache] setData:data forKey:vidFile.url callback:^{
+                        dispatch_async(dispatch_get_main_queue(), ^(void){
+                            if ([[EZCache globalCache] hasCacheForKey:vidFile.url]) {
+                                NSString* path = [[EZCache globalCache] pathForKey:vidFile.url];
+                                [weakSelf play:[NSURL fileURLWithPath:path]];
+                            }
+                        });
+                    }];
+                });
+            }
+        }
+        
         [self.fromUser setTheUser:self.post[@"giver"]];
         [self.toUser setTheUser:self.post[@"taker"]];
         
@@ -92,10 +124,32 @@
     [self setHidden:NO duration:self.animationDuration options:self.animationStyle];
 }
 
+-(void) play:(NSURL *) url {
+    
+    self.avPlayer = [AVPlayer playerWithURL:url];
+    self.avPlayer.actionAtItemEnd = AVPlayerActionAtItemEndNone;
+    
+    self.avPlayerLayer = [AVPlayerLayer playerLayerWithPlayer:self.avPlayer];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerItemDidReachEnd:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:[self.avPlayer currentItem]];
+    
+    CGRect screenRect = [self.view frame];
+    
+    self.avPlayerLayer.frame = CGRectMake(0, 0, screenRect.size.width, screenRect.size.height);
+    [self.view.layer addSublayer:self.avPlayerLayer];
+    [self.view bringSubviewToFront:self.heada];
+    [self.avPlayer play];
+}
+
 - (IBAction)didTap:(UITapGestureRecognizer *)tapGesture
 {
-    BOOL shouldOpen = self.window.frame.origin.y > 0;
-    [self setHidden:!shouldOpen duration:self.animationDuration options:self.animationStyle];
+//    BOOL shouldOpen = self.window.frame.origin.y > 0;
+//    [self setHidden:!shouldOpen duration:self.animationDuration options:self.animationStyle];
+    [[EZCache globalCache] clearCache];
+
 }
 
 - (IBAction)didPan:(UIPanGestureRecognizer *)panGesture
@@ -128,6 +182,11 @@
 
 - (void)setHidden:(BOOL)hidden duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options
 {
+    if (hidden) {
+        [self.avPlayer pause];
+        [self.avPlayerLayer removeFromSuperlayer];
+        [self.imageView setImage:nil];
+    }
     [UIView animateWithDuration:self.animationDuration delay:0 options:options animations:^{
         CGRect frame = self.window.bounds;
         frame.origin.y = !hidden ? 0 : CGRectGetHeight(self.view.bounds);

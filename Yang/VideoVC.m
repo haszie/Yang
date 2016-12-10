@@ -130,7 +130,7 @@
     encoder.outputFileType = AVFileTypeMPEG4;
     
     NSURL *ret  = [[[self applicationDocumentsDirectory]
-                    URLByAppendingPathComponent:@"out"] URLByAppendingPathExtension:@"mov"];
+                    URLByAppendingPathComponent:@"out"] URLByAppendingPathExtension:@"mp4"];
     
     [[NSFileManager defaultManager] removeItemAtURL:ret error:nil];
     
