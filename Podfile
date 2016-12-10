@@ -13,7 +13,6 @@ target 'Yang' do
         pod 'MMNumberKeyboard'
         pod 'MBProgressHUD'
         pod 'DateTools'
-        pod 'DBCamera'
         pod 'JHPullToRefreshKit'
         pod 'RSKImageCropper'
         pod 'APAddressBook'

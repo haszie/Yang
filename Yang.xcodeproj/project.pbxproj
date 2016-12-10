@@ -50,8 +50,6 @@
 		B658EF2D1C441C9300C6D333 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B658EF1F1C44040600C6D333 /* OpenSans-SemiboldItalic.ttf */; };
 		B669C4461C74DEA100D25661 /* FriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B669C4451C74DEA100D25661 /* FriendsVC.m */; };
 		B669C4491C767C5E00D25661 /* ProfileInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = B669C4481C767C5E00D25661 /* ProfileInfo.m */; };
-		B67021041C5BD9D40033E9A4 /* CustomCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = B67021031C5BD9D40033E9A4 /* CustomCamera.m */; };
-		B672193F1DB29CA00054FCAA /* UpButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B672193E1DB29CA00054FCAA /* UpButton.m */; };
 		B68581211C6B7893003F9799 /* YCash.m in Sources */ = {isa = PBXBuildFile; fileRef = B68581201C6B7893003F9799 /* YCash.m */; };
 		B68581241C6B7A98003F9799 /* YConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B68581231C6B7A98003F9799 /* YConstants.m */; };
 		B68581271C6B7FBA003F9799 /* YUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B68581261C6B7FBA003F9799 /* YUtil.m */; };
@@ -184,10 +182,6 @@
 		B669C4451C74DEA100D25661 /* FriendsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsVC.m; sourceTree = "<group>"; };
 		B669C4471C767C5E00D25661 /* ProfileInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileInfo.h; sourceTree = "<group>"; };
 		B669C4481C767C5E00D25661 /* ProfileInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileInfo.m; sourceTree = "<group>"; };
-		B67021021C5BD9D40033E9A4 /* CustomCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCamera.h; sourceTree = "<group>"; };
-		B67021031C5BD9D40033E9A4 /* CustomCamera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCamera.m; sourceTree = "<group>"; };
-		B672193D1DB29CA00054FCAA /* UpButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpButton.h; sourceTree = "<group>"; };
-		B672193E1DB29CA00054FCAA /* UpButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpButton.m; sourceTree = "<group>"; };
 		B685811F1C6B7893003F9799 /* YCash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YCash.h; sourceTree = "<group>"; };
 		B68581201C6B7893003F9799 /* YCash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YCash.m; sourceTree = "<group>"; };
 		B68581221C6B7A98003F9799 /* YConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YConstants.h; sourceTree = "<group>"; };
@@ -505,10 +499,6 @@
 				B6FA26911C6EE1EF00698584 /* ProPicIV.m */,
 				B625DC7B1C6FA66500FA5349 /* YangRefresh.h */,
 				B625DC7C1C6FA66500FA5349 /* YangRefresh.m */,
-				B67021021C5BD9D40033E9A4 /* CustomCamera.h */,
-				B67021031C5BD9D40033E9A4 /* CustomCamera.m */,
-				B672193D1DB29CA00054FCAA /* UpButton.h */,
-				B672193E1DB29CA00054FCAA /* UpButton.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -875,9 +865,7 @@
 				B6987E841C6AAD0C00355776 /* PostVC.m in Sources */,
 				B629B7891DFC7F9300091C37 /* EZCache.m in Sources */,
 				B6DB25411DCE845C00C40E91 /* SDAVAssetExportSession.m in Sources */,
-				B67021041C5BD9D40033E9A4 /* CustomCamera.m in Sources */,
 				B68581271C6B7FBA003F9799 /* YUtil.m in Sources */,
-				B672193F1DB29CA00054FCAA /* UpButton.m in Sources */,
 				B625DC7D1C6FA66500FA5349 /* YangRefresh.m in Sources */,
 				B6BFBFB91C72613D0052D699 /* LoginVC.m in Sources */,
 				B63C6AA61D073A150025C262 /* FwendsVC.m in Sources */,

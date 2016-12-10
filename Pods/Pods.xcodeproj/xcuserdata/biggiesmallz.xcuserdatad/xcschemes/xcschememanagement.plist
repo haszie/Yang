@@ -9,17 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>DBCamera.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>DateTools.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>GPUImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -102,12 +92,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0A7C904D05B7B051778A2DAD0C9AF8EF</key>
+		<key>1B7B2F1B683711584BFB5920DD48B225</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>25BF5FDC2F1EB446706963C51EE55951</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>266E27D897FD7FD68078059CF4D7455F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2A89E5FFBE6512C96BBBC4A27DD36238</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,11 +127,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>41B1049D8C8E948CF8DD599A2130B42F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>4FA1354E93C8891299C5142B0A7D9A60</key>
 		<dict>
 			<key>primary</key>
@@ -147,26 +142,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5DCEBF28FF6F1EF9913A980017D11521</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6688FC4CEA8EAA9A4ADA55F6E99D9507</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>72B84EEF741212E64AF885C52F2A70F3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7355165C3686E430B4912C22950ED024</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>73885D71005418AC53B4B350773197FD</key>
 		<dict>
 			<key>primary</key>
@@ -177,7 +152,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D6EC9B3524746A43359A356B70AE6BDC</key>
+		<key>9DAD6FA52799F67F1029F9C7433E585D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A77684828AAFB90FE6E00AF9FF75A587</key>
 		<dict>
 			<key>primary</key>
 			<true/>

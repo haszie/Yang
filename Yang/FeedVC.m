@@ -238,8 +238,7 @@
 -(void)didTapUpvoteButton:(UIButton *)button forPostCell:(PostCell *)postCell  forPost:(PFObject *)post {
     
     [button setUserInteractionEnabled:NO];
-    
-    if (!button.selected) {
+    if (!button.isSelected) {
         BOOL upvoted = !button.selected;
         [postCell setUpvoteStatus:upvoted];
         
@@ -257,8 +256,7 @@
             [button setUserInteractionEnabled:YES];
         }];
     } else {
-        // nav to see who else liked it
-        
+
     }
 }
 

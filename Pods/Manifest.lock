@@ -3,9 +3,6 @@ PODS:
     - APAddressBook/Core (= 0.2.3)
   - APAddressBook/Core (0.2.3)
   - DateTools (1.7.0)
-  - DBCamera (2.4.1):
-    - GPUImage (~> 0.1)
-  - GPUImage (0.1.7)
   - HexColors (2.2.1)
   - JHPullToRefreshKit (1.0.1)
   - JVFloatLabeledTextField (1.1.0)
@@ -36,7 +33,6 @@ PODS:
 DEPENDENCIES:
   - APAddressBook
   - DateTools
-  - DBCamera
   - JHPullToRefreshKit
   - JVFloatLabeledTextField
   - LLSimpleCamera (~> 4.1)
@@ -52,8 +48,6 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   APAddressBook: 2a91bf05999548bea210ec9d1a68073f4dc8bfce
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
-  DBCamera: 7a4343a541e1264610f9f33176552b93170a843e
-  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
   JHPullToRefreshKit: ec51e32764eacf468eddf3d05a9f1b3b6d9a7d76
   JVFloatLabeledTextField: ea4a3d8387ddd43724c472bb2b8ab39b79af05d4
@@ -67,6 +61,6 @@ SPEC CHECKSUMS:
   TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
   VWWPermissionKit: 102e84bbd358cf909f46eb2120d1c698d0e0c3af
 
-PODFILE CHECKSUM: 4c5f4eafd6d63b06adf85a093ca7a41d15bb8bd3
+PODFILE CHECKSUM: 7329c3aeeff81df6a6e9ffb5c4081cce6868496b
 
 COCOAPODS: 1.0.1

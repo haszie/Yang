@@ -176,6 +176,11 @@
 
     [_up_btn setBackgroundImage:[UIImage imageNamed:@"up-arrow-active"] forState:UIControlStateSelected];
     [_up_btn setBackgroundImage:[UIImage imageNamed:@"up-arrow"] forState:UIControlStateNormal];
+    [_ghost_btn setBackgroundImage:[YUtil imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
+    [_ghost_btn setBackgroundImage:[YUtil imageWithColor:[UIColor clearColor]] forState:UIControlStateSelected];
+    [_ghost_btn setTintColor:[UIColor clearColor]];
+    [_ghost_btn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
+    [_ghost_btn setTitleColor:[UIColor clearColor] forState:UIControlStateSelected];
     
     self.contentView.userInteractionEnabled = NO;
 }
@@ -189,6 +194,7 @@
 
 - (void)setUpvoteStatus:(BOOL)upvote {
     [self.up_btn setSelected:upvote];
+    [self.ghost_btn setSelected:upvote];
     if (upvote) {
         [self.upvotes setTextColor:[YUtil theColor]];
     } else {
