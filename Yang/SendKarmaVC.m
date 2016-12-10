@@ -418,7 +418,7 @@
             return;
         }
         
-        PFFile * photoFile = [PFFile fileWithData:photoData];
+        PFFile * photoFile = [PFFile fileWithName:@"snap.jpg" data:photoData];
         post[@"photo"] = photoFile;
         post[@"isPhoto"] = @YES;
     } else if (self.videoPath) {
@@ -429,6 +429,12 @@
             videoFile = [PFFile fileWithName:@"flick.mp4" data:videoData];
             post[@"video"] = videoFile;
             post[@"isPhoto"] = @NO;
+            
+            NSData *thumbData = UIImageJPEGRepresentation([self generateThumbImage:[self.videoPath path]], 0.6f);
+            if (thumbData != nil) {
+                PFFile * thumbFile = [PFFile fileWithName:@"thumbnail.jpg" data:thumbData];
+                post[@"thumbnail"] = thumbFile;
+            }
         }
     }
     
@@ -446,6 +452,22 @@
         
         [PFCloud callFunction:@"updateKarmaForUser" withParameters:@{@"userId": recipient.objectId, @"karma": recipient_karma}];
     }
+}
+
+-(UIImage *)generateThumbImage : (NSString *)filepath
+{
+    NSURL *url = [NSURL fileURLWithPath:filepath];
+    
+    AVAsset *asset = [AVAsset assetWithURL:url];
+    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc]initWithAsset:asset];
+    imageGenerator.appliesPreferredTrackTransform = YES;
+    CMTime time = [asset duration];
+    time.value = 100;
+    CGImageRef imageRef = [imageGenerator copyCGImageAtTime:time actualTime:NULL error:NULL];
+    UIImage *thumbnail = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    
+    return thumbnail;
 }
 
 

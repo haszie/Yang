@@ -36,6 +36,8 @@
     
     [self.view setBackgroundColor:[UIColor blackColor]];
     
+    self.loadVid = false;
+    
     self.heada = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 46)];
     self.heada.backgroundColor = [UIColor clearColor];
     
@@ -64,6 +66,32 @@
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
     self.imageView.clipsToBounds = YES;
     
+    self.thumbnailView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    self.thumbnailView.userInteractionEnabled = NO;
+    self.thumbnailView.contentMode = UIViewContentModeScaleAspectFill;
+    self.thumbnailView.clipsToBounds = YES;
+
+    
+    if (!UIAccessibilityIsReduceTransparencyEnabled()) {
+        self.thumbnailView.backgroundColor = [UIColor clearColor];
+        
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        blurEffectView.frame = self.thumbnailView.bounds;
+        blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        
+        [self.thumbnailView addSubview:blurEffectView];
+    } else {
+        self.thumbnailView.backgroundColor = [UIColor blackColor];
+    }
+    
+    UIActivityIndicatorView * spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [spinner setCenter:CGPointMake(self.thumbnailView.frame.size.width/2.0,
+                                   self.thumbnailView.frame.size.height/2.0)];
+    [self.thumbnailView addSubview:spinner];
+    [spinner startAnimating];
+    
+    [self.view addSubview:self.thumbnailView];
     [self.view addSubview:self.imageView];
     [self.view addSubview:self.heada];
     
@@ -90,23 +118,24 @@
         PFFile * vidFile = self.post[@"video"];
         
         if (imgFile) {
-            self.imageView.hidden = NO;
             [self.imageView sd_setImageWithURL:[NSURL URLWithString:imgFile.url]];
         } else if (vidFile) {
             if ([[EZCache globalCache] hasCacheForKey:vidFile.url]) {
                 NSString* path = [[EZCache globalCache] pathForKey:vidFile.url];
                 [self play:[NSURL fileURLWithPath:path]];
             } else {
-                // show loading screen
-                // make it liek snapchat, duh!
-                id weakSelf = self;
+                self.loadVid = true;
+                PFFile * thumbFile = self.post[@"thumbnail"];
+                [self.thumbnailView sd_setImageWithURL:[NSURL URLWithString:thumbFile.url]];
                 dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
                     NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:vidFile.url]];
                     [[EZCache globalCache] setData:data forKey:vidFile.url callback:^{
                         dispatch_async(dispatch_get_main_queue(), ^(void){
                             if ([[EZCache globalCache] hasCacheForKey:vidFile.url]) {
-                                NSString* path = [[EZCache globalCache] pathForKey:vidFile.url];
-                                [weakSelf play:[NSURL fileURLWithPath:path]];
+                                if (self.loadVid) {
+                                    NSString* path = [[EZCache globalCache] pathForKey:vidFile.url];
+                                    [self play:[NSURL fileURLWithPath:path]];
+                                }
                             }
                         });
                     }];
@@ -183,9 +212,12 @@
 - (void)setHidden:(BOOL)hidden duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options
 {
     if (hidden) {
+        self.loadVid = false;
         [self.avPlayer pause];
         [self.avPlayerLayer removeFromSuperlayer];
+        self.avPlayer = nil;
         [self.imageView setImage:nil];
+        [self.thumbnailView setImage:nil];
     }
     [UIView animateWithDuration:self.animationDuration delay:0 options:options animations:^{
         CGRect frame = self.window.bounds;

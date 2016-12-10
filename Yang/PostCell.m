@@ -52,7 +52,9 @@
         [cell.mediaPreview sd_setImageWithURL:[NSURL URLWithString:photo.url]];
 
     } else {
-        cell.mediaPreview.hidden = YES;
+        cell.mediaPreview.hidden = NO;
+        PFFile *thumbnail = [object objectForKey:@"thumbnail"];
+        [cell.mediaPreview sd_setImageWithURL:[NSURL URLWithString:thumbnail.url]];
     }
 
     cell.sender.delegate = theDelegate;
@@ -74,7 +76,7 @@
     cell.post = object;
     cell.tag = indexPath.row;
 
-    cell.mediaPreview.layer.cornerRadius = 20.0f;
+    cell.mediaPreview.layer.cornerRadius = 22.0f;
     cell.mediaPreview.contentMode = UIViewContentModeScaleAspectFill;
     [cell.mediaPreview.layer  setMasksToBounds:YES];
     

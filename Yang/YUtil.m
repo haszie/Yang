@@ -354,7 +354,7 @@ static MMDrawerController *drawer;
     // pad
     height += 6;
  
-    if (post[@"photo"]) {
+    if (post[@"photo"] || post[@"thumbnail"]) {
         height += 44;
     } else {
         height += 22;

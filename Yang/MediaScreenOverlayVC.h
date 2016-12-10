@@ -19,7 +19,10 @@
 
 @interface MediaScreenOverlayVC : UIViewController
 
+@property BOOL loadVid;
+
 @property (strong, nonatomic) UIImageView *imageView;
+@property (strong, nonatomic) UIImageView *thumbnailView;
 
 @property (strong, nonatomic) AVPlayer *avPlayer;
 @property (strong, nonatomic) AVPlayerLayer *avPlayerLayer;
