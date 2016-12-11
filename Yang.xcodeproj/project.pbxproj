@@ -9,9 +9,18 @@
 /* Begin PBXBuildFile section */
 		798FA54C88B26B85D95E94B5 /* libPods-YangTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A2F1FE0EE45FA6096757B8B /* libPods-YangTests.a */; };
 		B6158F1D1C652AC1003A39D0 /* FlexboxKit in Resources */ = {isa = PBXBuildFile; fileRef = B6158F1C1C652AC1003A39D0 /* FlexboxKit */; };
+		B616CD891DFDC6F400881214 /* SCAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = B616CD881DFDC6F400881214 /* SCAssetExportSession.m */; };
+		B616CD8C1DFDC74900881214 /* SCAudioConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B616CD8B1DFDC74900881214 /* SCAudioConfiguration.m */; };
+		B616CD8F1DFDC75B00881214 /* SCVideoConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B616CD8E1DFDC75B00881214 /* SCVideoConfiguration.m */; };
+		B616CD921DFDC7A600881214 /* SCMediaTypeConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = B616CD911DFDC7A600881214 /* SCMediaTypeConfiguration.m */; };
+		B616CD9B1DFDC8D300881214 /* SCIOPixelBuffers.m in Sources */ = {isa = PBXBuildFile; fileRef = B616CD941DFDC8D300881214 /* SCIOPixelBuffers.m */; };
+		B616CD9C1DFDC8D300881214 /* SCProcessingQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B616CD961DFDC8D300881214 /* SCProcessingQueue.m */; };
+		B616CD9D1DFDC8D300881214 /* SCRecorderTools.m in Sources */ = {isa = PBXBuildFile; fileRef = B616CD981DFDC8D300881214 /* SCRecorderTools.m */; };
+		B616CD9E1DFDC8D300881214 /* SCSampleBufferHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = B616CD9A1DFDC8D300881214 /* SCSampleBufferHolder.m */; };
 		B625DC7D1C6FA66500FA5349 /* YangRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = B625DC7C1C6FA66500FA5349 /* YangRefresh.m */; };
 		B625DC801C6FB4CE00FA5349 /* ProfileHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = B625DC7F1C6FB4CE00FA5349 /* ProfileHeader.m */; };
 		B629B7891DFC7F9300091C37 /* EZCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B629B7881DFC7F9300091C37 /* EZCache.m */; };
+		B629B78C1DFCCDCD00091C37 /* ShowUpdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B629B78B1DFCCDCD00091C37 /* ShowUpdVC.m */; };
 		B63C6AA61D073A150025C262 /* FwendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B63C6AA51D073A150025C262 /* FwendsVC.m */; };
 		B63C6AA91D0775550025C262 /* ActivityFeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B63C6AA81D0775550025C262 /* ActivityFeedVC.m */; };
 		B652A6DE1D99F1AA00DC8FBB /* MediaScreenOverlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B652A6DD1D99F1AA00DC8FBB /* MediaScreenOverlayVC.m */; };
@@ -65,7 +74,6 @@
 		B6C59CBD1C49AFBA009D735D /* SendKarmaVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6C59CBB1C49AFBA009D735D /* SendKarmaVC.xib */; };
 		B6C59CC01C49B356009D735D /* SharedStateThing.m in Sources */ = {isa = PBXBuildFile; fileRef = B6C59CBF1C49B356009D735D /* SharedStateThing.m */; };
 		B6DB253E1DCE80D500C40E91 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B658EF021C43F8C900C6D333 /* Bolts.framework */; };
-		B6DB25411DCE845C00C40E91 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DB25401DCE845C00C40E91 /* SDAVAssetExportSession.m */; };
 		B6DC045F1DBC08BB00DE2235 /* CameraVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DC045E1DBC08BB00DE2235 /* CameraVC.m */; };
 		B6DC04651DBCFE5200DE2235 /* ImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DC04641DBCFE5200DE2235 /* ImageVC.m */; };
 		B6DC04681DBCFE6800DE2235 /* VideoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6DC04671DBCFE6800DE2235 /* VideoVC.m */; };
@@ -123,12 +131,30 @@
 		85195D4CE574C8B23CBDE61C /* libPods-Yang.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Yang.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88BFA6D2A996FAFD7F80C359 /* Pods-Yang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Yang.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Yang/Pods-Yang.debug.xcconfig"; sourceTree = "<group>"; };
 		B6158F1C1C652AC1003A39D0 /* FlexboxKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = FlexboxKit; path = /Users/biggiesmallz/Desktop/iOS/Yang/Yang/FlexboxKit; sourceTree = "<absolute>"; };
+		B616CD871DFDC6F400881214 /* SCAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAssetExportSession.h; sourceTree = "<group>"; };
+		B616CD881DFDC6F400881214 /* SCAssetExportSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAssetExportSession.m; sourceTree = "<group>"; };
+		B616CD8A1DFDC74900881214 /* SCAudioConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCAudioConfiguration.h; sourceTree = "<group>"; };
+		B616CD8B1DFDC74900881214 /* SCAudioConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCAudioConfiguration.m; sourceTree = "<group>"; };
+		B616CD8D1DFDC75B00881214 /* SCVideoConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCVideoConfiguration.h; sourceTree = "<group>"; };
+		B616CD8E1DFDC75B00881214 /* SCVideoConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCVideoConfiguration.m; sourceTree = "<group>"; };
+		B616CD901DFDC7A600881214 /* SCMediaTypeConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCMediaTypeConfiguration.h; sourceTree = "<group>"; };
+		B616CD911DFDC7A600881214 /* SCMediaTypeConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCMediaTypeConfiguration.m; sourceTree = "<group>"; };
+		B616CD931DFDC8D300881214 /* SCIOPixelBuffers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCIOPixelBuffers.h; sourceTree = "<group>"; };
+		B616CD941DFDC8D300881214 /* SCIOPixelBuffers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCIOPixelBuffers.m; sourceTree = "<group>"; };
+		B616CD951DFDC8D300881214 /* SCProcessingQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCProcessingQueue.h; sourceTree = "<group>"; };
+		B616CD961DFDC8D300881214 /* SCProcessingQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCProcessingQueue.m; sourceTree = "<group>"; };
+		B616CD971DFDC8D300881214 /* SCRecorderTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCRecorderTools.h; sourceTree = "<group>"; };
+		B616CD981DFDC8D300881214 /* SCRecorderTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCRecorderTools.m; sourceTree = "<group>"; };
+		B616CD991DFDC8D300881214 /* SCSampleBufferHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSampleBufferHolder.h; sourceTree = "<group>"; };
+		B616CD9A1DFDC8D300881214 /* SCSampleBufferHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSampleBufferHolder.m; sourceTree = "<group>"; };
 		B625DC7B1C6FA66500FA5349 /* YangRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YangRefresh.h; sourceTree = "<group>"; };
 		B625DC7C1C6FA66500FA5349 /* YangRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YangRefresh.m; sourceTree = "<group>"; };
 		B625DC7E1C6FB4CE00FA5349 /* ProfileHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileHeader.h; sourceTree = "<group>"; };
 		B625DC7F1C6FB4CE00FA5349 /* ProfileHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileHeader.m; sourceTree = "<group>"; };
 		B629B7871DFC7F9300091C37 /* EZCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EZCache.h; sourceTree = "<group>"; };
 		B629B7881DFC7F9300091C37 /* EZCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EZCache.m; sourceTree = "<group>"; };
+		B629B78A1DFCCDCD00091C37 /* ShowUpdVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowUpdVC.h; sourceTree = "<group>"; };
+		B629B78B1DFCCDCD00091C37 /* ShowUpdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowUpdVC.m; sourceTree = "<group>"; };
 		B63C6AA41D073A150025C262 /* FwendsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FwendsVC.h; sourceTree = "<group>"; };
 		B63C6AA51D073A150025C262 /* FwendsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FwendsVC.m; sourceTree = "<group>"; };
 		B63C6AA71D0775550025C262 /* ActivityFeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityFeedVC.h; sourceTree = "<group>"; };
@@ -210,8 +236,6 @@
 		B6C59CBE1C49B356009D735D /* SharedStateThing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedStateThing.h; sourceTree = "<group>"; };
 		B6C59CBF1C49B356009D735D /* SharedStateThing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedStateThing.m; sourceTree = "<group>"; };
 		B6DB253B1DCE727E00C40E91 /* MediaPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaPicker.h; sourceTree = "<group>"; };
-		B6DB253F1DCE845C00C40E91 /* SDAVAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDAVAssetExportSession.h; sourceTree = "<group>"; };
-		B6DB25401DCE845C00C40E91 /* SDAVAssetExportSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDAVAssetExportSession.m; sourceTree = "<group>"; };
 		B6DC045D1DBC08BB00DE2235 /* CameraVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraVC.h; sourceTree = "<group>"; };
 		B6DC045E1DBC08BB00DE2235 /* CameraVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraVC.m; sourceTree = "<group>"; };
 		B6DC04631DBCFE5200DE2235 /* ImageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageVC.h; sourceTree = "<group>"; };
@@ -298,6 +322,29 @@
 				5DD07ED9BB7E8B4D484FBE9A /* Pods-YangUITests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B616CD9F1DFDC98400881214 /* SCExport */ = {
+			isa = PBXGroup;
+			children = (
+				B616CD901DFDC7A600881214 /* SCMediaTypeConfiguration.h */,
+				B616CD911DFDC7A600881214 /* SCMediaTypeConfiguration.m */,
+				B616CD8D1DFDC75B00881214 /* SCVideoConfiguration.h */,
+				B616CD8E1DFDC75B00881214 /* SCVideoConfiguration.m */,
+				B616CD8A1DFDC74900881214 /* SCAudioConfiguration.h */,
+				B616CD8B1DFDC74900881214 /* SCAudioConfiguration.m */,
+				B616CD931DFDC8D300881214 /* SCIOPixelBuffers.h */,
+				B616CD941DFDC8D300881214 /* SCIOPixelBuffers.m */,
+				B616CD951DFDC8D300881214 /* SCProcessingQueue.h */,
+				B616CD961DFDC8D300881214 /* SCProcessingQueue.m */,
+				B616CD971DFDC8D300881214 /* SCRecorderTools.h */,
+				B616CD981DFDC8D300881214 /* SCRecorderTools.m */,
+				B616CD991DFDC8D300881214 /* SCSampleBufferHolder.h */,
+				B616CD9A1DFDC8D300881214 /* SCSampleBufferHolder.m */,
+				B616CD871DFDC6F400881214 /* SCAssetExportSession.h */,
+				B616CD881DFDC6F400881214 /* SCAssetExportSession.m */,
+			);
+			name = SCExport;
 			sourceTree = "<group>";
 		};
 		B658EEA21C43F5C200C6D333 = {
@@ -412,8 +459,7 @@
 				B68581201C6B7893003F9799 /* YCash.m */,
 				B68581251C6B7FBA003F9799 /* YUtil.h */,
 				B68581261C6B7FBA003F9799 /* YUtil.m */,
-				B6DB253F1DCE845C00C40E91 /* SDAVAssetExportSession.h */,
-				B6DB25401DCE845C00C40E91 /* SDAVAssetExportSession.m */,
+				B616CD9F1DFDC98400881214 /* SCExport */,
 				B6C59CBE1C49B356009D735D /* SharedStateThing.h */,
 				B6C59CBF1C49B356009D735D /* SharedStateThing.m */,
 				B629B7871DFC7F9300091C37 /* EZCache.h */,
@@ -433,6 +479,8 @@
 				B6987E821C6AAD0C00355776 /* PostVC.m */,
 				B652A6DC1D99F1AA00DC8FBB /* MediaScreenOverlayVC.h */,
 				B652A6DD1D99F1AA00DC8FBB /* MediaScreenOverlayVC.m */,
+				B629B78A1DFCCDCD00091C37 /* ShowUpdVC.h */,
+				B629B78B1DFCCDCD00091C37 /* ShowUpdVC.m */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -854,20 +902,27 @@
 				B6FA268C1C6EDBD100698584 /* UserProfileVC.m in Sources */,
 				B6F3D8931C4C19FE003A4B17 /* FriendCell.m in Sources */,
 				B658EEB31C43F5C200C6D333 /* AppDelegate.m in Sources */,
+				B616CD8C1DFDC74900881214 /* SCAudioConfiguration.m in Sources */,
 				B6FA26921C6EE1EF00698584 /* ProPicIV.m in Sources */,
 				B658EEB01C43F5C200C6D333 /* main.m in Sources */,
+				B629B78C1DFCCDCD00091C37 /* ShowUpdVC.m in Sources */,
 				B6C59CBC1C49AFBA009D735D /* SendKarmaVC.m in Sources */,
+				B616CD921DFDC7A600881214 /* SCMediaTypeConfiguration.m in Sources */,
+				B616CD9E1DFDC8D300881214 /* SCSampleBufferHolder.m in Sources */,
 				B669C4461C74DEA100D25661 /* FriendsVC.m in Sources */,
 				B6DC04651DBCFE5200DE2235 /* ImageVC.m in Sources */,
+				B616CD9B1DFDC8D300881214 /* SCIOPixelBuffers.m in Sources */,
 				B6DC04731DBCFF2B00DE2235 /* UIImage+Crop.m in Sources */,
+				B616CD8F1DFDC75B00881214 /* SCVideoConfiguration.m in Sources */,
+				B616CD9D1DFDC8D300881214 /* SCRecorderTools.m in Sources */,
 				B6E82F4A1C7C4CB500F6B848 /* EditProfileVC.m in Sources */,
 				B6C59CB61C498FBD009D735D /* MenuCell.m in Sources */,
 				B6987E841C6AAD0C00355776 /* PostVC.m in Sources */,
 				B629B7891DFC7F9300091C37 /* EZCache.m in Sources */,
-				B6DB25411DCE845C00C40E91 /* SDAVAssetExportSession.m in Sources */,
 				B68581271C6B7FBA003F9799 /* YUtil.m in Sources */,
 				B625DC7D1C6FA66500FA5349 /* YangRefresh.m in Sources */,
 				B6BFBFB91C72613D0052D699 /* LoginVC.m in Sources */,
+				B616CD891DFDC6F400881214 /* SCAssetExportSession.m in Sources */,
 				B63C6AA61D073A150025C262 /* FwendsVC.m in Sources */,
 				B6DC04681DBCFE6800DE2235 /* VideoVC.m in Sources */,
 				B6DC04721DBCFF2B00DE2235 /* ViewUtils.m in Sources */,
@@ -884,6 +939,7 @@
 				B6C59CC01C49B356009D735D /* SharedStateThing.m in Sources */,
 				B6BFBFB61C725F4F0052D699 /* MainVC.m in Sources */,
 				B6DC045F1DBC08BB00DE2235 /* CameraVC.m in Sources */,
+				B616CD9C1DFDC8D300881214 /* SCProcessingQueue.m in Sources */,
 				B625DC801C6FB4CE00FA5349 /* ProfileHeader.m in Sources */,
 				B68581241C6B7A98003F9799 /* YConstants.m in Sources */,
 			);

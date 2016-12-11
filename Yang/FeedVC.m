@@ -256,7 +256,10 @@
             [button setUserInteractionEnabled:YES];
         }];
     } else {
-
+        [button setUserInteractionEnabled:YES];
+        // show who up'd
+        ShowUpdVC * su = [[ShowUpdVC alloc] initWithPFObject:post];
+        [self.navigationController pushViewController:su animated:YES];
     }
 }
 

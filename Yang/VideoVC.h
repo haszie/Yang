@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SDAVAssetExportSession.h"
 #import "MediaPicker.h"
+#import "MBProgressHUD.h"
+
+#import "SCAssetExportSession.h"
 
 @import AVFoundation;
 
-@interface VideoVC : UIViewController
+@interface VideoVC : UIViewController <SCAssetExportSessionDelegate>
 
 - (instancetype)initWithVideoUrl:(NSURL *)url;
 
@@ -22,6 +24,10 @@
 @property (strong, nonatomic) AVPlayerLayer *avPlayerLayer;
 @property (strong, nonatomic) UIButton *cancelButton;
 @property (strong, nonatomic) UIButton *acceptButton;
+
+@property (strong, nonatomic) MBProgressHUD * hud;
+
+@property (strong, nonatomic) NSURL * outputURL;
 
 @property (nonatomic, weak) id <MediaPickerDelegate> delegate;
 

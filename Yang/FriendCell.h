@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
+
 
 @interface FriendCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *usr_pro;
 @property (weak, nonatomic) IBOutlet UILabel *username;
-
+@property (weak, nonatomic) PFUser * fwend;
 @end

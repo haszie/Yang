@@ -25,7 +25,7 @@
     if (indexPath.row % 2 == 0) {
         [cell.bg setBackgroundColor:[UIColor whiteColor]];
     } else {
-        [cell.bg setBackgroundColor:[UIColor colorWithRed:249.0f/255.0f green:249.0f/255.0f blue:249.0f/255.0f alpha:1.0f]];
+        [cell.bg setBackgroundColor:[UIColor colorWithRed:251.0f/255.0f green:251.0f/255.0f blue:251.0f/255.0f alpha:1.0f]];
     }
     
     PFUser *theSender = [object objectForKey:kPostSenderKey];

@@ -17,6 +17,7 @@
 #import "PostCell.h"
 #import "YangRefresh.h"
 #import "MediaScreenOverlayVC.h"
+#import "ShowUpdVC.h"
 
 @interface FeedVC : PFQueryTableViewController <PostCellDelegate, ProPicDelegate>
 

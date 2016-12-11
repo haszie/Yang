@@ -119,59 +119,64 @@
 
 - (void)acceptButtonPressed:(UIButton *)button {
     if (_delegate && [_delegate respondsToSelector:@selector(didFinishWithVideo:)]) {
-        NSURL * encodeURL = [self encodeVideo:self.videoUrl];
-        [_delegate didFinishWithVideo:encodeURL];
+        [self export:self.videoUrl];
     }
 }
 
--(NSURL *) encodeVideo:(NSURL *) url {
+#pragma mark SCAssetDelegate
+
+- (void)assetExportSessionDidProgress:(SCAssetExportSession *)assetExportSession {
+    float progress = assetExportSession.progress;
+    if (self.hud) {
+        self.hud.progress = progress;
+    }
+}
+
+-(void) export: (NSURL *) url {
+    
     AVURLAsset *vid = [[AVURLAsset alloc] initWithURL:url options:nil];
-    
-    SDAVAssetExportSession *encoder = [SDAVAssetExportSession.alloc initWithAsset:vid];
-    encoder.outputFileType = AVFileTypeMPEG4;
-    
-    NSURL *ret  = [[[self applicationDocumentsDirectory]
+    self.outputURL  = [[[self applicationDocumentsDirectory]
                     URLByAppendingPathComponent:@"out"] URLByAppendingPathExtension:@"mp4"];
+
+    SCAssetExportSession *exportSession = [[SCAssetExportSession alloc] initWithAsset:vid];
+    exportSession.videoConfiguration.preset = SCPresetMediumQuality;
+    exportSession.audioConfiguration.preset = SCPresetMediumQuality;
+    exportSession.videoConfiguration.maxFrameRate = 40;
+    exportSession.outputUrl = self.outputURL;
+    exportSession.outputFileType = AVFileTypeMPEG4;
+    exportSession.delegate = self;
+
+    CFTimeInterval time = CACurrentMediaTime();
+    __weak typeof(self) wSelf = self;
     
-    [[NSFileManager defaultManager] removeItemAtURL:ret error:nil];
-    
-    encoder.outputURL = ret;
-    encoder.videoSettings = @
-    {
-    AVVideoCodecKey: AVVideoCodecH264,
-    AVVideoWidthKey: @720,
-    AVVideoHeightKey: @1280,
-    AVVideoCompressionPropertiesKey: @
-        {
-        AVVideoAverageBitRateKey: @2000000,
-        AVVideoProfileLevelKey: AVVideoProfileLevelH264High40,
-        },
-    };
-    encoder.audioSettings = @
-    {
-    AVFormatIDKey: @(kAudioFormatMPEG4AAC),
-    AVNumberOfChannelsKey: @2,
-    AVSampleRateKey: @44100,
-    AVEncoderBitRateKey: @128000,
-    };
-    
-    [encoder exportAsynchronouslyWithCompletionHandler:^
-     {
-         if (encoder.status == AVAssetExportSessionStatusCompleted)
-         {
-             NSLog(@"Video export succeeded");
-         }
-         else if (encoder.status == AVAssetExportSessionStatusCancelled)
-         {
-             NSLog(@"Video export cancelled");
-         }
-         else
-         {
-             NSLog(@"Video export failed with error: %@ (%ld)", encoder.error.localizedDescription, encoder.error.code);
-         }
-     }];
-    
-    return ret;
+    self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    self.hud.mode = MBProgressHUDModeAnnularDeterminate;
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [exportSession exportAsynchronouslyWithCompletionHandler:^{
+        __strong typeof(self) strongSelf = wSelf;
+        
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+        
+        if (!exportSession.cancelled) {
+            NSLog(@"Completed compression in %fs", CACurrentMediaTime() - time);
+        }
+        
+        if (strongSelf) {
+            [self.hud hide:YES];
+        }
+
+        NSError *error = exportSession.error;
+        if (exportSession.cancelled) {
+            NSLog(@"Export was cancelled");
+        } else if (error == nil) {
+            [_delegate didFinishWithVideo:self.outputURL];
+
+        } else {
+            if (!exportSession.cancelled) {
+                [[[UIAlertView alloc] initWithTitle:@"Failed to save" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+            }
+        }
+    }];
 }
 
 - (NSURL *)applicationDocumentsDirectory {
