@@ -84,7 +84,7 @@
 }
 
 -(void) doPermissions {
-    VWWCameraPermission *camera = [VWWCameraPermission permissionWithLabelText:@"Yang Permissions"];
+    VWWCameraPermission *camera = [VWWCameraPermission permissionWithLabelText:@"For taking pictures and recording video."];
     
     VWWMicrophonePermission *microphone = [VWWMicrophonePermission permissionWithLabelText:@"The videos need to have sound!"];
     

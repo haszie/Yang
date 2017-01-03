@@ -41,7 +41,7 @@
      @{NSForegroundColorAttributeName:[UIColor whiteColor],
        NSFontAttributeName:[UIFont fontWithName:@"OpenSans" size:14.0f]
        } forState:UIControlStateNormal];
-    
+        
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     if ([PFUser currentUser] && [[PFUser currentUser] isAuthenticated]) {

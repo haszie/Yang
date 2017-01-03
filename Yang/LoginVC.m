@@ -311,6 +311,15 @@
                     [MBProgressHUD hideHUDForView:self.view animated:YES];
                     [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                     
+                    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                                    UIUserNotificationTypeBadge |
+                                                                    UIUserNotificationTypeSound);
+                    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                                             categories:nil];
+                    
+                    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+                    [[UIApplication sharedApplication] registerForRemoteNotifications];
+                    
                     //HomeFeedVC *home = [[HomeFeedVC alloc] initWithStyle:UITableViewStylePlain];
                     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MenuVC home]];
                     nav.navigationBar.barStyle = UIBarStyleBlackTranslucent;
@@ -550,6 +559,15 @@
                                         NSLog(@"%@ - %@", permission.type, [permission stringForStatus]);
                                     }];
 
+                                    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                                                    UIUserNotificationTypeBadge |
+                                                                                    UIUserNotificationTypeSound);
+                                    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                                                             categories:nil];
+                                    
+                                    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+                                    [[UIApplication sharedApplication] registerForRemoteNotifications];
+                                    
                                     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[MenuVC home]];
                                     
                                     MenuVC *menu = [[MenuVC alloc] init];
