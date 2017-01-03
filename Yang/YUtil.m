@@ -67,8 +67,6 @@ static MMDrawerController *drawer;
                     for (PFObject *activity in objects) {
                         if ([[activity objectForKey:kActivityTypeKey] isEqualToString:kActivityTypeUpvote] && [activity objectForKey:kActivityFromUserKey]) {
                             [likers addObject:[activity objectForKey:kActivityFromUserKey]];
-                        } else if ([[activity objectForKey:kActivityTypeKey] isEqualToString:kActivityTypeComment] && [activity objectForKey:kActivityFromUserKey]) {
-                            [commenters addObject:[activity objectForKey:kActivityFromUserKey]];
                         }
                         
                         if ([[[activity objectForKey:kActivityFromUserKey] objectId] isEqualToString:[[PFUser currentUser] objectId]]) {
@@ -307,16 +305,16 @@ static MMDrawerController *drawer;
     [queryLikes whereKey:kActivityPostKey equalTo:post];
     [queryLikes whereKey:kActivityTypeKey equalTo:kActivityTypeUpvote];
     
-    PFQuery *queryComments = [PFQuery queryWithClassName:kActivityClassKey];
-    [queryComments whereKey:kActivityPostKey equalTo:post];
-    [queryComments whereKey:kActivityTypeKey equalTo:kActivityTypeComment];
+    [queryLikes setCachePolicy:cachePolicy];
+    [queryLikes includeKey:kActivityFromUserKey];
+    [queryLikes includeKey:kActivityPostKey];
+
+//    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:queryLikes,queryComments,nil]];
+//    [query setCachePolicy:cachePolicy];
+//    [query includeKey:kActivityFromUserKey];
+//    [query includeKey:kActivityPostKey];
     
-    PFQuery *query = [PFQuery orQueryWithSubqueries:[NSArray arrayWithObjects:queryLikes,queryComments,nil]];
-    [query setCachePolicy:cachePolicy];
-    [query includeKey:kActivityFromUserKey];
-    [query includeKey:kActivityPostKey];
-    
-    return query;
+    return queryLikes;
 }
 
 + (UIImage *)imageWithColor:(UIColor *)color {

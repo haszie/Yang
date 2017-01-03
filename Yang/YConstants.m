@@ -37,7 +37,7 @@ NSString *const kActivityToUserKey                          = @"toUser";
 NSString *const kActivityContentKey                         = @"content";
 NSString *const kActivityTypeUpvote                         = @"upvote";
 NSString *const kActivityTypeFollow                         = @"follow";
-NSString *const kActivityTypeComment                        = @"comment";
+NSString *const kActivityTypeKarma                          = @"karma";
 NSString *const kActivitySenderKey                          = @"sender";
 NSString *const kActivityReceiverKey                        = @"receiver";
 

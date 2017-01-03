@@ -98,10 +98,11 @@
     
     if ([object[kActivityTypeKey] isEqualToString:kActivityTypeFollow]) {
         [cell.username setText:[NSString stringWithFormat:@"%@ %@ is now following you", fromUser[@"first"], fromUser[@"last"]]];
-    } else if ([object[kActivityTypeKey] isEqualToString:kActivityTypeComment]) {
-        [cell.username setText:[NSString stringWithFormat:@"%@ commented on your post", fromUser[@"first"]]];
     } else if ([object[kActivityTypeKey] isEqualToString:kActivityTypeUpvote]) {
-        [cell.username setText:[NSString stringWithFormat:@"%@ upvoted a post about you", fromUser[@"first"]]];
+        [cell.username setText:[NSString stringWithFormat:@"%@ gave you an upvote", fromUser[@"first"]]];
+    } else if ([object[kActivityTypeKey] isEqualToString:kActivityTypeKarma]) {
+        PFObject * post = object[@"post"];
+        [cell.username setText:[NSString stringWithFormat:@"%@ sent you %d karma", fromUser[@"first"], [post[@"amt"] intValue]]];
     }
     
     PFUser *usa = object[kActivityFromUserKey];
@@ -118,17 +119,14 @@
     if ([object[kActivityTypeKey] isEqualToString:kActivityTypeFollow]) {
         UserProfileVC *vc = [[UserProfileVC alloc] initWithUser:object[kActivityFromUserKey]];
         [self.navigationController pushViewController:vc animated:YES];
-    } else if ([object[kActivityTypeKey] isEqualToString:kActivityTypeComment]) {
-        PostVC *vc = [[PostVC alloc] initWithPFObject:object[kActivityPostKey] withHeight:[YUtil calcHeight:object[kActivityPostKey] withFrame:self.view.frame]];
-        [self.navigationController pushViewController:vc animated:YES];
-    } else if ([object[kActivityTypeKey] isEqualToString:kActivityTypeUpvote]) {
+    } else if ([object[kActivityTypeKey] isEqualToString:kActivityTypeUpvote] || [object[kActivityTypeKey] isEqualToString:kActivityTypeKarma] ) {
         PostVC *vc = [[PostVC alloc] initWithPFObject:object[kActivityPostKey] withHeight:[YUtil calcHeight:object[kActivityPostKey] withFrame:self.view.frame]];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44.0f;
+    return 70.0f;
 }
 
 @end

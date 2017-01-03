@@ -40,7 +40,8 @@ extern NSString *const kActivityReceiverKey;
 extern NSString *const kActivityContentKey;
 extern NSString *const kActivityTypeUpvote;
 extern NSString *const kActivityTypeFollow;
-extern NSString *const kActivityTypeComment;
+extern NSString *const kActivityTypeKarma;
+
 
 # pragma mark - Post
 

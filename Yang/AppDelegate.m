@@ -83,52 +83,52 @@
 
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-
-    NSString *objectId = [userInfo objectForKey:@"objectID"];
-    NSString *className = [userInfo objectForKey:@"className"];
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *) notificationData {
 
     if (application.applicationState != UIApplicationStateActive) {
-        [self handleNotificationCallback:className and:objectId];
+        [self handleNotificationCallback:notificationData];
     } else {
-        
-        NSString *message = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-        
+        NSString *message = [[notificationData objectForKey:@"aps"] objectForKey:@"alert"];
         LNNotification* notification = [LNNotification notificationWithMessage:message];
-        notification.defaultAction = [LNNotificationAction actionWithTitle:@"WOOOOO" handler:^(LNNotificationAction *action) {
-            [self handleNotificationCallback:className and:objectId];
+        notification.defaultAction = [LNNotificationAction actionWithTitle:@"Open" handler:^(LNNotificationAction *action) {
+            [self handleNotificationCallback:notificationData];
         }];
         [[LNNotificationCenter defaultCenter] presentNotification:notification forApplicationIdentifier:@"yang"];
     }
 }
 
--(void) handleNotificationCallback:(NSString *) className and:(NSString *) objectId {
-    if (className != nil) {
-        if ([className isEqualToString:@"_User"]) {
-            PFUser *usr = (PFUser *)[PFObject objectWithoutDataWithClassName:className objectId:objectId];
-            
-            [usr fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                [[YUtil getTheDrawer] closeDrawerAnimated:YES completion:^(BOOL finished) {
-                    UserProfileVC *userProfile = [[UserProfileVC alloc] initWithUser:(PFUser *) object];
-                    UINavigationController *nav = (UINavigationController *) [YUtil getTheDrawer].centerViewController;
-                    userProfile.addMenuButton = YES;
-                    
-                    [nav setViewControllers:@[userProfile] animated:YES];
-                }];
+-(void) handleNotificationCallback:(NSDictionary *) notificationData {
+    
+    NSString * type = [notificationData objectForKey:@"type"];
+
+    if ([type isEqualToString:@"karma"] || [type isEqualToString:@"upvote"]) {
+        NSString * objId = [notificationData objectForKey:@"postId"];
+
+        PFObject *obj = [PFObject objectWithoutDataWithClassName:@"post" objectId:objId];
+        
+        [obj fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            [[YUtil getTheDrawer] closeDrawerAnimated:YES completion:^(BOOL finished) {
+                PostVC *pvc = [[PostVC alloc] initWithPFObject:object withHeight:[YUtil calcHeight:object withFrame:self.window.frame]];
+                UINavigationController *nav = (UINavigationController *) [YUtil getTheDrawer].centerViewController;
+                pvc.addMenuButton = YES;
+                
+                [nav setViewControllers:@[pvc] animated:YES];
             }];
-        } else {
-            PFObject *obj = [PFObject objectWithoutDataWithClassName:className objectId:objectId];
-            
-            [obj fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                [[YUtil getTheDrawer] closeDrawerAnimated:YES completion:^(BOOL finished) {
-                    PostVC *pvc = [[PostVC alloc] initWithPFObject:object withHeight:[YUtil calcHeight:object withFrame:self.window.frame]];
-                    UINavigationController *nav = (UINavigationController *) [YUtil getTheDrawer].centerViewController;
-                    pvc.addMenuButton = YES;
-                    
-                    [nav setViewControllers:@[pvc] animated:YES];
-                }];
+        }];
+    } else if ([type isEqualToString:@"follow"]) {
+        NSString * objId = [notificationData objectForKey:@"fromUserId"];
+
+        PFUser *usr = (PFUser *)[PFObject objectWithoutDataWithClassName:@"_User" objectId:objId];
+        
+        [usr fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+            [[YUtil getTheDrawer] closeDrawerAnimated:YES completion:^(BOOL finished) {
+                UserProfileVC *userProfile = [[UserProfileVC alloc] initWithUser:(PFUser *) object];
+                UINavigationController *nav = (UINavigationController *) [YUtil getTheDrawer].centerViewController;
+                userProfile.addMenuButton = YES;
+                
+                [nav setViewControllers:@[userProfile] animated:YES];
             }];
-        }
+        }];
     }
 }
 
