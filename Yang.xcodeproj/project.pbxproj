@@ -84,6 +84,8 @@
 		B6E82F4D1C7C557200F6B848 /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6E82F4C1C7C557200F6B848 /* SettingsVC.m */; };
 		B6F3D8931C4C19FE003A4B17 /* FriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B6F3D8911C4C19FE003A4B17 /* FriendCell.m */; };
 		B6F3D8941C4C19FE003A4B17 /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6F3D8921C4C19FE003A4B17 /* FriendCell.xib */; };
+		B6F611831E1BFE79005AB3A5 /* LNNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6F611821E1BFE57005AB3A5 /* LNNotificationsUI.framework */; };
+		B6F611841E1BFE79005AB3A5 /* LNNotificationsUI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B6F611821E1BFE57005AB3A5 /* LNNotificationsUI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B6FA268C1C6EDBD100698584 /* UserProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA268B1C6EDBD100698584 /* UserProfileVC.m */; };
 		B6FA268F1C6EDE4800698584 /* FeedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA268E1C6EDE4800698584 /* FeedVC.m */; };
 		B6FA26921C6EE1EF00698584 /* ProPicIV.m in Sources */ = {isa = PBXBuildFile; fileRef = B6FA26911C6EE1EF00698584 /* ProPicIV.m */; };
@@ -107,6 +109,20 @@
 			remoteGlobalIDString = B658EEAA1C43F5C200C6D333;
 			remoteInfo = Yang;
 		};
+		B6F611811E1BFE57005AB3A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6F6117D1E1BFE56005AB3A5 /* LNNotificationsUI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 39FC4F8319B8EFB400E45E37;
+			remoteInfo = LNNotificationsUI;
+		};
+		B6F611851E1BFE79005AB3A5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6F6117D1E1BFE56005AB3A5 /* LNNotificationsUI.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 39FC4F8219B8EFB400E45E37;
+			remoteInfo = LNNotificationsUI;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -116,6 +132,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B6F611841E1BFE79005AB3A5 /* LNNotificationsUI.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +273,7 @@
 		B6F3D8911C4C19FE003A4B17 /* FriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendCell.m; sourceTree = "<group>"; };
 		B6F3D8921C4C19FE003A4B17 /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
 		B6F6117C1E1BFC07005AB3A5 /* Yang.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Yang.entitlements; sourceTree = "<group>"; };
+		B6F6117D1E1BFE56005AB3A5 /* LNNotificationsUI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LNNotificationsUI.xcodeproj; path = "../../../Downloads/LNNotificationsUI-master 2/LNNotificationsUI/LNNotificationsUI.xcodeproj"; sourceTree = "<group>"; };
 		B6FA268A1C6EDBD100698584 /* UserProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfileVC.h; sourceTree = "<group>"; };
 		B6FA268B1C6EDBD100698584 /* UserProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfileVC.m; sourceTree = "<group>"; };
 		B6FA268D1C6EDE4800698584 /* FeedVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedVC.h; sourceTree = "<group>"; };
@@ -274,6 +292,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6F611831E1BFE79005AB3A5 /* LNNotificationsUI.framework in Frameworks */,
 				B658EF231C4407A700C6D333 /* Accounts.framework in Frameworks */,
 				B658EF211C4407A200C6D333 /* Social.framework in Frameworks */,
 				B658EF001C43F7A000C6D333 /* libsqlite3.tbd in Frameworks */,
@@ -432,6 +451,7 @@
 				B658EF201C4407A200C6D333 /* Social.framework */,
 				B658EEFF1C43F7A000C6D333 /* libsqlite3.tbd */,
 				B658EEFD1C43F79600C6D333 /* libz.tbd */,
+				B6F6117D1E1BFE56005AB3A5 /* LNNotificationsUI.xcodeproj */,
 				B658EF021C43F8C900C6D333 /* Bolts.framework */,
 				B658EF031C43F8C900C6D333 /* Parse.framework */,
 				B658EF061C43F8C900C6D333 /* ParseTwitterUtils.framework */,
@@ -526,6 +546,14 @@
 				B6DC04711DBCFF2B00DE2235 /* UIImage+Resize.m */,
 			);
 			name = LLUtils;
+			sourceTree = "<group>";
+		};
+		B6F6117E1E1BFE56005AB3A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B6F611821E1BFE57005AB3A5 /* LNNotificationsUI.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B6FE890A1C768F5200115565 /* Model */ = {
@@ -631,6 +659,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B6F611861E1BFE79005AB3A5 /* PBXTargetDependency */,
 			);
 			name = Yang;
 			productName = Yang;
@@ -720,6 +749,12 @@
 			mainGroup = B658EEA21C43F5C200C6D333;
 			productRefGroup = B658EEAC1C43F5C200C6D333 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B6F6117E1E1BFE56005AB3A5 /* Products */;
+					ProjectRef = B6F6117D1E1BFE56005AB3A5 /* LNNotificationsUI.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B658EEAA1C43F5C200C6D333 /* Yang */,
@@ -728,6 +763,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B6F611821E1BFE57005AB3A5 /* LNNotificationsUI.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = LNNotificationsUI.framework;
+			remoteRef = B6F611811E1BFE57005AB3A5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B658EEA91C43F5C200C6D333 /* Resources */ = {
@@ -975,6 +1020,11 @@
 			isa = PBXTargetDependency;
 			target = B658EEAA1C43F5C200C6D333 /* Yang */;
 			targetProxy = B658EED01C43F5C200C6D333 /* PBXContainerItemProxy */;
+		};
+		B6F611861E1BFE79005AB3A5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LNNotificationsUI;
+			targetProxy = B6F611851E1BFE79005AB3A5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

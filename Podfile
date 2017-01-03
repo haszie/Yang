@@ -16,7 +16,6 @@ target 'Yang' do
         pod 'JHPullToRefreshKit'
         pod 'RSKImageCropper'
         pod 'APAddressBook'
-        pod 'TSMessages'
 	pod 'VWWPermissionKit', '~> 1.3.0'
 	pod 'Onboard'
 	pod 'LLSimpleCamera', '~> 4.1'

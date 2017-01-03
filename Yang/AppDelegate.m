@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 
+@import LNNotificationsUI;
+
 @interface AppDelegate ()
 
 @end
@@ -76,6 +78,9 @@
         [installation setObject:[PFUser currentUser].objectId forKey:@"user"];
     }
     [installation saveInBackground];
+    
+    [[LNNotificationCenter defaultCenter] registerApplicationWithIdentifier:@"yang" name:@"Yang" icon:[UIImage imageNamed:@"app_60"] defaultSettings:[LNNotificationAppSettings defaultNotificationAppSettings]];
+
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
@@ -88,41 +93,42 @@
     } else {
         
         NSString *message = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-                
-        [TSMessage showNotificationInViewController:[YUtil getTheDrawer] title:@"Activity!" subtitle:message image:[UIImage imageNamed:@"activity_menu_icon"] type:TSMessageNotificationTypeWarning duration:TSMessageNotificationDurationAutomatic callback:^{
-                [self handleNotificationCallback:className and:objectId];
-                [TSMessage dismissActiveNotification];
-        } buttonTitle:@"Dismiss" buttonCallback:^{
-            [TSMessage dismissActiveNotification];
-        } atPosition:TSMessageNotificationPositionTop canBeDismissedByUser:YES];
+        
+        LNNotification* notification = [LNNotification notificationWithMessage:message];
+        notification.defaultAction = [LNNotificationAction actionWithTitle:@"WOOOOO" handler:^(LNNotificationAction *action) {
+            [self handleNotificationCallback:className and:objectId];
+        }];
+        [[LNNotificationCenter defaultCenter] presentNotification:notification forApplicationIdentifier:@"yang"];
     }
 }
 
 -(void) handleNotificationCallback:(NSString *) className and:(NSString *) objectId {
-    if ([className isEqualToString:@"_User"]) {
-        PFUser *usr = (PFUser *)[PFObject objectWithoutDataWithClassName:className objectId:objectId];
-        
-        [usr fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-            [[YUtil getTheDrawer] closeDrawerAnimated:YES completion:^(BOOL finished) {
-                UserProfileVC *userProfile = [[UserProfileVC alloc] initWithUser:(PFUser *) object];
-                UINavigationController *nav = (UINavigationController *) [YUtil getTheDrawer].centerViewController;
-                userProfile.addMenuButton = YES;
-                
-                [nav setViewControllers:@[userProfile] animated:YES];
+    if (className != nil) {
+        if ([className isEqualToString:@"_User"]) {
+            PFUser *usr = (PFUser *)[PFObject objectWithoutDataWithClassName:className objectId:objectId];
+            
+            [usr fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                [[YUtil getTheDrawer] closeDrawerAnimated:YES completion:^(BOOL finished) {
+                    UserProfileVC *userProfile = [[UserProfileVC alloc] initWithUser:(PFUser *) object];
+                    UINavigationController *nav = (UINavigationController *) [YUtil getTheDrawer].centerViewController;
+                    userProfile.addMenuButton = YES;
+                    
+                    [nav setViewControllers:@[userProfile] animated:YES];
+                }];
             }];
-        }];
-    } else {
-        PFObject *obj = [PFObject objectWithoutDataWithClassName:className objectId:objectId];
-        
-        [obj fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-            [[YUtil getTheDrawer] closeDrawerAnimated:YES completion:^(BOOL finished) {
-                PostVC *pvc = [[PostVC alloc] initWithPFObject:object withHeight:[YUtil calcHeight:object withFrame:self.window.frame]];
-                UINavigationController *nav = (UINavigationController *) [YUtil getTheDrawer].centerViewController;
-                pvc.addMenuButton = YES;
-                
-                [nav setViewControllers:@[pvc] animated:YES];
+        } else {
+            PFObject *obj = [PFObject objectWithoutDataWithClassName:className objectId:objectId];
+            
+            [obj fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                [[YUtil getTheDrawer] closeDrawerAnimated:YES completion:^(BOOL finished) {
+                    PostVC *pvc = [[PostVC alloc] initWithPFObject:object withHeight:[YUtil calcHeight:object withFrame:self.window.frame]];
+                    UINavigationController *nav = (UINavigationController *) [YUtil getTheDrawer].centerViewController;
+                    pvc.addMenuButton = YES;
+                    
+                    [nav setViewControllers:@[pvc] animated:YES];
+                }];
             }];
-        }];
+        }
     }
 }
 

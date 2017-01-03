@@ -14,11 +14,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>HexColors.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>JHPullToRefreshKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -79,11 +74,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>TSMessages.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>VWWPermissionKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -92,22 +82,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1B7B2F1B683711584BFB5920DD48B225</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>25BF5FDC2F1EB446706963C51EE55951</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>266E27D897FD7FD68078059CF4D7455F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2A89E5FFBE6512C96BBBC4A27DD36238</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,12 +107,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>5408AD1A87FB4A286236DCFAC6BEA455</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>550F7EEAEEA17E3F92C873912E23B01C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>597F56C54F2050BEE2BF6BC5DE49D44C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6026106754235ADE4C027AE0F08A9077</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -152,22 +137,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9DAD6FA52799F67F1029F9C7433E585D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A77684828AAFB90FE6E00AF9FF75A587</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>DA17884156D67867C1321919546DCA90</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E9EF397B95762DDB254C71DDCB4B1381</key>
+		<key>E0BA05A087310511193C61C49001D115</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E80929B0A488A6732E083EED48C6BF48</key>
 		<dict>
 			<key>primary</key>
 			<true/>

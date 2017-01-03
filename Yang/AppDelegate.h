@@ -13,8 +13,7 @@
 #import "MenuVC.h"
 #import "PostVC.h"
 #import "YUtil.h"
-#import "TSMessage.h"
-#import "TSMessageView.h"
+
 
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <SDWebImage/SDWebImagePrefetcher.h>
