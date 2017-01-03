@@ -12,6 +12,8 @@
 
 @interface FriendCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *heightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *widthConstraint;
 @property (weak, nonatomic) IBOutlet UIImageView *usr_pro;
 @property (weak, nonatomic) IBOutlet UILabel *username;
 @property (weak, nonatomic) PFUser * fwend;

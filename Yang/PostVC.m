@@ -9,6 +9,7 @@
 #import "PostVC.h"
 #import "ProPicIV.h"
 #import "UserProfileVC.h"
+#import "MediaScreenOverlayVC.h"
 
 @interface PostVC () {
     PFObject *post;
@@ -16,6 +17,9 @@
     NSMutableArray<PFObject *> *_mutableObjects;
     BOOL scrollToLast;
 }
+
+@property (strong, nonatomic) MediaScreenOverlayVC *mediaScreen;
+@property (strong, nonatomic) UIWindow *topWindow;
 
 @end
 
@@ -55,6 +59,11 @@
                         [cell configureCell:cell forObject:post withDelegate:self];
                         cell.bg.layer.shadowColor = [UIColor clearColor].CGColor;
                         
+                        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapPostCell)];
+                        tap.numberOfTapsRequired = 1;
+                        
+                        [cell addGestureRecognizer:tap];
+
                         self.tableView.tableHeaderView = cell;
                     }];
                 }
@@ -62,8 +71,6 @@
         }
     }];
     
-    
-    PFFile *propic = [[PFUser currentUser] objectForKey:kUserProfilePicture];
     
     if (self.addMenuButton) {
         UIImage *menu_img = [UIImage imageNamed:@"menu-alt"];
@@ -83,6 +90,20 @@
     [self.quickRefresh addToScrollView:self.tableView withRefreshBlock:^{
         [weakSelf tableViewWasPulledToRefresh];
     }];
+    
+    // media screen
+    
+    self.mediaScreen = [[MediaScreenOverlayVC alloc] init];
+    
+    CGRect frame = self.view.bounds;
+    frame.origin.y = CGRectGetHeight(self.view.bounds) + 20;
+    frame.size.height += 20;
+    
+    self.topWindow = [[UIWindow alloc] initWithFrame:frame];
+    self.topWindow.windowLevel = UIWindowLevelStatusBar;
+    
+    [self.topWindow setRootViewController:self.mediaScreen];
+    [self.topWindow setHidden:NO];
 
 }
 
@@ -119,7 +140,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    return 74.0f;
+    return 50.0f;
 }
 
 #pragma mark - PostCellDelegate
@@ -235,12 +256,14 @@
     PFFile * propic = usa[@"propic"];
     if (propic != nil) {
         [cell.usr_pro sd_setImageWithURL:[NSURL URLWithString:propic.url]];
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapUserPic:)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapUpdUserPic:)];
         tap.numberOfTapsRequired = 1;
         
         [cell addGestureRecognizer:tap];
         cell.fwend = usa;
         cell.username.text = [NSString stringWithFormat:@"%@ %@", usa[@"first"], usa[@"last"]];
+        cell.widthConstraint.constant = 32.0f;
+        cell.heightConstraint.constant = 32.0f;
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
@@ -260,6 +283,16 @@
     return cell;
 }
 
+-(void) didTapPostCell {
+    if (post[@"photo"]) {
+        self.mediaScreen.post = post;
+        [self.mediaScreen show];
+    } else if (post[@"video"]) {
+        self.mediaScreen.post = post;
+        [self.mediaScreen show];
+    }
+}
+
 - (NSArray<__kindof PFObject *> *)objects {
     return _mutableObjects;
 }
@@ -268,10 +301,15 @@
     return self.objects[indexPath.row];
 }
 
--(void)didTapUserPic:(UITapGestureRecognizer *) tappy {
+-(void)didTapUpdUserPic:(UITapGestureRecognizer *) tappy {
     FriendCell * fcell = (FriendCell *) tappy.view;
     
     UserProfileVC *upvc = [[UserProfileVC alloc] initWithUser:fcell.fwend];
+    [self.navigationController pushViewController:upvc animated:YES];
+}
+
+-(void)didTapUserPic:(ProPicIV *)thePic {
+    UserProfileVC *upvc = [[UserProfileVC alloc] initWithUser:thePic.theUser];
     [self.navigationController pushViewController:upvc animated:YES];
 }
 

@@ -45,7 +45,6 @@
 @protocol PostCellDelegate <NSObject>
 
 -(void) didTapUpvoteButton:(UIButton *)button forPostCell:(PostCell *)postCell  forPost:(PFObject *)post;
--(void) didTapCommentButton:(UIButton *)button forPostCell:(PostCell *)postCell  forPost:(PFObject *)post;
 
 @property (nonatomic, strong) NSMutableDictionary *outstandingQueries;
 

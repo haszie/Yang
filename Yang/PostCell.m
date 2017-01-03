@@ -191,11 +191,5 @@
     }
 }
 
--(void) didTapCommentButton:(UIButton *)button {
-    if (delegate && [delegate respondsToSelector:@selector(didTapCommentButton:forPostCell:forPost:)]) {
-        [delegate didTapCommentButton:button forPostCell:self forPost:_post];
-    }
-}
-
 
 @end

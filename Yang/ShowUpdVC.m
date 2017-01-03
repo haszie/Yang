@@ -26,7 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.tableView.separatorColor = [UIColor clearColor];
     [self setTitle:@"Up'd"];
     [self.tableView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:@"UpCell"];
 
@@ -74,6 +74,8 @@
         
         [cell addGestureRecognizer:tap];
         cell.fwend = usa;
+        cell.widthConstraint.constant = 32.0f;
+        cell.heightConstraint.constant = 32.0f;
         cell.username.text = [NSString stringWithFormat:@"%@ %@", usa[@"first"], usa[@"last"]];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -93,7 +95,7 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 70;
+    return 50;
 }
 
 @end
