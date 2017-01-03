@@ -36,9 +36,7 @@
     
     _mutableObjects = [NSMutableArray array];
     _filteredObjects = [NSMutableArray array];
-    
-    self.navigationController.navigationBar.translucent = NO;
-    
+  
     [self.navigationController.navigationBar setBarTintColor:[UIColor lightTextColor]];
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:0.0/255.0f green:51.0/255.0f blue:102.0/255.0f alpha:1.0f]];
     
@@ -99,6 +97,8 @@
     _recipient.delegate = self;
     _desc.delegate = self;
 
+    _desc.autocorrectionType = UITextAutocorrectionTypeNo;
+    
     _recipient.tag = 0;
     
     MMNumberKeyboard *keyboard = [[MMNumberKeyboard alloc] initWithFrame:CGRectZero];

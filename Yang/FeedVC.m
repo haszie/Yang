@@ -44,7 +44,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tableView.separatorInset = UIEdgeInsetsMake(0, 16, 0, 16);
+    self.tableView.separatorInset = UIEdgeInsetsMake(0, 8, 0, 8);
+    self.tableView.separatorColor = [UIColor colorWithRed:245.0f/255.0f green:245.0f/255.0f blue:245.0f/255.0f alpha:1.0f];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"PostCell" bundle:nil] forCellReuseIdentifier:@"Cell"];
     
     self.navigationController.hidesBarsOnSwipe = NO;
@@ -263,10 +267,6 @@
     }
 }
 
--(void)didTapCommentButton:(UIButton *)button forPostCell:(PostCell *)postCell  forPost:(PFObject *)post {
-    PostVC *vc = [[PostVC alloc] initWithPFObject:post withHeight:[YUtil calcHeight:[self objectAtIndexPath:[NSIndexPath indexPathForRow:postCell.tag inSection:0]] withFrame:self.view.frame] userDidTapCommentButton:YES];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 
 -(NSString*) normalize: (NSString *) number{
     NSMutableCharacterSet *nonNumberCharacterSet = [NSMutableCharacterSet decimalDigitCharacterSet];

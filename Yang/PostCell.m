@@ -22,12 +22,6 @@
 
 -(void) configureCell:(PostCell *) cell forObject:(PFObject *) object withIndexPath:(NSIndexPath *) indexPath withDelegate:(id<PostCellDelegate, ProPicDelegate>) theDelegate {
     
-    if (indexPath.row % 2 == 0) {
-        [cell.bg setBackgroundColor:[UIColor whiteColor]];
-    } else {
-        [cell.bg setBackgroundColor:[UIColor colorWithRed:251.0f/255.0f green:251.0f/255.0f blue:251.0f/255.0f alpha:1.0f]];
-    }
-    
     PFUser *theSender = [object objectForKey:kPostSenderKey];
     PFUser *theReceiver = [object objectForKey:kPostReceiverKey];
     
@@ -161,16 +155,6 @@
 
 }
 
-//-(NSString *) formatCommentsLabel:(int) numComments {
-//    if (numComments == 0) {
-//        return @"NO COMMENTS";
-//    } else if (numComments == 1) {
-//        return @"1 COMMENT";
-//    } else {
-//        return [NSString stringWithFormat:@"%d COMMENTS", numComments];
-//    }
-//}
-
 
 -(void) setUp {
 
@@ -188,7 +172,6 @@
 -(void) setPost:(PFObject *)aPost {
     _post = aPost;
     [_ghost_btn addTarget:self action:@selector(didTapUpvoteButton:) forControlEvents:UIControlEventTouchUpInside];
-    //[_comment_btn addTarget:self action:@selector(didTapCommentButton:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 

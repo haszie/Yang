@@ -14,7 +14,6 @@
     PFObject *post;
     CGFloat cell_height;
     NSMutableArray<PFObject *> *_mutableObjects;
-    BOOL userDidTapCommentButton;
     BOOL scrollToLast;
 }
 
@@ -23,13 +22,12 @@
 @implementation PostVC
 @synthesize outstandingQueries;
 
-- (id)initWithPFObject: (PFObject *) obj withHeight: (CGFloat) height userDidTapCommentButton:(BOOL) didTap  {
+- (id)initWithPFObject: (PFObject *) obj withHeight: (CGFloat) height  {
     self = [super init];
     if(self) {
         post = obj;
         cell_height = height;
         _mutableObjects = [NSMutableArray array];
-        userDidTapCommentButton = didTap;
         outstandingQueries = [NSMutableDictionary dictionary];
         scrollToLast = NO;
     }
@@ -41,7 +39,7 @@
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 8, 0, 8);
     self.tableView.separatorColor = [UIColor clearColor];
     
-    [self.tableView registerClass:[CommentCell class] forCellReuseIdentifier:@"CommentCell"];
+    [self.tableView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:@"PostVCUpCell"];
 
     [post fetchIfNeededInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
         if (!error) {
@@ -64,10 +62,8 @@
         }
     }];
     
-    NewCommentView *ncv = [[NewCommentView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 60)];
     
     PFFile *propic = [[PFUser currentUser] objectForKey:kUserProfilePicture];
-    [ncv set_user_pic:propic.url];
     
     if (self.addMenuButton) {
         UIImage *menu_img = [UIImage imageNamed:@"menu-alt"];
@@ -82,21 +78,11 @@
         self.navigationItem.leftBarButtonItem = menu_itm;
     }
     
-    self.tableView.tableFooterView = ncv;
-    _comment_field = ncv.commentField;
-    _comment_field.delegate = self;
-
     self.quickRefresh = [[YangRefresh alloc] initWithType:JHRefreshControlTypeSlideDown];
     __weak id weakSelf = self;
     [self.quickRefresh addToScrollView:self.tableView withRefreshBlock:^{
         [weakSelf tableViewWasPulledToRefresh];
     }];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userChangedPostAttr:) name:YPostVCUserUpvotePostNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userChangedPostAttr:) name:YUtilUserUpvotePostCallbackFinishedNotification object:nil];
 
 }
 
@@ -104,14 +90,6 @@
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    if (userDidTapCommentButton) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [_comment_field becomeFirstResponder];
-        });
-    }
-}
 
 -(void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
@@ -140,63 +118,36 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PFObject *object = [self objectAtIndexPath:indexPath];
-    
-    if (object) {
-        NSString *commentString = [object objectForKey:kActivityContentKey];
-        
-        PFUser *commentAuthor = (PFUser *)[object objectForKey:kActivityFromUserKey];
-        
-        NSString *nameString = @"";
-        if (commentAuthor) {
-            nameString = [commentAuthor objectForKey:kUserUsername];
-        }
-        return [CommentCell heightForCellWithName:nameString contentString:commentString cellInsetWidth:0.0f];
-    }
-    return 60.0f;
+
+    return 74.0f;
 }
 
 #pragma mark - PostCellDelegate
 
--(void)didTapUpvoteButton:(UIButton *)button forPostCell:(PostCell *)postCell  forPost:(PFObject *)thePost {
-    
+-(void) didTapUpvoteButton:(UIButton *)button forPostCell:(PostCell *)postCell  forPost:(PFObject *)thePost {
+
     [button setUserInteractionEnabled:NO];
-    
-    BOOL upvoted = !button.selected;
-    [postCell setUpvoteStatus:upvoted];
-    
-    //NSString *originalButtonTitle = [self normalize:button.titleLabel.text];
-    
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    
-    NSNumber *upvotes = [numberFormatter numberFromString:[self normalize:button.titleLabel.text]];
-    if (upvoted) {
-        upvotes = [NSNumber numberWithInt:[upvotes intValue] + 1];
-        [[YCash sharedCache] incrementUpvoterCountForPost:thePost];
-    } else {
-        if ([upvotes intValue] > 0) {
-            upvotes = [NSNumber numberWithInt:[upvotes intValue] - 1];
-        }
-        [[YCash sharedCache] decrementUpvoterCountForPost:thePost];
-    }
-    
-    [[YCash sharedCache] setCurrentUserGaveUpvoteForPost:thePost upvoted:upvoted];
+    if (!button.isSelected) {
+        BOOL upvoted = !button.selected;
+        [postCell setUpvoteStatus:upvoted];
         
-    if (upvoted) {
-        [YUtil upvotePostInBackground:thePost block:^(BOOL succeeded, NSError *error) {
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+        
+        NSNumber *upvotes = [numberFormatter numberFromString:[self normalize:button.titleLabel.text]];
+        
+        upvotes = [NSNumber numberWithInt:[upvotes intValue] + 1];
+        [[YCash sharedCache] incrementUpvoterCountForPost:post];
+        
+        [[YCash sharedCache] setCurrentUserGaveUpvoteForPost:post upvoted:upvoted];
+        
+        [YUtil upvotePostInBackground:post block:^(BOOL succeeded, NSError *error) {
             [button setUserInteractionEnabled:YES];
         }];
+        
+    } else {
+        [button setUserInteractionEnabled:YES];
     }
-//    } else {
-//        [YUtil unUpvotePostInBackground:thePost block:^(BOOL succeeded, NSError *error) {
-//            [button setUserInteractionEnabled:YES];
-//        }];
-//    }
-}
-
--(void)didTapCommentButton:(UIButton *)button forPostCell:(PostCell *)postCell  forPost:(PFObject *)thePost {
-    [_comment_field becomeFirstResponder];
 }
 
 -(NSString*) normalize: (NSString *) number{
@@ -210,19 +161,18 @@
 
 - (PFQuery *)queryForTable {
     
-    PFQuery *query = [PFQuery queryWithClassName:kActivityClassKey];
-    [query whereKey:kActivityPostKey equalTo:post];
-    [query includeKey:kActivityFromUserKey];
-    [query whereKey:kActivityTypeKey equalTo:kActivityTypeComment];
-    [query orderByAscending:@"createdAt"];
+    PFQuery *upvote = [PFQuery queryWithClassName:kActivityClassKey];
+    [upvote whereKey:kActivityPostKey equalTo:post];
+    [upvote includeKey:kActivityFromUserKey];
+    [upvote whereKey:kActivityTypeKey equalTo:kActivityTypeUpvote];
+    [upvote orderByAscending:@"createdAt"];
     
-    [query setCachePolicy:kPFCachePolicyNetworkOnly];
-
+    
     if (self.objects.count == 0) {
-        [query setCachePolicy:kPFCachePolicyCacheThenNetwork];
+        upvote.cachePolicy = kPFCachePolicyCacheThenNetwork;
     }
     
-    return query;
+    return upvote;
 }
 
 -(void)objectsDidLoad:(NSError *)error {
@@ -276,23 +226,33 @@
 }
 
 - (void)tableView:(UITableView *)tableView
-    configureCell:(CommentCell *)cell
+    configureCell:(FriendCell *)cell
       atIndexPath:(NSIndexPath *)indexPath
            object:(PFObject *)object {
+    
+    PFUser *usa = object[@"fromUser"];
+    
+    PFFile * propic = usa[@"propic"];
+    if (propic != nil) {
+        [cell.usr_pro sd_setImageWithURL:[NSURL URLWithString:propic.url]];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapUserPic:)];
+        tap.numberOfTapsRequired = 1;
+        
+        [cell addGestureRecognizer:tap];
+        cell.fwend = usa;
+        cell.username.text = [NSString stringWithFormat:@"%@ %@", usa[@"first"], usa[@"last"]];
+    }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
-    [cell setUser:[object objectForKey:kActivityFromUserKey]];
-    [cell setContentText:[object objectForKey:kActivityContentKey]];
-    [cell setDate:[object createdAt]];
-    cell.avatar.delegate = self;
 }
 
-- (CommentCell *)tableView:(UITableView *)tableView
+- (FriendCell *)tableView:(UITableView *)tableView
     cellForRowAtIndexPath:(NSIndexPath *)indexPath
                    object:(PFObject *)object {
     
-    CommentCell *cell = (CommentCell *) [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+    FriendCell *cell = (FriendCell *) [tableView dequeueReusableCellWithIdentifier:@"PostVCUpCell"];
     if (!cell) {
-        cell = [[CommentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"CommentCell"];
+        cell = [[FriendCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PostVCUpCell"];
     }
     
     [self tableView:tableView configureCell:cell atIndexPath:indexPath object:object];
@@ -305,90 +265,14 @@
 }
 
 - (PFObject *)objectAtIndexPath:(NSIndexPath *)indexPath {
-
     return self.objects[indexPath.row];
 }
 
-#pragma mark - ProPicDelegate
-
--(void)didTapUserPic:(ProPicIV *)thePic {
-    UserProfileVC *upvc = [[UserProfileVC alloc] initWithUser:thePic.theUser];
-    [self.navigationController pushViewController:upvc animated:YES];
-}
-
-#pragma mark - UITextFieldDelegate
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    userDidTapCommentButton = NO;
-    NSString *trimmedComment = [textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    if (trimmedComment.length != 0 && [post objectForKey:kPostSenderKey]) {
-        PFObject *comment = [PFObject objectWithClassName:kActivityClassKey];
-        [comment setObject:trimmedComment forKey:kActivityContentKey]; // Set comment text
-        [comment setObject:[post objectForKey:kPostSenderKey] forKey:kActivityToUserKey]; // Set toUser
-        [comment setObject:[PFUser currentUser] forKey:kActivityFromUserKey]; // Set fromUser
-        [comment setObject:[post objectForKey:kPostSenderKey] forKey:kActivitySenderKey];
-        [comment setObject:[post objectForKey:kPostReceiverKey] forKey:kActivityReceiverKey];
-        [comment setObject:kActivityTypeComment forKey:kActivityTypeKey];
-        [comment setObject:post forKey:kActivityPostKey];
-        
-        PFACL *ACL = [PFACL ACLWithUser:[PFUser currentUser]];
-        [ACL setPublicReadAccess:YES];
-        [ACL setWriteAccess:YES forUser:[post objectForKey:kPostSenderKey]];
-        comment.ACL = ACL;
-        
-        [[YCash sharedCache] incrementCommentCountForPost:post];
-        
-        // Show HUD view
-        [MBProgressHUD showHUDAddedTo:self.view.superview animated:YES];
-        
-        // If more than 5 seconds pass since we post a comment, stop waiting for the server to respond
-        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(handleCommentTimeout:) userInfo:@{@"comment": comment} repeats:NO];
-        
-        [comment saveEventually:^(BOOL succeeded, NSError *error) {
-            [timer invalidate];
-            
-            if (error && error.code == kPFErrorObjectNotFound) {
-                [[YCash sharedCache] decrementCommentCountForPost:post];
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Could not post comment", nil) message:NSLocalizedString(@"This photo is no longer available", nil) delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-                [alert show];
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-            
-            [MBProgressHUD hideHUDForView:self.view.superview animated:YES];
-            scrollToLast = YES;
-            [self loadObjects];
-        }];
-    }
+-(void)didTapUserPic:(UITapGestureRecognizer *) tappy {
+    FriendCell * fcell = (FriendCell *) tappy.view;
     
-    [textField setText:@""];
-    return [textField resignFirstResponder];
-}
-
-#pragma mark - NSNotifications
-
-- (void)userChangedPostAttr:(NSNotification *)note {
-    PostCell *heada = (PostCell *) self.tableView.tableHeaderView;
-    //heada.upvotes.text = [[[YCash sharedCache] upvoteCountForPost:heada.post] stringValue];
-}
-
-- (void)keyboardWasShown:(NSNotification*)aNotification
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        NSDictionary* info = [aNotification userInfo];
-        CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-        
-        if ((self.view.frame.size.height - self.tableView.contentSize.height) < kbSize.height) {
-            CGPoint scrollPoint = CGPointMake(0.0, self.tableView.contentOffset.y + 20);
-            [self.tableView setContentOffset:scrollPoint animated:YES];
-        }
-    });
-}
-
-
-- (void)handleCommentTimeout:(NSTimer *)aTimer {
-    [MBProgressHUD hideHUDForView:self.view.superview animated:YES];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"New Comment", nil) message:NSLocalizedString(@"Your comment will be posted next time there is an Internet connection.", nil)  delegate:nil cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Dismiss", nil), nil];
-    [alert show];
+    UserProfileVC *upvc = [[UserProfileVC alloc] initWithUser:fcell.fwend];
+    [self.navigationController pushViewController:upvc animated:YES];
 }
 
 @end

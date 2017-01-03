@@ -116,7 +116,7 @@
         
         [obj fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
             [[YUtil getTheDrawer] closeDrawerAnimated:YES completion:^(BOOL finished) {
-                PostVC *pvc = [[PostVC alloc] initWithPFObject:object withHeight:[YUtil calcHeight:object withFrame:self.window.frame] userDidTapCommentButton:NO];
+                PostVC *pvc = [[PostVC alloc] initWithPFObject:object withHeight:[YUtil calcHeight:object withFrame:self.window.frame]];
                 UINavigationController *nav = (UINavigationController *) [YUtil getTheDrawer].centerViewController;
                 pvc.addMenuButton = YES;
                 

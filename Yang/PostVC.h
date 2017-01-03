@@ -12,8 +12,7 @@
 #import <ParseUI/ParseUI.h>
 #import "PostCell.h"
 #import "DateTools.h"
-#import "CommentCell.h"
-#import "NewCommentView.h"
+#import "FriendCell.h"
 #import "MBProgressHUD.h"
 #import "YUtil.h"
 #import "YangRefresh.h"
@@ -22,7 +21,7 @@
 
 @interface PostVC : UITableViewController <PostCellDelegate, ProPicDelegate, UITextFieldDelegate>
 
-- (id)initWithPFObject: (PFObject *) obj withHeight: (CGFloat) height userDidTapCommentButton:(BOOL) didTap;
+- (id)initWithPFObject: (PFObject *) obj withHeight: (CGFloat) height ;
 
 @property (nullable, nonatomic, strong) UITextField *comment_field;
 

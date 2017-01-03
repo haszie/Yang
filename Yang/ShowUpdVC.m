@@ -27,7 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.separatorColor = [UIColor clearColor];
     [self setTitle:@"Up'd"];
     [self.tableView registerNib:[UINib nibWithNibName:@"FriendCell" bundle:nil] forCellReuseIdentifier:@"UpCell"];
 

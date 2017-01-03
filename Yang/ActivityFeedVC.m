@@ -119,16 +119,16 @@
         UserProfileVC *vc = [[UserProfileVC alloc] initWithUser:object[kActivityFromUserKey]];
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([object[kActivityTypeKey] isEqualToString:kActivityTypeComment]) {
-        PostVC *vc = [[PostVC alloc] initWithPFObject:object[kActivityPostKey] withHeight:[YUtil calcHeight:object[kActivityPostKey] withFrame:self.view.frame] userDidTapCommentButton:YES];
+        PostVC *vc = [[PostVC alloc] initWithPFObject:object[kActivityPostKey] withHeight:[YUtil calcHeight:object[kActivityPostKey] withFrame:self.view.frame]];
         [self.navigationController pushViewController:vc animated:YES];
     } else if ([object[kActivityTypeKey] isEqualToString:kActivityTypeUpvote]) {
-        PostVC *vc = [[PostVC alloc] initWithPFObject:object[kActivityPostKey] withHeight:[YUtil calcHeight:object[kActivityPostKey] withFrame:self.view.frame] userDidTapCommentButton:NO];
+        PostVC *vc = [[PostVC alloc] initWithPFObject:object[kActivityPostKey] withHeight:[YUtil calcHeight:object[kActivityPostKey] withFrame:self.view.frame]];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 70.0f;
+    return 44.0f;
 }
 
 @end
