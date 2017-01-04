@@ -332,11 +332,7 @@
                             [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
                            componentsJoinedByString:@""];
         
-        PFObject *referal = [PFObject objectWithClassName:@"referal"];
-        [referal setObject:[PFUser currentUser] forKey:@"fromUser"];
-        [referal setObject:numba forKey:@"toNumber"];
-        
-        [referal saveInBackground];
+        [PFCloud callFunctionInBackground:@"refer" withParameters:@{ @"phoneNumber": numba }];
     }
     
     [controller dismissViewControllerAnimated:YES completion:nil];

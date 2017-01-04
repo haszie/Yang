@@ -193,7 +193,7 @@
                 if (err) {
                     NSLog(@"%@", [err localizedDescription]);
                     _hud.mode = MBProgressHUDModeText;
-                    _hud.labelText = [NSString stringWithFormat:@"Error: %@",[err localizedDescription]];
+                    _hud.labelText = [err localizedDescription];
                     
                     [_hud show:YES];
                     [_hud hide:YES afterDelay:2.0f];
@@ -383,23 +383,6 @@
         return;
     }
     
-    int sender_karma = [[sender objectForKey:@"karma"] intValue];
-    NSNumber *amount = [NSNumber numberWithInt:[_amount.text intValue]];
-    
-    if (amount.intValue > sender_karma) {
-        success = false;
-        dispatch_async(dispatch_get_main_queue(), ^(void){
-            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-            
-            _hud.mode = MBProgressHUDModeText;
-            _hud.labelText = @"You do not have enough karma";
-            
-            [_hud show:YES];
-            [_hud hide:YES afterDelay:2.0f];
-        });
-        return;
-    }
-    
     if ([_desc.text isEqualToString:@""]) {
         success = false;
         dispatch_async(dispatch_get_main_queue(), ^(void){
@@ -452,9 +435,6 @@
     
     [post save:&error];
     
-    if (!error) {
-        [PFCloud callFunction:@"sendKarma" withParameters:@{ @"fromUserId": sender.objectId, @"toUserId": recipient.objectId, @"amount": amount, @"postId": post.objectId} error:&error];
-    }
     err = error;
     success = err == nil;
 }
