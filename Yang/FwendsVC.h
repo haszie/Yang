@@ -29,6 +29,7 @@
 @property (nullable, nonatomic, strong) APAddressBook *book;
 @property (nullable, nonatomic, copy, readonly) NSArray<__kindof APContact *> *contacts;
 @property (nullable, nonatomic, weak) NSString *phoneNumberReferred;
+@property (strong, nonatomic, nullable) MBProgressHUD *hud;
 
 - (nullable BFTask<NSArray<__kindof APContact *> *> *)loadContacts;
 

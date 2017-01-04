@@ -93,6 +93,9 @@
         self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [self.view addSubview:bg];
     }
+    _hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:_hud];
+
 }
 
 -(void) menuButtonPress {
@@ -326,16 +329,35 @@
     if(result == MessageComposeResultFailed) {
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to send SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [warningAlert show];
+        [controller dismissViewControllerAnimated:YES completion:nil];
     } else if (result == MessageComposeResultSent) {
         
         NSString *numba = [[self.phoneNumberReferred componentsSeparatedByCharactersInSet:
                             [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
                            componentsJoinedByString:@""];
-        
-        [PFCloud callFunctionInBackground:@"refer" withParameters:@{ @"phoneNumber": numba }];
+
+        [controller dismissViewControllerAnimated:YES completion:^{
+            
+            [PFCloud callFunctionInBackground:@"refer" withParameters:@{ @"phoneNumber": numba } block:^(id  _Nullable object, NSError * _Nullable error) {
+                if (!error) {
+                    _hud.mode = MBProgressHUDModeText;
+                    _hud.labelText = @"Success! 10 Karma awarded";
+                    
+                    [_hud show:YES];
+                    [_hud hide:YES afterDelay:2.0f];
+                } else {
+                    NSLog(@"%@", [error localizedDescription]);
+                    if ([@"already" isEqualToString:[error localizedDescription]]) {
+                        _hud.mode = MBProgressHUDModeText;
+                        _hud.labelText = @"Already received karma";
+                        
+                        [_hud show:YES];
+                        [_hud hide:YES afterDelay:2.0f];
+                    }
+                }
+            }];
+        }];
     }
-    
-    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
