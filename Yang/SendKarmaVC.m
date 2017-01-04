@@ -11,7 +11,7 @@
 @interface SendKarmaVC () {
     NSMutableArray<PFObject *> *_mutableObjects;
     NSMutableArray<PFObject *> *_filteredObjects;
-
+    NSError *err;
     BOOL success;
 }
 
@@ -168,13 +168,13 @@
         [self sendKarma];
         
         dispatch_async(dispatch_get_main_queue(), ^(void){
+            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
             if (success == true) {
                 _hud.mode = MBProgressHUDModeCustomView;
                 _hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark"]];
                 _hud.labelText = @"Success!";
                 __weak typeof(self) weakSelf = self;
                 [_hud setCompletionBlock:^(){
-                    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                     [weakSelf.view endEditing:YES];
                     
                     MMDrawerController *drawer = (MMDrawerController *) weakSelf.presentingViewController;
@@ -188,8 +188,18 @@
                         }
                     }];
                 }];
-                [_hud hide:YES afterDelay:1.0f];
+                [_hud hide:YES afterDelay:0.500f];
+            } else {
+                if (err) {
+                    NSLog(@"%@", [err localizedDescription]);
+                    _hud.mode = MBProgressHUDModeText;
+                    _hud.labelText = [NSString stringWithFormat:@"Error: %@",[err localizedDescription]];
+                    
+                    [_hud show:YES];
+                    [_hud hide:YES afterDelay:2.0f];
+                }
             }
+            [_hud hide:YES afterDelay:0.500f];
         });
     });
 }
@@ -420,7 +430,7 @@
         
         PFFile * photoFile = [PFFile fileWithName:@"snap.jpg" data:photoData];
         post[@"photo"] = photoFile;
-        post[@"isPhoto"] = @YES;
+
     } else if (self.videoPath) {
         NSData * videoData = [[NSFileManager defaultManager] contentsAtPath:[self.videoPath path]];
         
@@ -428,7 +438,6 @@
         if (videoData != nil) {
             videoFile = [PFFile fileWithName:@"flick.mp4" data:videoData];
             post[@"video"] = videoFile;
-            post[@"isPhoto"] = @NO;
             
             NSData *thumbData = UIImageJPEGRepresentation([self generateThumbImage:[self.videoPath path]], 0.6f);
             if (thumbData != nil) {
@@ -438,20 +447,16 @@
         }
     }
     
-    NSError *err = nil;
-    [post save:&err];
+    err = nil;
+    NSError * error = nil;
     
-    if (err) {
-        NSLog(@"%@", [err localizedDescription]);
-    } else {
-        success = true;
-        sender[@"karma"] = [NSNumber numberWithInt:(sender_karma - amount.intValue)];
-        [sender save];
-        
-        NSNumber *recipient_karma = [NSNumber numberWithInt:([[recipient objectForKey:@"karma"] intValue] + amount.intValue)];
-        
-        [PFCloud callFunction:@"updateKarmaForUser" withParameters:@{@"userId": recipient.objectId, @"karma": recipient_karma}];
+    [post save:&error];
+    
+    if (!error) {
+        [PFCloud callFunction:@"sendKarma" withParameters:@{ @"fromUserId": sender.objectId, @"toUserId": recipient.objectId, @"amount": amount, @"postId": post.objectId} error:&error];
     }
+    err = error;
+    success = err == nil;
 }
 
 -(UIImage *)generateThumbImage : (NSString *)filepath

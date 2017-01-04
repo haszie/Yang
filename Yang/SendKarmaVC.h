@@ -55,7 +55,6 @@
 @property(strong, nonatomic) UIImage *photo;
 @property(strong, nonatomic) NSURL *videoPath;
 
-
 @property (nullable, nonatomic, copy, readonly) NSArray<__kindof PFObject *> *objects;
 
 - (nullable PFObject *)objectAtIndexPath:(nullable NSIndexPath *)indexPath;
