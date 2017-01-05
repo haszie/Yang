@@ -19,6 +19,7 @@ target 'Yang' do
 	pod 'VWWPermissionKit', '~> 1.3.0'
 	pod 'Onboard'
 	pod 'LLSimpleCamera', '~> 4.1'
+	pod 'DZNEmptyDataSet'
 
   target 'YangTests' do
     inherit! :search_paths

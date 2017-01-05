@@ -45,7 +45,7 @@
     [super viewDidLoad];
 
     self.tableView.separatorInset = UIEdgeInsetsMake(0, 8, 0, 8);
-    self.tableView.separatorColor = [UIColor colorWithRed:245.0f/255.0f green:245.0f/255.0f blue:245.0f/255.0f alpha:1.0f];
+    self.tableView.separatorColor = [UIColor colorWithRed:238.0f/255.0f green:238.0f/255.0f blue:238.0f/255.0f alpha:1.0f];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -101,7 +101,9 @@
     if (self.scrollToTop) {
         self.scrollToTop = NO;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            if ([self.tableView numberOfRowsInSection:0] > 0) {
+                [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            }
         });
     }
 }

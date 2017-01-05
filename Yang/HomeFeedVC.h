@@ -7,7 +7,8 @@
 //
 
 #import "FeedVC.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface HomeFeedVC : FeedVC
+@interface HomeFeedVC : FeedVC <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end

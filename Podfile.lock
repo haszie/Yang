@@ -3,6 +3,7 @@ PODS:
     - APAddressBook/Core (= 0.2.3)
   - APAddressBook/Core (0.2.3)
   - DateTools (1.7.0)
+  - DZNEmptyDataSet (1.8.1)
   - JHPullToRefreshKit (1.0.1)
   - JVFloatLabeledTextField (1.1.0)
   - LLSimpleCamera (4.2.0)
@@ -30,6 +31,7 @@ PODS:
 DEPENDENCIES:
   - APAddressBook
   - DateTools
+  - DZNEmptyDataSet
   - JHPullToRefreshKit
   - JVFloatLabeledTextField
   - LLSimpleCamera (~> 4.1)
@@ -44,6 +46,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   APAddressBook: 2a91bf05999548bea210ec9d1a68073f4dc8bfce
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
+  DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   JHPullToRefreshKit: ec51e32764eacf468eddf3d05a9f1b3b6d9a7d76
   JVFloatLabeledTextField: ea4a3d8387ddd43724c472bb2b8ab39b79af05d4
   LLSimpleCamera: ed7813ce4827ff3e34c6af159c99b5b56e54d1c6
@@ -55,6 +58,6 @@ SPEC CHECKSUMS:
   SDWebImage: 247edd7dd80dd6124197b0d6a17846fe9d1df968
   VWWPermissionKit: 102e84bbd358cf909f46eb2120d1c698d0e0c3af
 
-PODFILE CHECKSUM: debff945265a5275d828ea29d351a3ab1b37e5b9
+PODFILE CHECKSUM: 17abc0f53b2fc11dbbbe81d4afa6627385ac1771
 
 COCOAPODS: 1.0.1

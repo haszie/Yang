@@ -26,6 +26,7 @@
     [super viewDidLoad];
     [self setNeedsStatusBarAppearanceUpdate];    
     
+    
     UIView * frame = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     
     UIImage *logo = [UIImage imageNamed:@"logo-2"];
@@ -57,21 +58,57 @@
     UIBarButtonItem *menu_itm= [[UIBarButtonItem alloc] initWithCustomView:menu_btn];
     
     self.navigationItem.leftBarButtonItem= menu_itm;
+    self.tableView.emptyDataSetSource = self;
+    self.tableView.emptyDataSetDelegate = self;
+    
+    // A little trick for removing the cell separators
+    self.tableView.tableFooterView = [UIView new];
+
 }
 
--(void)objectsDidLoad:(NSError *)error {
-    [super objectsDidLoad:error];
-    
-//    if (self.objects.count == 0) {
-//        UILabel * bg = [[UILabel alloc] initWithFrame:CGRectMake(64.0f, self.view.frame.size.height / 2.0f - 96.0f, self.view.frame.size.width - 128.0f, 120.0f)];
-//        [bg setFont:[UIFont fontWithName:@"OpenSans-Light" size:18.0f]];
-//        bg.text = @"← Add friends and start Yangin' out";
-//        bg.numberOfLines = 0;
-//        [bg sizeToFit];
-//        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//        [self.view addSubview:bg];
-//    }
+#pragma mark EmptyDataSet
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIImage imageNamed:@"friends_menu_icon"];
 }
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"Welcome to Yang!";
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
+                                 NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
+{
+    NSString *text = @"To get started, add some friends using the menu bar on the ←. If none of your friends are on Yang right now, invite them!\n\nYou will receive +10 karma for every invite you send, regardless of wether they accept it or not.\n\n Once you have some friends, give them some karma using the send icon located in the nav bar to the ↗.";
+    
+    NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+    paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+    paragraph.alignment = NSTextAlignmentCenter;
+    
+    NSDictionary *attributes = @{NSFontAttributeName: [UIFont systemFontOfSize:14.0f],
+                                 NSForegroundColorAttributeName: [UIColor lightGrayColor],
+                                 NSParagraphStyleAttributeName: paragraph};
+    
+    return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+- (UIColor *)backgroundColorForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return [UIColor whiteColor];
+}
+
+- (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return -self.tableView.tableHeaderView.frame.size.height/2.0f;
+}
+
+#pragma mark menu button
 
 -(void) menuButtonPress {
     [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];

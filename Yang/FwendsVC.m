@@ -226,7 +226,7 @@
     if (section == 0) {
         return @"Friends on Yang";
     } else {
-        return @"Invite to Yang";
+        return @"+10 karma for every invite sent !";
     }
 }
 

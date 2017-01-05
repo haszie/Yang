@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E0BA05A087310511193C61C49001D115'
+               BlueprintIdentifier = '93126F48EC07FD8B29AAB899C4FCA8B8'
                BlueprintName = 'VWWPermissionKit'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libVWWPermissionKit.a'>
