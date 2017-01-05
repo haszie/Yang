@@ -75,7 +75,12 @@
     _recv_img.contentMode = UIViewContentModeScaleAspectFill;
     
     PFFile *curr_usr_propic = [[PFUser currentUser] objectForKey:@"propic"];
-    [_send_img sd_setImageWithURL:[NSURL URLWithString:curr_usr_propic.url]];
+    
+    if (curr_usr_propic != nil) {
+        [_send_img sd_setImageWithURL:[NSURL URLWithString:curr_usr_propic.url]];
+    } else {
+        [_send_img setImage:[UIImage imageNamed:@"usr"]];
+    }
     
     _send_img.layer.cornerRadius = 5;
     _send_img.clipsToBounds = YES;
@@ -138,13 +143,6 @@
     
 }
 
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    [self setNeedsStatusBarAppearanceUpdate];
-    
-}
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -311,13 +309,6 @@
 
 }
 
--(UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
-    return UIStatusBarAnimationSlide;
-}
-
--(UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleDefault;
-}
 
 -(void) sendKarma {
     

@@ -23,8 +23,15 @@
                                                     UIUserNotificationTypeSound);
     UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
                                                                              categories:nil];
-    [Parse setApplicationId:@"s2pr5k1K1w3Vg3EiYw4oexB4UzrcPPUlJQU2h7Ry"
-                  clientKey:@"Hbr8AOdETokyms4BQbyaKHJOvKShTMQGX5ZaOcK2"];
+    
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = @"g8BaVcDxvMmkosF2gcXxfjXnxnRVI3T5sS7gZf6U";
+        configuration.clientKey = @"02ZEC6CqTa570YSaxgZCB8pQpUTrQ1cMa3UgPJY6";
+        configuration.server = @"https://parseapi.back4app.com/";
+    }]];
+    
+//    [Parse setApplicationId:@"s2pr5k1K1w3Vg3EiYw4oexB4UzrcPPUlJQU2h7Ry"
+//                  clientKey:@"Hbr8AOdETokyms4BQbyaKHJOvKShTMQGX5ZaOcK2"];
     
     [[UINavigationBar appearance] setBarTintColor:[YUtil theColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];

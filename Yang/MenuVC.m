@@ -85,20 +85,24 @@ static ActivityFeedVC *nike;
     blurb.numberOfLines = 5;
     [blurb sizeToFit];
     
-    UILabel *karma = [[UILabel alloc] initWithFrame:CGRectMake(16.0f, 64.0f + 70.0f + 8.0f, 70.0f, 14.0f)];
+    UILabel *karma = [[UILabel alloc] initWithFrame:CGRectMake(16.0f, 64.0f + 70.0f + 8.0f, 200.0f, 14.0f)];
     [karma setTextColor:[UIColor blackColor]];
     [karma setFont:[UIFont fontWithName:@"OpenSans-Light" size:12.0f]];
-    karma.text = [NSString stringWithFormat:@"%@", [NSNumberFormatter localizedStringFromNumber:[PFUser currentUser][@"karma"]
+    karma.text = [NSString stringWithFormat:@"%@ karma", [NSNumberFormatter localizedStringFromNumber:[PFUser currentUser][@"karma"]
                                                                                 numberStyle:NSNumberFormatterDecimalStyle]];
-    [karma setTextAlignment:NSTextAlignmentCenter];
+    [karma setTextAlignment:NSTextAlignmentLeft];
     
     [heada addSubview:propic];
     [heada addSubview:name];
     [heada addSubview:blurb];
     [heada addSubview:go];
-    //[heada addSubview:karma];
+    [heada addSubview:karma];
     
     self.tableView.tableHeaderView = heada;
+}
+
+-(UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    return UIStatusBarAnimationFade;
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {

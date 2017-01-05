@@ -75,7 +75,7 @@
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSString *text = @"Welcome to Yang!";
+    NSString *text = @"Add some friends!";
     
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
@@ -116,8 +116,21 @@
 
 -(void) sendButtonPress {
     SendKarmaVC *vc = [[SendKarmaVC alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    SendKarmaNav *nav = [[SendKarmaNav alloc] initWithRootViewController:vc];
+    
     [self presentViewController:nav animated:YES completion:nil];
+}
+
+@end
+
+@implementation SendKarmaNav
+
+-(UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    return UIStatusBarAnimationSlide;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleDefault;
 }
 
 @end

@@ -12,3 +12,7 @@
 @interface HomeFeedVC : FeedVC <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end
+
+@interface SendKarmaNav : UINavigationController
+
+@end

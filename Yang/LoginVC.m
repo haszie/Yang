@@ -517,16 +517,19 @@
     self.theNewUser[@"last"] = trimmedLast;
     self.theNewUser[@"blurb"] = trimmedBlurb;
     self.theNewUser[@"signedUp"] = @YES;
+    self.theNewUser[@"karma"] = @333;
     
     MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [self.theNewUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (succeeded) {
             
-            [MBProgressHUD hideHUDForView:self.view animated:YES];
-            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-            
-            [self doPermissions];
+            [PFCloud callFunctionInBackground:@"createKarma" withParameters:@{ @"toUserId": [PFUser currentUser].objectId, @"amount": @333 } block:^(id  _Nullable object, NSError * _Nullable error) {
+                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                
+                [self doPermissions];
+            }];
         } else {
             hud.mode = MBProgressHUDModeText;
             hud.labelText = error.localizedDescription;

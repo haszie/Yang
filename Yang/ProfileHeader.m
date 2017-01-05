@@ -51,21 +51,21 @@
         [karmaMini setTextColor:[UIColor blackColor]];
         karmaMini.text = @"Karma";
         
-        UILabel *upvote = [[UILabel alloc] initWithFrame:
-                          CGRectMake(HOR + miniLabelWidth * 2.0f, bigLabelOffset, miniLabelWidth, 16.0f)];
-        [upvote setFont:[UIFont fontWithName:@"OpenSans-Light" size:18.0f]];
-        [upvote setTextColor:[UIColor blackColor]];
-        upvote.text = @"0";
-        
-        PFQuery *upvotes = [YUtil upvoteCountForUser:self.theUser];
-        [upvotes countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
-            upvote.text = [NSString stringWithFormat:@"%d", number];
-        }];
-        
-        UILabel *upvoteMini = [[UILabel alloc] initWithFrame:CGRectMake(HOR + miniLabelWidth * 2.0f, karma.frame.origin.y + HOR / 2.0f + 14.0f, miniLabelWidth, 16.0f)];
-        [upvoteMini setFont:[UIFont fontWithName:@"OpenSans" size:12.0f]];
-        [upvoteMini setTextColor:[UIColor blackColor]];
-        upvoteMini.text = @"Upvotes";
+//        UILabel *upvote = [[UILabel alloc] initWithFrame:
+//                          CGRectMake(HOR + miniLabelWidth * 2.0f, bigLabelOffset, miniLabelWidth, 16.0f)];
+//        [upvote setFont:[UIFont fontWithName:@"OpenSans-Light" size:18.0f]];
+//        [upvote setTextColor:[UIColor blackColor]];
+//        upvote.text = @"0";
+//        
+//        PFQuery *upvotes = [YUtil upvoteCountForUser:self.theUser];
+//        [upvotes countObjectsInBackgroundWithBlock:^(int number, NSError * _Nullable error) {
+//            upvote.text = [NSString stringWithFormat:@"%d", number];
+//        }];
+//        
+//        UILabel *upvoteMini = [[UILabel alloc] initWithFrame:CGRectMake(HOR + miniLabelWidth * 2.0f, karma.frame.origin.y + HOR / 2.0f + 14.0f, miniLabelWidth, 16.0f)];
+//        [upvoteMini setFont:[UIFont fontWithName:@"OpenSans" size:12.0f]];
+//        [upvoteMini setTextColor:[UIColor blackColor]];
+//        upvoteMini.text = @"Upvotes";
 
 //        UILabel *received = [[UILabel alloc] initWithFrame:
 //                          CGRectMake(HOR + miniLabelWidth * 3.0f, bigLabelOffset, miniLabelWidth, 16.0f)];
@@ -89,8 +89,8 @@
         [self addSubview:blurb];
         [self addSubview:karma];
         [self addSubview:karmaMini];
-        [self addSubview:upvote];
-        [self addSubview:upvoteMini];
+//        [self addSubview:upvote];
+//        [self addSubview:upvoteMini];
 //        [self addSubview:received];
 //        [self addSubview:receivedMini];
         
