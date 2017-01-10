@@ -8,6 +8,7 @@
 
 #import "HomeFeedVC.h"
 #import "SendKarmaVC.h"
+#import "MenuVC.h"
 
 @implementation HomeFeedVC
 @synthesize scrollToTop;
@@ -58,6 +59,7 @@
     UIBarButtonItem *menu_itm= [[UIBarButtonItem alloc] initWithCustomView:menu_btn];
     
     self.navigationItem.leftBarButtonItem= menu_itm;
+    
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
     
@@ -75,7 +77,7 @@
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSString *text = @"Add some friends!";
+    NSString *text = @"No posts to show";
     
     NSDictionary *attributes = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:18.0f],
                                  NSForegroundColorAttributeName: [UIColor darkGrayColor]};
@@ -85,7 +87,7 @@
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSString *text = @"Swipe ← or hit the menu icon in the top left to open the menu. Navigate to the 'Friends' tab. If none of your friends are on Yang right now, invite them! Once you have some friends, hit the send icon to the top right to send some karma.";
+    NSString *text = @"This could be because you are not following anyone or because no one has posted yet. Start following some friends and then send them some karma.";
     
     NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
     paragraph.lineBreakMode = NSLineBreakByWordWrapping;
@@ -106,6 +108,37 @@
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
     return -self.tableView.tableHeaderView.frame.size.height/2.0f;
+}
+
+- (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return 22.0f;
+}
+
+- (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
+{
+    NSMutableDictionary *attributes = [NSMutableDictionary new];
+    [attributes setObject:[UIFont boldSystemFontOfSize:18.0f] forKey:NSFontAttributeName];
+    [attributes setObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    
+    return [[NSAttributedString alloc] initWithString:@"Add Friends Now" attributes:attributes];
+}
+
+-(UIImage *)buttonBackgroundImageForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state {
+    UIEdgeInsets capInsets = UIEdgeInsetsMake(25.0, 25.0, 25.0, 25.0);
+    UIEdgeInsets rectInsets = UIEdgeInsetsMake(0.0, 10, 0.0, 10);
+
+    return [[[UIImage imageNamed:@"button_background"] resizableImageWithCapInsets:capInsets resizingMode:UIImageResizingModeStretch] imageWithAlignmentRectInsets:rectInsets];
+
+}
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapButton:(UIButton *)button
+{
+    [self.mm_drawerController closeDrawerAnimated:YES completion:^(BOOL finished) {
+        UINavigationController *nav = (UINavigationController *) [self.mm_drawerController centerViewController];
+
+        [nav setViewControllers:@[[MenuVC fwends]] animated:NO];
+    }];
 }
 
 #pragma mark menu button

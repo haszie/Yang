@@ -158,6 +158,17 @@
 
 -(void) setUp {
 
+//    if (!self.fromUserButton) {
+//        self.fromUserButton = [[UIButton alloc] initWithFrame:self.fromUserLbl.frame];
+//        [self.fromUserButton addTarget:self action:@selector(fromUserButtonHit) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    
+//    if (!self.toUserButton) {
+//        self.toUserButton = [[UIButton alloc] initWithFrame:self.fromUserLbl.frame];
+//        [self.toUserButton addTarget:self action:@selector(toUserButtonHit) forControlEvents:UIControlEventTouchUpInside];
+//
+//    }
+    
     [_up_btn setBackgroundImage:[UIImage imageNamed:@"up-arrow-active"] forState:UIControlStateSelected];
     [_up_btn setBackgroundImage:[UIImage imageNamed:@"up-arrow"] forState:UIControlStateNormal];
     [_ghost_btn setBackgroundImage:[YUtil imageWithColor:[UIColor clearColor]] forState:UIControlStateNormal];
@@ -167,6 +178,26 @@
     [_ghost_btn setTitleColor:[UIColor clearColor] forState:UIControlStateSelected];
     
     self.contentView.userInteractionEnabled = NO;
+}
+
+-(void) fromUserButtonHit {
+
+    PFUser * usa = self.post[kPostSenderKey];
+    if (usa) {
+        if (delegate && [delegate respondsToSelector:@selector(didTapUsername:)]) {
+            [delegate didTapUsername:usa];
+        }
+    }
+
+}
+
+-(void) toUserButtonHit {
+    PFUser * usa = self.post[kPostReceiverKey];
+    if (usa) {
+        if (delegate && [delegate respondsToSelector:@selector(didTapUsername:)]) {
+            [delegate didTapUsername:usa];
+        }
+    }
 }
 
 -(void) setPost:(PFObject *)aPost {

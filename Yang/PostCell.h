@@ -35,6 +35,9 @@
 @property (nonatomic, weak) id <PostCellDelegate> delegate;
 @property (nonatomic, strong) PFObject *post;
 
+@property (nonatomic) UIButton * fromUserButton;
+@property (nonatomic) UIButton * toUserButton;
+
 - (void)setUpvoteStatus:(BOOL)upvote;
 
 -(void) configureCell:(PostCell *) cell forObject:(PFObject *) object withDelegate:(id<PostCellDelegate, ProPicDelegate>) theDelegate;
@@ -45,6 +48,7 @@
 @protocol PostCellDelegate <NSObject>
 
 -(void) didTapUpvoteButton:(UIButton *)button forPostCell:(PostCell *)postCell  forPost:(PFObject *)post;
+-(void) didTapUsername: (PFUser *) user;
 
 @property (nonatomic, strong) NSMutableDictionary *outstandingQueries;
 

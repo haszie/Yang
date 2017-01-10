@@ -102,7 +102,7 @@
     CGFloat width = (self.view.frame.size.width - 80.0f) / 2.0f;
     
     UIButton *keepGoing = [[UIButton alloc] initWithFrame:
-                           CGRectMake(32.0f + self.view.frame.size.width + 16.0f + width, textCode.frame.origin.y + textCode.frame.size.height + 24.0f, width, 50.0f)];
+                           CGRectMake(32.0f + self.view.frame.size.width + 16.0f + width, textCode.frame.origin.y + textCode.frame.size.height + 16.0f, width, 44.0f)];
     [keepGoing addTarget:self action:@selector(didHitKeepGoing) forControlEvents:UIControlEventTouchUpInside];
     [keepGoing.titleLabel setFont:[UIFont fontWithName:@"OpenSans" size:24.0f]];
     [keepGoing setBackgroundImage:[YUtil imageWithColor:[UIColor colorWithRed:240.0/255.0f green:240.0/255.0f blue:240.0/255.0f alpha:1.0f]] forState:UIControlStateNormal];
@@ -119,7 +119,7 @@
     self.keepGoing = keepGoing;
     
     UIButton *resend = [[UIButton alloc] initWithFrame:
-                        CGRectMake(32.0f + self.view.frame.size.width, keepGoing.frame.origin.y, width , 50.0f)];
+                        CGRectMake(32.0f + self.view.frame.size.width, keepGoing.frame.origin.y, width , 44.0f)];
     [resend addTarget:self action:@selector(didHitResend) forControlEvents:UIControlEventTouchUpInside];
     [resend.titleLabel setFont:[UIFont fontWithName:@"OpenSans" size:24.0f]];
     [resend setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -642,3 +642,5 @@
 }
 
 @end
+
+

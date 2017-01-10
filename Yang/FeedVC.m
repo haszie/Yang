@@ -269,6 +269,11 @@
     }
 }
 
+-(void)didTapUsername:(PFUser *)user {
+    UserProfileVC *upvc = [[UserProfileVC alloc] initWithUser:user];
+    [self.navigationController pushViewController:upvc animated:YES];
+}
+
 
 -(NSString*) normalize: (NSString *) number{
     NSMutableCharacterSet *nonNumberCharacterSet = [NSMutableCharacterSet decimalDigitCharacterSet];

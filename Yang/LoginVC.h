@@ -11,6 +11,8 @@
 #import "MainVC.h"
 #import "RSKImageCropper.h"
 #import "VWWPermissionKit.h"
+#import "FriendCell.h"
+#import "FwendsVC.h"
 
 @interface LoginVC : UIViewController <UIScrollViewDelegate, UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,
                                         UITextFieldDelegate, RSKImageCropViewControllerDelegate, RSKImageCropViewControllerDataSource>
