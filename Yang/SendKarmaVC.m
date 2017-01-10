@@ -137,9 +137,9 @@
     }
     
     
-    UIView *grr = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 264, self.view.frame.size.width, 264)];
-    grr.backgroundColor = [YUtil theColor];
-    [self.view addSubview:grr];
+//    UIView *grr = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 264, self.view.frame.size.width, 264)];
+//    grr.backgroundColor = [YUtil theColor];
+//    [self.view addSubview:grr];
     
 }
 
@@ -168,6 +168,10 @@
         dispatch_async(dispatch_get_main_queue(), ^(void){
             [[UIApplication sharedApplication] endIgnoringInteractionEvents];
             if (success == true) {
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"UpdateProfile"
+                 object:self];
+
                 _hud.mode = MBProgressHUDModeCustomView;
                 _hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark"]];
                 _hud.labelText = @"Success!";

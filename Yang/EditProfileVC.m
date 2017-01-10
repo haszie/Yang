@@ -190,6 +190,9 @@
         
         [usa saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if (succeeded) {
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"UpdateProfile"
+                 object:self];
                 [[UIApplication sharedApplication] endIgnoringInteractionEvents];
                 hud.mode = MBProgressHUDModeCustomView;
                 hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark"]];

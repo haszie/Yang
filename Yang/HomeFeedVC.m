@@ -85,7 +85,7 @@
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSString *text = @"To get started, add some friends using the menu bar on the ←. If none of your friends are on Yang right now, invite them!\n\nYou will receive +10 karma for every invite you send, regardless of wether they accept it or not.\n\n Once you have some friends, give them some karma using the send icon located in the nav bar to the ↗.";
+    NSString *text = @"Swipe ← or hit the menu icon in the top left to open the menu. Navigate to the 'Friends' tab. If none of your friends are on Yang right now, invite them! Once you have some friends, hit the send icon to the top right to send some karma.";
     
     NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
     paragraph.lineBreakMode = NSLineBreakByWordWrapping;

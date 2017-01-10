@@ -146,8 +146,11 @@
         [self.fromUser setTheUser:self.post[@"giver"]];
         [self.toUser setTheUser:self.post[@"taker"]];
         
-        self.fromUserLbl.text = [NSString stringWithFormat:@"%@ → %d", self.post[@"giver"][@"first"], amt];
-        self.toUserLbl.text = self.post[@"taker"][@"first"];
+//        self.fromUserLbl.text = [NSString stringWithFormat:@"%@ → %d", self.post[@"giver"][@"first"], amt];
+//        self.toUserLbl.text = self.post[@"taker"][@"first"];
+        
+        self.fromUserLbl.text = [[NSString alloc] initWithFormat:@"%@ → %@", self.post[@"giver"][@"first"], self.post[@"taker"][@"first"]];
+        self.toUserLbl.text = [[NSString alloc] initWithFormat:@"%d", amt];
     }
     
     [self setHidden:NO duration:self.animationDuration options:self.animationStyle];

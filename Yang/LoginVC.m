@@ -82,7 +82,7 @@
     [instructions setFont:[UIFont fontWithName:@"OpenSans" size:18.0f]];
     [instructions setTextColor:[UIColor blackColor]];
     instructions.numberOfLines = 0;
-    instructions.text = @"Enter the code below.";
+    instructions.text = @"You should have received a text message with a code in it, enter that code below.";
     [instructions setTextAlignment:NSTextAlignmentJustified];
     [instructions sizeToFit];
     
@@ -90,7 +90,6 @@
                             CGRectMake(self.view.frame.size.width, instructions.frame.origin.y + instructions.frame.size.height + 16.0f, self.view.frame.size.width, 60.0f)];
     [textCode setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:240.0/255.0f blue:240.0/255.0f alpha:1.0f]];
     [textCode setFont:[UIFont fontWithName:@"OpenSans" size:24.0f]];
-    [textCode setPlaceholder:@"1234"];
     [textCode setTextColor:[UIColor blackColor]];
     [textCode setKeyboardType:UIKeyboardTypeNumberPad];
     UIView *spacer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 32.0f, 60.0f)];

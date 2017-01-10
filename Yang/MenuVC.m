@@ -67,38 +67,43 @@ static ActivityFeedVC *nike;
     UIView *heada= [[UIView alloc] initWithFrame:CGRectMake(0, 0, 250.0f, 200.0f)];
     [heada setBackgroundColor:[UIColor colorWithRed:240.0/255.0f green:240.0/255.0f blue:240.0/255.0f alpha:1.0f]];
     
-    ProPicIV *propic = [[ProPicIV alloc] initWithFrame:CGRectMake(16.0f, 64.0f, 70.0f, 70.0f) withUser:[PFUser currentUser]];
+    self.propic = [[ProPicIV alloc] initWithFrame:CGRectMake(16.0f, 64.0f, 70.0f, 70.0f) withUser:[PFUser currentUser]];
     
     UIButton *go = [[UIButton alloc] initWithFrame:CGRectMake(16.0f, 64.0f, 200, 70.0f)];
     [go setBackgroundColor:[UIColor clearColor]];
     [go addTarget:self action:@selector(didHitUserYo) forControlEvents:UIControlEventTouchUpInside];
     
-    UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(16.0f + 70.0f + 8.0f, 64.0f, 250.0f - 16.0f - 70.0f, 24.0f)];
-    [name setTextColor:[UIColor blackColor]];
-    [name setFont:[UIFont fontWithName:@"OpenSans-Light" size:18.0f]];
-    name.text = [NSString stringWithFormat:@"%@ %@", [PFUser currentUser][@"first"], [PFUser currentUser][@"last"]];
+    self.name = [[UILabel alloc] initWithFrame:CGRectMake(16.0f + 70.0f + 8.0f, 64.0f, 250.0f - 16.0f - 70.0f, 24.0f)];
+    [self.name setTextColor:[UIColor blackColor]];
+    [self.name setFont:[UIFont fontWithName:@"OpenSans-Light" size:18.0f]];
+    self.name.text = [NSString stringWithFormat:@"%@ %@", [PFUser currentUser][@"first"], [PFUser currentUser][@"last"]];
     
-    UILabel *blurb = [[UILabel alloc] initWithFrame:CGRectMake(16.0f + 70.0f + 8.0f, 64.0f + 24.0f, 250.0f - 16.0f - 70.0f - 16.0f, 46.0f)];
-    [blurb setTextColor:[UIColor blackColor]];
-    [blurb setFont:[UIFont fontWithName:@"OpenSans-Light" size:12.0f]];
-    blurb.text = [PFUser currentUser][@"blurb"];
-    blurb.numberOfLines = 5;
-    [blurb sizeToFit];
+    self.blurb = [[UILabel alloc] initWithFrame:CGRectMake(16.0f + 70.0f + 8.0f, 64.0f + 24.0f, 250.0f - 16.0f - 70.0f - 16.0f, 46.0f)];
+    [self.blurb setTextColor:[UIColor blackColor]];
+    [self.blurb setFont:[UIFont fontWithName:@"OpenSans-Light" size:12.0f]];
+    self.blurb.text = [PFUser currentUser][@"blurb"];
+    self.blurb.numberOfLines = 5;
+    [self.blurb sizeToFit];
     
-    UILabel *karma = [[UILabel alloc] initWithFrame:CGRectMake(16.0f, 64.0f + 70.0f + 8.0f, 200.0f, 14.0f)];
-    [karma setTextColor:[UIColor blackColor]];
-    [karma setFont:[UIFont fontWithName:@"OpenSans-Light" size:12.0f]];
-    karma.text = [NSString stringWithFormat:@"%@ karma", [NSNumberFormatter localizedStringFromNumber:[PFUser currentUser][@"karma"]
-                                                                                numberStyle:NSNumberFormatterDecimalStyle]];
-    [karma setTextAlignment:NSTextAlignmentLeft];
+    self.karma = [[UILabel alloc] initWithFrame:CGRectMake(16.0f, 64.0f + 70.0f + 8.0f, 200.0f, 14.0f)];
+    [self.karma setTextColor:[UIColor blackColor]];
+    [self.karma setFont:[UIFont fontWithName:@"OpenSans-Light" size:12.0f]];
+    self.karma.text = [NSString stringWithFormat:@"%@ karma", [NSNumberFormatter localizedStringFromNumber:[PFUser currentUser][@"karma"]
+                                                                                           numberStyle:NSNumberFormatterDecimalStyle]];
+    [self.karma setTextAlignment:NSTextAlignmentLeft];
     
-    [heada addSubview:propic];
-    [heada addSubview:name];
-    [heada addSubview:blurb];
+    [heada addSubview:self.propic];
+    [heada addSubview:self.name];
+    [heada addSubview:self.blurb];
     [heada addSubview:go];
-    [heada addSubview:karma];
+    [heada addSubview:self.karma];
     
     self.tableView.tableHeaderView = heada;
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateProfile:)
+                                                 name:@"UpdateProfile"
+                                               object:nil];
 }
 
 -(UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
@@ -107,6 +112,20 @@ static ActivityFeedVC *nike;
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleDefault;
+}
+
+-(void) updateProfile: (NSNotification *) note {
+    [[PFUser currentUser] fetchInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+        if (!error) {
+            self.karma.text = [NSString stringWithFormat:@"%@ karma", [NSNumberFormatter localizedStringFromNumber:object[@"karma"] numberStyle:NSNumberFormatterDecimalStyle]];
+            self.name.text = [NSString stringWithFormat:@"%@ %@", object[@"first"], object[@"last"]];
+            self.blurb.text = object[@"blurb"];
+            self.propic.theUser = (PFUser*)object;
+
+        } else {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
 }
 
 -(void) didHitUserYo {

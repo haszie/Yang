@@ -20,6 +20,11 @@
 
 @interface MenuVC : UITableViewController
 
+@property (nonatomic) ProPicIV * propic;
+@property (nonatomic) UILabel * karma;
+@property (nonatomic) UILabel * name;
+@property (nonatomic) UILabel * blurb;
+
 +(SettingsVC *) settings_mon;
 +(HomeFeedVC *) home;
 +(FwendsVC *) fwends;

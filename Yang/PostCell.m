@@ -34,8 +34,8 @@
         NSString *givr_name = theSender[@"first"];
         NSString *takr_name = theReceiver[@"first"];
         
-        cell.fromUserLbl.text = [[NSString alloc] initWithFormat:@"%@ → %d", givr_name, amt];
-        cell.toUserLbl.text = [[NSString alloc] initWithFormat:@"%@", takr_name];
+        cell.fromUserLbl.text = [[NSString alloc] initWithFormat:@"%@ → %@", givr_name, takr_name];
+        cell.toUserLbl.text = [[NSString alloc] initWithFormat:@"%d", amt];
     }
 
     NSDate * date = object.createdAt;
